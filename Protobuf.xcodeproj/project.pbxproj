@@ -83,6 +83,11 @@
 			dependencies = (
 			);
 			name = Protobuf;
+			packageProductDependencies = (
+				90A983C128CFD79E0046A19B /* SwiftProtobuf */,
+				90A983C528CFDF170046A19B /* SwiftProtobufPluginLibrary */,
+				908EC75E28E255B20020CC92 /* CodableCSV */,
+			);
 			productName = Protobuf;
 			productReference = 90A983AF28CFD71B0046A19B /* Protobuf.app */;
 			productType = "com.apple.product-type.application";
@@ -339,6 +344,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		908EC75D28E255B10020CC92 /* XCRemoteSwiftPackageReference "CodableCSV" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dehesa/CodableCSV";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.7;
+			};
+		};
+		90A983C028CFD79E0046A19B /* XCRemoteSwiftPackageReference "swift-protobuf" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-protobuf.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.6.0;
+			};
+		};
+		90A983C428CFDF170046A19B /* XCRemoteSwiftPackageReference "swift-protobuf" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-protobuf.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		908EC75E28E255B20020CC92 /* CodableCSV */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 908EC75D28E255B10020CC92 /* XCRemoteSwiftPackageReference "CodableCSV" */;
+			productName = CodableCSV;
+		};
+		90A983C128CFD79E0046A19B /* SwiftProtobuf */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 90A983C028CFD79E0046A19B /* XCRemoteSwiftPackageReference "swift-protobuf" */;
+			productName = SwiftProtobuf;
+		};
+		90A983C528CFDF170046A19B /* SwiftProtobufPluginLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 90A983C428CFDF170046A19B /* XCRemoteSwiftPackageReference "swift-protobuf" */;
+			productName = SwiftProtobufPluginLibrary;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 90A983A728CFD71B0046A19B /* Project object */;
 }
