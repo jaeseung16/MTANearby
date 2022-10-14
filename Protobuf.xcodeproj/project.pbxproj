@@ -22,6 +22,8 @@
 		908EC75F28E255B20020CC92 /* CodableCSV in Frameworks */ = {isa = PBXBuildFile; productRef = 908EC75E28E255B20020CC92 /* CodableCSV */; };
 		908EC76128E255E10020CC92 /* MTAStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908EC76028E255E10020CC92 /* MTAStop.swift */; };
 		909F55F328F4B2F900BEC9B9 /* MTATripReplacementPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909F55F228F4B2F900BEC9B9 /* MTATripReplacementPeriod.swift */; };
+		909F55F528F4D02500BEC9B9 /* MTARouteId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909F55F428F4D02500BEC9B9 /* MTARouteId.swift */; };
+		909F55F728F4D89600BEC9B9 /* StopsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909F55F628F4D89600BEC9B9 /* StopsView.swift */; };
 		90A46B6728F228F500DED050 /* MTAVehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A46B6628F228F500DED050 /* MTAVehicle.swift */; };
 		90A46B6928F229CA00DED050 /* MTAVehicleStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A46B6828F229CA00DED050 /* MTAVehicleStatus.swift */; };
 		90A4BEF128EE424600B210F8 /* MTADirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A4BEF028EE424600B210F8 /* MTADirection.swift */; };
@@ -48,6 +50,8 @@
 		908EC75828E252070020CC92 /* stops.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stops.txt; sourceTree = "<group>"; };
 		908EC76028E255E10020CC92 /* MTAStop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTAStop.swift; sourceTree = "<group>"; };
 		909F55F228F4B2F900BEC9B9 /* MTATripReplacementPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTATripReplacementPeriod.swift; sourceTree = "<group>"; };
+		909F55F428F4D02500BEC9B9 /* MTARouteId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTARouteId.swift; sourceTree = "<group>"; };
+		909F55F628F4D89600BEC9B9 /* StopsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopsView.swift; sourceTree = "<group>"; };
 		90A46B6628F228F500DED050 /* MTAVehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTAVehicle.swift; sourceTree = "<group>"; };
 		90A46B6828F229CA00DED050 /* MTAVehicleStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTAVehicleStatus.swift; sourceTree = "<group>"; };
 		90A4BEF028EE424600B210F8 /* MTADirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTADirection.swift; sourceTree = "<group>"; };
@@ -87,6 +91,7 @@
 				9059965628F37F5A006FD733 /* MTAStopTimeUpdate.swift */,
 				9059965828F37F6A006FD733 /* MTATripUpdate.swift */,
 				909F55F228F4B2F900BEC9B9 /* MTATripReplacementPeriod.swift */,
+				909F55F428F4D02500BEC9B9 /* MTARouteId.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -125,6 +130,7 @@
 				90672E4428CFE14E00B4BF74 /* gtfs-realtime.pb.swift */,
 				90A983B228CFD71B0046A19B /* ProtobufApp.swift */,
 				90A983B428CFD71B0046A19B /* ContentView.swift */,
+				909F55F628F4D89600BEC9B9 /* StopsView.swift */,
 				90672E4228CFE0FF00B4BF74 /* ViewModel.swift */,
 				90A983B628CFD71C0046A19B /* Assets.xcassets */,
 				90A983B828CFD71C0046A19B /* Preview Content */,
@@ -232,11 +238,13 @@
 				90A46B6928F229CA00DED050 /* MTAVehicleStatus.swift in Sources */,
 				90672E4528CFE14E00B4BF74 /* gtfs-realtime.pb.swift in Sources */,
 				90672E4728CFE15600B4BF74 /* nyct-subway.pb.swift in Sources */,
+				909F55F728F4D89600BEC9B9 /* StopsView.swift in Sources */,
 				909F55F328F4B2F900BEC9B9 /* MTATripReplacementPeriod.swift in Sources */,
 				9085487A28EB9EDE00DE7863 /* MTAAlert.swift in Sources */,
 				9085487828EB9D0C00DE7863 /* MTARoute.swift in Sources */,
 				90A4BEF128EE424600B210F8 /* MTADirection.swift in Sources */,
 				90672E4328CFE0FF00B4BF74 /* ViewModel.swift in Sources */,
+				909F55F528F4D02500BEC9B9 /* MTARouteId.swift in Sources */,
 				90A983B328CFD71B0046A19B /* ProtobufApp.swift in Sources */,
 				908EC76128E255E10020CC92 /* MTAStop.swift in Sources */,
 			);

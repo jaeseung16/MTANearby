@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct MTARoute: Identifiable, Codable {
-    var id: String
+struct MTARoute: Identifiable, Codable, Hashable {
+    var id: MTARouteId
     var agency: String
     var shortName: String
     var longName: String
