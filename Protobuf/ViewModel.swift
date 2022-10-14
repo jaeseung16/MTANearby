@@ -75,6 +75,8 @@ class ViewModel: NSObject, ObservableObject {
         return result
     }
     
+    static var stopsById: [String: MTAStop] = Dictionary(uniqueKeysWithValues: mtaStops.map { ($0.id, $0) })
+    
     func getAllData() -> Void {
         MTASubwayFeedURL.allCases.forEach { getData(from: $0) }
     }
