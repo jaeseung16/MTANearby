@@ -53,6 +53,23 @@ class ViewModel: NSObject, ObservableObject {
             return [MTARoute]()
         }
         
+        //ViewModel.logger.info("\(result)")
+        
+        return result
+    }
+    
+    static var stopsByRoute: [MTARouteId: [MTAStop]] {
+        var result = [MTARouteId: [MTAStop]]()
+        
+        mtaStops.forEach { stop in
+            if let firstLetter = stop.id.first, let routeId = MTARouteId(rawValue: String(firstLetter)) {
+                if result[routeId] == nil {
+                    result[routeId] = [MTAStop]()
+                }
+                result[routeId]?.append(stop)
+            }
+        }
+        
         ViewModel.logger.info("\(result)")
         
         return result
@@ -90,7 +107,7 @@ class ViewModel: NSObject, ObservableObject {
                 let header = feed.header
                 ViewModel.logger.log("\(header.debugDescription)")
                 
-                let timestamp = Date(timeIntervalSince1970: TimeInterval(header.timestamp))
+                //let timestamp = Date(timeIntervalSince1970: TimeInterval(header.timestamp))
                 
                 var mtaTripReplacementPeriods = [MTATripReplacementPeriod]()
                 
@@ -121,8 +138,8 @@ class ViewModel: NSObject, ObservableObject {
             
             ViewModel.logger.log("date = \(dateFormatter.string(from: date))")
             
-            //feed.entity.forEach { entity in
-                /*
+            feed.entity.forEach { entity in
+                
                 if entity.hasAlert {
                     let alert = entity.alert
                     
@@ -134,9 +151,7 @@ class ViewModel: NSObject, ObservableObject {
                     
                     ViewModel.logger.log("mtaAlert = \(String(describing: mtaAlert), privacy: .public)")
                 }
-                */
                 
-                /*
                 if entity.hasVehicle {
                     let vehicle = entity.vehicle
                     let measured = Date(timeIntervalSince1970: TimeInterval(vehicle.timestamp))
@@ -160,9 +175,7 @@ class ViewModel: NSObject, ObservableObject {
                     
                     ViewModel.logger.info("mtaVehicle = \(String(describing: mtaVehicle), privacy: .public)")
                 }
-                */
                 
-                /*
                 if entity.hasTripUpdate {
                     let tripUpdate = entity.tripUpdate
                     
@@ -201,8 +214,7 @@ class ViewModel: NSObject, ObservableObject {
                     ViewModel.logger.info("mtaTripUpdate = \(String(describing: mtaTripUpdate), privacy: .public)")
                     
                 }
-                */
-            //}
+            }
             
         }
 
