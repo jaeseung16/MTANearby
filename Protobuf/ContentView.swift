@@ -16,6 +16,8 @@ struct ContentView: View {
     
     @State private var stops = ViewModel.mtaStops
     @State private var routes = ViewModel.mtaRoutes
+    @State private var stopsByRoute = ViewModel.stopsByRoute
+    @State private var stopsById = ViewModel.stopsById
     
     var body: some View {
         Button {
@@ -24,7 +26,75 @@ struct ContentView: View {
             Text("Download feed data")
                 .padding()
         }
-
+        
+        NavigationView {
+            List {
+                ForEach(MTARouteId.allCases) { routeId in
+                    if let stops = stopsByRoute[routeId] {
+                        NavigationLink {
+                            StopsView(stops: stops)
+                        } label: {
+                            HStack {
+                                Text(routeId.rawValue)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        /*
+        
+        NavigationView {
+            List {
+                ForEach(Array(stopsById.keys).sorted(by: <), id: \.self) { key in
+                    if let stop = stopsById[key], let vehicles = vehiclesByStopId[key] {
+                        NavigationLink {
+                            VehiclesAtStopView(stop: stop, vehicles: vehicles)
+                        } label: {
+                            HStack {
+                                Text("\(key)")
+                                Spacer()
+                                Text("\(stop.name)")
+                            }
+                        }
+                    } else {
+                        HStack {
+                            Text("\(key)")
+                            Spacer()
+                            Text("\(stopsById[key]?.name ?? "")")
+                        }
+                    }
+                }
+            }
+        }
+        .onChange(of: viewModel.updated) { _ in
+            vehiclesByStopId = viewModel.vehiclesByStopId
+        }
+        
+        */
+        /*
+        List {
+            ForEach(routes) { route in
+                HStack {
+                    Text("\(route.shortName): \(route.longName)")
+                }
+            }
+        }
+        */
+        /*
+        List {
+            ForEach(stops) { stop in
+                HStack {
+                    Text("\(stop.id): \(stop.name)")
+                    Spacer()
+                    Text("\(stop.latitude), \(stop.longitude)")
+                }
+                
+            }
+        }
+         */
+        
         /*
         Map(coordinateRegion: $region)
             .edgesIgnoringSafeArea(.all)

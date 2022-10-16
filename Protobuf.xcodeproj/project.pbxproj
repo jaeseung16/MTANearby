@@ -18,9 +18,11 @@
 		9085487828EB9D0C00DE7863 /* MTARoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085487728EB9D0C00DE7863 /* MTARoute.swift */; };
 		9085487A28EB9EDE00DE7863 /* MTAAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085487928EB9EDE00DE7863 /* MTAAlert.swift */; };
 		9085487C28EB9F4300DE7863 /* MTATrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085487B28EB9F4300DE7863 /* MTATrip.swift */; };
+		908B1AA228FB6AC5008ACF21 /* TripUpdatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908B1AA128FB6AC5008ACF21 /* TripUpdatesView.swift */; };
 		908EC75928E252070020CC92 /* stops.txt in Resources */ = {isa = PBXBuildFile; fileRef = 908EC75828E252070020CC92 /* stops.txt */; };
 		908EC75F28E255B20020CC92 /* CodableCSV in Frameworks */ = {isa = PBXBuildFile; productRef = 908EC75E28E255B20020CC92 /* CodableCSV */; };
 		908EC76128E255E10020CC92 /* MTAStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908EC76028E255E10020CC92 /* MTAStop.swift */; };
+		909B162028FA1C7A002D8A33 /* VehiclesAtStopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909B161F28FA1C7A002D8A33 /* VehiclesAtStopView.swift */; };
 		909F55F328F4B2F900BEC9B9 /* MTATripReplacementPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909F55F228F4B2F900BEC9B9 /* MTATripReplacementPeriod.swift */; };
 		909F55F528F4D02500BEC9B9 /* MTARouteId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909F55F428F4D02500BEC9B9 /* MTARouteId.swift */; };
 		909F55F728F4D89600BEC9B9 /* StopsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909F55F628F4D89600BEC9B9 /* StopsView.swift */; };
@@ -47,8 +49,10 @@
 		9085487728EB9D0C00DE7863 /* MTARoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTARoute.swift; sourceTree = "<group>"; };
 		9085487928EB9EDE00DE7863 /* MTAAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTAAlert.swift; sourceTree = "<group>"; };
 		9085487B28EB9F4300DE7863 /* MTATrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTATrip.swift; sourceTree = "<group>"; };
+		908B1AA128FB6AC5008ACF21 /* TripUpdatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripUpdatesView.swift; sourceTree = "<group>"; };
 		908EC75828E252070020CC92 /* stops.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stops.txt; sourceTree = "<group>"; };
 		908EC76028E255E10020CC92 /* MTAStop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTAStop.swift; sourceTree = "<group>"; };
+		909B161F28FA1C7A002D8A33 /* VehiclesAtStopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehiclesAtStopView.swift; sourceTree = "<group>"; };
 		909F55F228F4B2F900BEC9B9 /* MTATripReplacementPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTATripReplacementPeriod.swift; sourceTree = "<group>"; };
 		909F55F428F4D02500BEC9B9 /* MTARouteId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTARouteId.swift; sourceTree = "<group>"; };
 		909F55F628F4D89600BEC9B9 /* StopsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopsView.swift; sourceTree = "<group>"; };
@@ -96,6 +100,16 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		908B1AA028FB6A8E008ACF21 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				909F55F628F4D89600BEC9B9 /* StopsView.swift */,
+				909B161F28FA1C7A002D8A33 /* VehiclesAtStopView.swift */,
+				908B1AA128FB6AC5008ACF21 /* TripUpdatesView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		908EC75728E251EF0020CC92 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,13 +138,13 @@
 		90A983B128CFD71B0046A19B /* Protobuf */ = {
 			isa = PBXGroup;
 			children = (
-				9085487228EB967E00DE7863 /* Model */,
 				908EC75728E251EF0020CC92 /* Resources */,
+				9085487228EB967E00DE7863 /* Model */,
+				908B1AA028FB6A8E008ACF21 /* Views */,
 				90672E4628CFE15600B4BF74 /* nyct-subway.pb.swift */,
 				90672E4428CFE14E00B4BF74 /* gtfs-realtime.pb.swift */,
 				90A983B228CFD71B0046A19B /* ProtobufApp.swift */,
 				90A983B428CFD71B0046A19B /* ContentView.swift */,
-				909F55F628F4D89600BEC9B9 /* StopsView.swift */,
 				90672E4228CFE0FF00B4BF74 /* ViewModel.swift */,
 				90A983B628CFD71C0046A19B /* Assets.xcassets */,
 				90A983B828CFD71C0046A19B /* Preview Content */,
@@ -236,11 +250,13 @@
 				90A46B6728F228F500DED050 /* MTAVehicle.swift in Sources */,
 				90A983B528CFD71B0046A19B /* ContentView.swift in Sources */,
 				90A46B6928F229CA00DED050 /* MTAVehicleStatus.swift in Sources */,
+				909B162028FA1C7A002D8A33 /* VehiclesAtStopView.swift in Sources */,
 				90672E4528CFE14E00B4BF74 /* gtfs-realtime.pb.swift in Sources */,
 				90672E4728CFE15600B4BF74 /* nyct-subway.pb.swift in Sources */,
 				909F55F728F4D89600BEC9B9 /* StopsView.swift in Sources */,
 				909F55F328F4B2F900BEC9B9 /* MTATripReplacementPeriod.swift in Sources */,
 				9085487A28EB9EDE00DE7863 /* MTAAlert.swift in Sources */,
+				908B1AA228FB6AC5008ACF21 /* TripUpdatesView.swift in Sources */,
 				9085487828EB9D0C00DE7863 /* MTARoute.swift in Sources */,
 				90A4BEF128EE424600B210F8 /* MTADirection.swift in Sources */,
 				90672E4328CFE0FF00B4BF74 /* ViewModel.swift in Sources */,
