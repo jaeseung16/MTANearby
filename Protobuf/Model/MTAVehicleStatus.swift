@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MTAVehicleStatus {
+enum MTAVehicleStatus: String {
     case incomingAt
     case stoppedAt
     case inTransitTo
