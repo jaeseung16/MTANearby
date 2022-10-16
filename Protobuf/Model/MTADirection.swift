@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum MTADirection {
-    case east
-    case west
-    case south
-    case north
+enum MTADirection: String {
+    case east = "E"
+    case west = "W"
+    case south = "S"
+    case north = "N"
     
     init(from direction: NyctTripDescriptor.Direction) {
         switch direction {
