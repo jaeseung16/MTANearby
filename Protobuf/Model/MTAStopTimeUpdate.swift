@@ -7,11 +7,14 @@
 
 import Foundation
 
-struct MTAStopTimeUpdate {
+struct MTAStopTimeUpdate: Identifiable {
+    var id: String {
+        return stopId ?? UUID().uuidString
+    }
+    
     let stopId: String?
     let arrivalTime: Date?
     let departureTime: Date?
     let scheduledTrack: String?
     let actualTrack: String?
-    
 }
