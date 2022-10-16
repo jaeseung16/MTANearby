@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MTATrip: CustomStringConvertible {
+struct MTATrip: CustomStringConvertible, Hashable {
     var tripId: String?
     var routeId: String?
     var start: Date?
