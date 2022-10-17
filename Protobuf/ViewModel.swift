@@ -8,6 +8,7 @@
 import Foundation
 import os
 import CodableCSV
+import CoreLocation
 
 class ViewModel: NSObject, ObservableObject {
     static let logger = Logger()
@@ -81,6 +82,7 @@ class ViewModel: NSObject, ObservableObject {
     
     var vehiclesByStopId = [String: [MTAVehicle]]()
     var tripUpdatesByTripId = [String: [MTATripUpdate]]()
+    var tripUpdatesByStopId = [String: [MTATripUpdate]]()
     
     func getAllData() -> Void {
         if !vehiclesByStopId.isEmpty {
@@ -89,11 +91,16 @@ class ViewModel: NSObject, ObservableObject {
         if !tripUpdatesByTripId.isEmpty {
             tripUpdatesByTripId.removeAll()
         }
-        
+        if !tripUpdatesByStopId.isEmpty {
+            tripUpdatesByStopId.removeAll()
+        }
+   
         MTASubwayFeedURL.allCases.forEach { getData(from: $0) }
     }
     
     func getData(from mtaSubwayFeedURL: MTASubwayFeedURL) -> Void {
+        let start = Date()
+        
         let url = mtaSubwayFeedURL.url()!
         
         var urlRequest = URLRequest(url: url)
@@ -171,9 +178,9 @@ class ViewModel: NSObject, ObservableObject {
                 
                 if entity.hasVehicle {
                     let vehicle = entity.vehicle
-                    let measured = Date(timeIntervalSince1970: TimeInterval(vehicle.timestamp))
+                    //let measured = Date(timeIntervalSince1970: TimeInterval(vehicle.timestamp))
                     
-                    ViewModel.logger.info("vehicle = \(String(describing: vehicle), privacy: .public)")
+                    //ViewModel.logger.info("vehicle = \(String(describing: vehicle), privacy: .public)")
                     //ViewModel.logger.info("date = \(dateFormatter.string(from: measured))")
                     
                     // https://developers.google.com/transit/gtfs-realtime/reference#message-vehicleposition
@@ -191,13 +198,13 @@ class ViewModel: NSObject, ObservableObject {
                     
                     vehicles.append(mtaVehicle)
                     
-                    ViewModel.logger.info("mtaVehicle = \(String(describing: mtaVehicle), privacy: .public)")
+                    //ViewModel.logger.info("mtaVehicle = \(String(describing: mtaVehicle), privacy: .public)")
                 }
                 
                 if entity.hasTripUpdate {
                     let tripUpdate = entity.tripUpdate
                     
-                    ViewModel.logger.info("tripUpdate = \(String(describing: tripUpdate), privacy: .public)")
+                    //ViewModel.logger.info("tripUpdate = \(String(describing: tripUpdate), privacy: .public)")
                     
                     var trip: MTATrip?
                     if tripUpdate.hasTrip {
@@ -229,7 +236,7 @@ class ViewModel: NSObject, ObservableObject {
                     
                     let mtaTripUpdate = MTATripUpdate(trip: trip, stopTimeUpdates: mtaStopTimeUpdates)
                     
-                    ViewModel.logger.info("mtaTripUpdate = \(String(describing: mtaTripUpdate), privacy: .public)")
+                    //ViewModel.logger.info("mtaTripUpdate = \(String(describing: mtaTripUpdate), privacy: .public)")
                     
                     tripUpdates.append(mtaTripUpdate)
                 }
@@ -239,7 +246,7 @@ class ViewModel: NSObject, ObservableObject {
             
             if !vehicles.isEmpty {
                 for vehicle in vehicles {
-                    ViewModel.logger.info("vehicle = \(String(describing: vehicle), privacy: .public)")
+                    //ViewModel.logger.info("vehicle = \(String(describing: vehicle), privacy: .public)")
                     if let stopId = vehicle.stopId {
                         if self.vehiclesByStopId.keys.contains(stopId) {
                             self.vehiclesByStopId[stopId]?.append(vehicle)
@@ -266,6 +273,9 @@ class ViewModel: NSObject, ObservableObject {
             DispatchQueue.main.async {
                 self.updated.toggle()
             }
+            
+            ViewModel.logger.log("For url=\(url.absoluteString), it took \(DateInterval(start: start, end: Date()).duration) sec")
+        
         }
 
         task.resume()
@@ -330,6 +340,30 @@ class ViewModel: NSObject, ObservableObject {
                        assigned: assigned,
                        trainId: trainId,
                        direction: direction)
+    }
+    
+    func vehicles(near center: CLLocationCoordinate2D) -> [MTAStop: [MTAVehicle]] {
+        var vehicles = [MTAStop: [MTAVehicle]]()
+        
+        let radius = CLLocationDistance(2000)
+        let circularRegion = CLCircularRegion(center: center, radius: radius, identifier: "\(center)")
+        
+        let stopsNearBy = ViewModel.mtaStops.filter { mtaStop in
+            circularRegion.contains(CLLocationCoordinate2D(latitude: mtaStop.latitude, longitude: mtaStop.longitude))
+        }
+        
+        ViewModel.logger.info("stopsNearBy.count = \(String(describing: stopsNearBy.count), privacy: .public) around \(String(describing: center), privacy: .public)")
+        
+        for stop in stopsNearBy {
+            ViewModel.logger.info("stop.id = \(String(describing: stop.id), privacy: .public) around \(String(describing: center), privacy: .public)")
+            if let vehiclesAtStop = vehiclesByStopId[stop.id] {
+                vehicles[stop] = vehiclesAtStop
+            }
+        }
+        
+        //ViewModel.logger.info("vehicles = \(String(describing: vehicles), privacy: .public) around \(String(describing: center), privacy: .public)")
+        
+        return vehicles
     }
     
 }
