@@ -366,4 +366,65 @@ class ViewModel: NSObject, ObservableObject {
         return vehicles
     }
     
+    func trains(near center: CLLocationCoordinate2D) -> [MTAStop: [MTATrain]] {
+        var trains = [MTAStop: [MTATrain]]()
+        
+        let location = CLLocation(latitude: center.latitude, longitude: center.longitude)
+        let radius = CLLocationDistance(1500)
+        let circularRegion = CLCircularRegion(center: center, radius: radius, identifier: "\(center)")
+        
+        let stopsNearby = ViewModel.mtaStops.filter { mtaStop in
+            circularRegion.contains(CLLocationCoordinate2D(latitude: mtaStop.latitude, longitude: mtaStop.longitude))
+        }
+        
+        let stopIds = stopsNearby.map { $0.id }
+        
+        for tripId in tripUpdatesByTripId.keys {
+            if let tripUpdates = tripUpdatesByTripId[tripId] {
+                for tripUpdate in tripUpdates {
+                    for stopTimeUpdate in tripUpdate.stopTimeUpdates {
+                        if let stopId = stopTimeUpdate.stopId, stopIds.contains(stopId) {
+                            let vehiclesAtStop = vehiclesByStopId[stopId]?.first(where: { tripId == $0.trip?.tripId })
+                            
+                            let mtaTrain = MTATrain(trip: tripUpdate.trip,
+                                                    status: vehiclesAtStop?.status,
+                                                    stopId: stopId,
+                                                    arrivalTime: stopTimeUpdate.arrivalTime,
+                                                    departureTime: stopTimeUpdate.departureTime)
+                            
+                            
+                            if let stop = ViewModel.stopsById[stopId], trains[stop] != nil {
+                                trains[stop]!.append(mtaTrain)
+                            } else if let stop = ViewModel.stopsById[stopId], trains[stop] == nil {
+                                trains[stop] = Array(arrayLiteral: mtaTrain)
+                            } else {
+                                ViewModel.logger.info("Can't find a stop with stopId=\(stopId), privacy: .public)")
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
+            
+        // ViewModel.logger.info("trains=\(trains, privacy: .public) near (\(center.longitude, privacy: .public), \(center.latitude, privacy: .public))")
+        
+        return trains
+    }
+    
+    func stops(near center: CLLocationCoordinate2D) -> [MTAStop] {
+        let location = CLLocation(latitude: center.latitude, longitude: center.longitude)
+        let radius = CLLocationDistance(1500)
+        let circularRegion = CLCircularRegion(center: center, radius: radius, identifier: "\(center)")
+        
+        return ViewModel.mtaStops.filter { mtaStop in
+            circularRegion.contains(CLLocationCoordinate2D(latitude: mtaStop.latitude, longitude: mtaStop.longitude))
+        }.sorted { mtaStop1, mtaStop2 in
+            let location1 = CLLocation(latitude: mtaStop1.latitude, longitude: mtaStop1.longitude)
+            let location2 = CLLocation(latitude: mtaStop2.latitude, longitude: mtaStop2.longitude)
+            
+            return location1.distance(from: location) < location2.distance(from: location) || mtaStop1.name < mtaStop2.name
+        }
+        
+    }
 }

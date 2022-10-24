@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MTAStop: Identifiable, Codable {
+struct MTAStop: Identifiable, Codable, Hashable {
     var id: String
     var code: String
     var name: String
