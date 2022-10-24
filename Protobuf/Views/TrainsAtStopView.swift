@@ -1,22 +1,24 @@
 //
-//  VehiclesAtStopView.swift
+//  TrainsAtStopView.swift
 //  Protobuf
 //
-//  Created by Jae Seung Lee on 10/14/22.
+//  Created by Jae Seung Lee on 10/17/22.
 //
 
 import SwiftUI
 
-struct VehiclesAtStopView: View {
+struct TrainsAtStopView: View {
     @EnvironmentObject private var viewModel: ViewModel
     
+    private let maxTimeInterval: TimeInterval = 30 * 60
+    
     var stop: MTAStop
-    var vehicles: [MTAVehicle]
+    var trains: [MTATrain]
     
     var body: some View {
         List {
-            ForEach(vehicles, id: \.self) { vehicle in
-                if let trip = vehicle.trip {
+            ForEach(trains, id: \.self) { train in
+                if let trip = train.trip, let arrivalTime = train.arrivalTime, arrivalTime.timeIntervalSince(Date()) < maxTimeInterval {
                     NavigationLink {
                         if let tripId = trip.tripId, let tripUpdate = viewModel.tripUpdatesByTripId[tripId] {
                             TripUpdatesView(tripUpdate: tripUpdate[0])
@@ -39,11 +41,11 @@ struct VehiclesAtStopView: View {
                             
                             Spacer()
                             
-                            Text("Status: \(vehicle.status.rawValue)")
+                            Text("Status: \(train.status?.rawValue ?? "")")
                             
                             Spacer()
                             
-                            Text(vehicle.timestamp ?? Date(), format: Date.FormatStyle(date: .omitted, time: .standard))
+                            Text(train.arrivalTime ?? Date(), format: Date.FormatStyle(date: .omitted, time: .standard))
                         }
                     }
                 }
@@ -83,3 +85,4 @@ struct VehiclesAtStopView: View {
         
     }
 }
+

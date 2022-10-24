@@ -16,7 +16,7 @@ struct TripUpdatesView: View {
         List {
             ForEach(tripUpdate.stopTimeUpdates) { stopTimeUpdate in
                 HStack {
-                    Text("\(stopTimeUpdate.id)")
+                    Text("\(ViewModel.stopsById[stopTimeUpdate.id]?.name ?? stopTimeUpdate.id)")
                     
                     Spacer()
                     
