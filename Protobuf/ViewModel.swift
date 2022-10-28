@@ -369,7 +369,6 @@ class ViewModel: NSObject, ObservableObject {
     func trains(near center: CLLocationCoordinate2D) -> [MTAStop: [MTATrain]] {
         var trains = [MTAStop: [MTATrain]]()
         
-        let location = CLLocation(latitude: center.latitude, longitude: center.longitude)
         let radius = CLLocationDistance(1500)
         let circularRegion = CLCircularRegion(center: center, radius: radius, identifier: "\(center)")
         
@@ -392,10 +391,16 @@ class ViewModel: NSObject, ObservableObject {
                                                     arrivalTime: stopTimeUpdate.arrivalTime,
                                                     departureTime: stopTimeUpdate.departureTime)
                             
+                            var stopIdWithoutDirection: String
+                            if let last = stopId.last, last == "N" || last == "S" {
+                                stopIdWithoutDirection = String(stopId.dropLast(1))
+                            } else {
+                                stopIdWithoutDirection = stopId
+                            }
                             
-                            if let stop = ViewModel.stopsById[stopId], trains[stop] != nil {
+                            if let stop = ViewModel.stopsById[stopIdWithoutDirection], trains[stop] != nil {
                                 trains[stop]!.append(mtaTrain)
-                            } else if let stop = ViewModel.stopsById[stopId], trains[stop] == nil {
+                            } else if let stop = ViewModel.stopsById[stopIdWithoutDirection], trains[stop] == nil {
                                 trains[stop] = Array(arrayLiteral: mtaTrain)
                             } else {
                                 ViewModel.logger.info("Can't find a stop with stopId=\(stopId), privacy: .public)")
