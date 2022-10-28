@@ -11,9 +11,15 @@ import MapKit
 struct ContentView: View {
     @EnvironmentObject private var viewModel: ViewModel
     
-    // 40.7267786,-73.8536679
-    // 40.7370413,-73.8625352
-    private var location = CLLocationCoordinate2D(latitude: 40.7370413, longitude: -73.8625352)
+    private var numberFormatter: NumberFormatter {
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = 2
+        return formatter
+    }
+    
+    // 40.7370413,-73.8625352 Home
+    // 40.75696,-73.9703863 850 Third Ave
+    private var location = CLLocationCoordinate2D(latitude: 40.75696, longitude: -73.9703863)
     
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 40.712778, longitude: -74.006111),
                                                    latitudinalMeters: CLLocationDistance(2000),
@@ -67,14 +73,14 @@ struct ContentView: View {
                         ForEach(stopsNearby, id:\.self) { stop in
                             if let trains = trainsNearby[stop] {
                                 NavigationLink {
-                                    TrainsAtStopView(stop: stop, trains: trains.sorted(by: { $0.arrivalTime! < $1.arrivalTime!}))
+                                    TrainsAtStopView(stop: stop, trains: trains.filter( {$0.arrivalTime != nil} ).sorted(by: {$0.arrivalTime! < $1.arrivalTime!}))
                                 } label: {
                                     HStack {
                                         Text("\(stop.name)")
                                         
                                         Spacer()
                                         
-                                        Text("\(distance(to: stop))")
+                                        Text(distance(to: stop).converted(to: .miles), format: .measurement(width: .abbreviated, usage: .asProvided, numberFormatStyle: .number.precision(.fractionLength(1))))
                                     }
                                 }
                             }
@@ -137,11 +143,11 @@ struct ContentView: View {
         
     }
     
-    private func distance(to stop: MTAStop) -> CLLocationDistance {
+    private func distance(to stop: MTAStop) -> Measurement<UnitLength> {
         let clLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
         let stopLocation = CLLocation(latitude: stop.latitude, longitude: stop.longitude)
         
-        return stopLocation.distance(from: clLocation)
+        return Measurement(value: stopLocation.distance(from: clLocation), unit: UnitLength.meters)
     }
     
 }
