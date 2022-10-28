@@ -428,7 +428,7 @@ class ViewModel: NSObject, ObservableObject {
             let location1 = CLLocation(latitude: mtaStop1.latitude, longitude: mtaStop1.longitude)
             let location2 = CLLocation(latitude: mtaStop2.latitude, longitude: mtaStop2.longitude)
             
-            return location1.distance(from: location) < location2.distance(from: location) || mtaStop1.name < mtaStop2.name
+            return location1.distance(from: location) < location2.distance(from: location)
         }
         
     }
