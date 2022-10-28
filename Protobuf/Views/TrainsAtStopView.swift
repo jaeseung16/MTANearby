@@ -10,7 +10,8 @@ import SwiftUI
 struct TrainsAtStopView: View {
     @EnvironmentObject private var viewModel: ViewModel
     
-    private let maxTimeInterval: TimeInterval = 30 * 60
+    private let maxAgo: TimeInterval = -1 * 60
+    private let maxComing: TimeInterval = 30 * 60
     
     var stop: MTAStop
     var trains: [MTATrain]
@@ -18,7 +19,7 @@ struct TrainsAtStopView: View {
     var body: some View {
         List {
             ForEach(trains, id: \.self) { train in
-                if let trip = train.trip, let arrivalTime = train.arrivalTime, arrivalTime.timeIntervalSince(Date()) < maxTimeInterval {
+                if let trip = train.trip, let arrivalTime = train.arrivalTime, isValid(arrivalTime) {
                     NavigationLink {
                         if let tripId = trip.tripId, let tripUpdate = viewModel.tripUpdatesByTripId[tripId] {
                             TripUpdatesView(tripUpdate: tripUpdate[0])
@@ -27,25 +28,27 @@ struct TrainsAtStopView: View {
                         }
                     } label: {
                         HStack {
-                            // Text("\(trip.tripId ?? "")")
+                            Image(systemName: getDirection(of: train)?.systemName ?? "")
                             
-                            Text("Route: \(getRouteId(of: trip))")
+                            ZStack {
+                                Circle()
+                                    .foregroundColor(getRouteColor(of: trip) ?? .clear)
+                                
+                                Text(getRouteId(of: trip)?.rawValue ?? "")
+                                    .font(.title2)
+                                    .foregroundColor(getRouteIdColor(of: trip))
+                            }
+                            .frame(width: 30, height: 30)
                             
-                            // Text("\(getOriginTime(of: trip), format: Date.FormatStyle(date: .numeric, time: .standard))")
+                            //Spacer()
                             
-                            // Text("\(vehicle.stopSequence ?? UInt.max)")
+                            //Text("\(train.status?.rawValue ?? "")")
+                            
+                            //Text("\(train.stopId ?? "")")
                             
                             Spacer()
                             
-                            Text("Direction: \(getDirection(of: trip))")
-                            
-                            Spacer()
-                            
-                            Text("Status: \(train.status?.rawValue ?? "")")
-                            
-                            Spacer()
-                            
-                            Text(train.arrivalTime ?? Date(), format: Date.FormatStyle(date: .omitted, time: .standard))
+                            Text(getTimeInterval(arrivalTime))
                         }
                     }
                 }
@@ -53,14 +56,60 @@ struct TrainsAtStopView: View {
         }
     }
     
-    private func getRouteId(of trip: MTATrip) -> String {
+    private func isValid(_ arrivalTime: Date) -> Bool {
+        return arrivalTime.timeIntervalSinceNow > maxAgo && arrivalTime.timeIntervalSinceNow < maxComing
+    }
+    
+    private func getRouteId(of trip: MTATrip) -> MTARouteId? {
         if let tripId = trip.tripId {
             let routeAndDirection = String(tripId.split(separator: "_")[1])
             let route = routeAndDirection.split(separator: ".")[0]
-            return MTARouteId(rawValue: String(route))?.rawValue ?? ""
+            return MTARouteId(rawValue: String(route))
         } else {
-            return ""
+            return nil
         }
+    }
+    
+    private func getRouteColor(of trip: MTATrip) -> Color? {
+        if let tripId = trip.tripId {
+            let routeAndDirection = String(tripId.split(separator: "_")[1])
+            let route = routeAndDirection.split(separator: ".")[0]
+            if let routeId = MTARouteId(rawValue: String(route)), let mtaRoute = ViewModel.mtaRoutes.first(where: { $0.id == routeId }) {
+                return Color(uiColor: hexStringToUIColor(hex: mtaRoute.color))
+            }
+        }
+        return nil
+    }
+    
+    private func getRouteIdColor(of trip: MTATrip) -> Color {
+        switch getRouteId(of: trip) {
+        case .n, .q, .r, .w:
+            return .black
+        default:
+            return .white
+        }
+    }
+    
+    private func hexStringToUIColor (hex:String) -> UIColor {
+        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+
+        if (cString.hasPrefix("#")) {
+            cString.remove(at: cString.startIndex)
+        }
+
+        if ((cString.count) != 6) {
+            return UIColor.gray
+        }
+
+        var rgbValue:UInt64 = 0
+        Scanner(string: cString).scanHexInt64(&rgbValue)
+
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
     }
     
     private func getOriginTime(of trip: MTATrip) -> Date {
@@ -72,16 +121,33 @@ struct TrainsAtStopView: View {
         }
     }
     
-    private func getDirection(of trip: MTATrip) -> String {
+    private func getDirection(of trip: MTATrip) -> MTADirection? {
         if let direction = trip.direction {
-            return direction.rawValue
+            return direction
         } else if let tripId = trip.tripId {
             let routeAndDirection = String(tripId.split(separator: "_")[1])
             let direction = routeAndDirection.split(separator: ".").last ?? ""
-            return MTADirection(rawValue: String(direction))?.rawValue ?? ""
+            return MTADirection(rawValue: String(direction))
         } else {
-            return ""
+            return nil
         }
+    }
+    
+    private func getDirection(of train: MTATrain) -> MTADirection? {
+        if let trip = train.trip, let direction = getDirection(of: trip) {
+             return direction
+        } else if let last = train.stopId?.last {
+            if last == "N" {
+                return .north
+            } else if last == "S" {
+                return .south
+            }
+        }
+        return nil
+    }
+    
+    private func getTimeInterval(_ arrivalTime: Date) -> String {
+        return RelativeDateTimeFormatter().localizedString(for: arrivalTime, relativeTo: Date())
         
     }
 }
