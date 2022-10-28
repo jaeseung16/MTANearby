@@ -25,4 +25,17 @@ enum MTADirection: String {
             self = .west
         }
     }
+    
+    var systemName: String {
+        switch self {
+        case .north:
+            return "arrow.up"
+        case .south:
+            return "arrow.down"
+        case .east:
+            return "arrow.right"
+        case .west:
+            return "arrow.left"
+        }
+    }
 }
