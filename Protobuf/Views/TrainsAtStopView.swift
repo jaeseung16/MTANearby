@@ -49,6 +49,7 @@ struct TrainsAtStopView: View {
                             Spacer()
                             
                             Text(getTimeInterval(arrivalTime))
+                                .foregroundColor(arrivalTime < Date() ? .secondary : .primary)
                         }
                     }
                 }
@@ -148,7 +149,6 @@ struct TrainsAtStopView: View {
     
     private func getTimeInterval(_ arrivalTime: Date) -> String {
         return RelativeDateTimeFormatter().localizedString(for: arrivalTime, relativeTo: Date())
-        
     }
 }
 
