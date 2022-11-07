@@ -79,6 +79,7 @@ class ViewModel: NSObject, ObservableObject {
     static var stopsById: [String: MTAStop] = Dictionary(uniqueKeysWithValues: mtaStops.map { ($0.id, $0) })
     
     @Published var updated = false
+    @Published var numberOfUpdatedFeed = 0
     
     var vehiclesByStopId = [String: [MTAVehicle]]()
     var tripUpdatesByTripId = [String: [MTATripUpdate]]()
@@ -93,6 +94,10 @@ class ViewModel: NSObject, ObservableObject {
         }
         if !tripUpdatesByStopId.isEmpty {
             tripUpdatesByStopId.removeAll()
+        }
+        
+        DispatchQueue.main.async {
+            self.numberOfUpdatedFeed = 0
         }
    
         MTASubwayFeedURL.allCases.forEach { getData(from: $0) }
@@ -271,7 +276,7 @@ class ViewModel: NSObject, ObservableObject {
             }
             
             DispatchQueue.main.async {
-                self.updated.toggle()
+                self.numberOfUpdatedFeed += 1
             }
             
             ViewModel.logger.log("For url=\(url.absoluteString), it took \(DateInterval(start: start, end: Date()).duration) sec")

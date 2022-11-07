@@ -19,7 +19,7 @@ struct ContentView: View {
     
     // 40.7370413,-73.8625352 Home
     // 40.75696,-73.9703863 850 Third Ave
-    private var location = CLLocationCoordinate2D(latitude: 40.75696, longitude: -73.9703863)
+    private var location = CLLocationCoordinate2D(latitude: 40.7370413, longitude: -73.8625352)
     
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 40.712778, longitude: -74.006111),
                                                    latitudinalMeters: CLLocationDistance(2000),
@@ -33,39 +33,11 @@ struct ContentView: View {
     @State private var trainsNearby = [MTAStop: [MTATrain]]()
     @State private var stopsNearby = [MTAStop]()
     
+    @State private var showProgress = false
+    
     var body: some View {
         VStack {
-            HStack {
-                Spacer()
-                
-                Button {
-                    viewModel.getAllData()
-                } label: {
-                    Text("Download feed data")
-                        .padding()
-                }
-                
-                Spacer()
-                
-                Button {
-                    vehiclesNearby = viewModel.vehicles(near: location)
-                } label: {
-                    Text("Show trains")
-                        .padding()
-                }
-                
-                Spacer()
-                
-                Button {
-                    stopsNearby = viewModel.stops(near: location)
-                    trainsNearby = viewModel.trains(near: location)
-                } label: {
-                    Text("Show trains 2")
-                        .padding()
-                }
-                
-                Spacer()
-            }
+            Label("Nearby Subway Stations", systemImage: "tram.fill.tunnel")
             
             if !trainsNearby.isEmpty {
                 NavigationView{
@@ -89,56 +61,27 @@ struct ContentView: View {
                 }
             }
             
-            /*
-            if !vehiclesNearby.isEmpty {
-                NavigationView{
-                    List {
-                        ForEach(Array(vehiclesNearby.keys), id:\.self) { stop in
-                            if let vehicles = vehiclesNearby[stop] {
-                                NavigationLink {
-                                    VehiclesAtStopView(stop: stop, vehicles: vehicles)
-                                } label: {
-                                    Text("\(stop.name)")
-                                }
-                            }
-                        }
-                    }
-                }
+            Spacer()
+            
+            Button {
+                showProgress = true
+                viewModel.getAllData()
+            } label: {
+                Label("Refresh", systemImage: "arrow.clockwise.circle")
             }
-            */
-            
-            /*
-            NavigationView {
-                List {
-                    ForEach(MTARouteId.allCases) { routeId in
-                        if let stops = stopsByRoute[routeId] {
-                            NavigationLink {
-                                StopsView(stops: stops)
-                            } label: {
-                                HStack {
-                                    Text(routeId.rawValue)
-                                }
-                            }
-                        }
-                    }
-                }
+
+        }
+        .overlay {
+            ProgressView("Please wait...")
+                .progressViewStyle(CircularProgressViewStyle())
+                .opacity(showProgress ? 1 : 0)
+        }
+        .onReceive(viewModel.$numberOfUpdatedFeed) { newValue in
+            if newValue == MTASubwayFeedURL.allCases.count {
+                showProgress = false
+                stopsNearby = viewModel.stops(near: location)
+                trainsNearby = viewModel.trains(near: location)
             }
-            */
-            
-            /*
-            Map(coordinateRegion: $region)
-                .edgesIgnoringSafeArea(.all)
-            */
-            
-            
-            /*
-                Map(coordinateRegion: $region, annotationItems: stops) { stop in
-                    MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: stop.latitude, longitude: stop.longitude)) {
-                        Image(systemName: "m.square.fill")
-                            .foregroundColor(.blue)
-                    }
-                }
-            */
         }
         
     }
