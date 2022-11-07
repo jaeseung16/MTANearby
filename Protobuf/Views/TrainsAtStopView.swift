@@ -48,8 +48,13 @@ struct TrainsAtStopView: View {
                             
                             Spacer()
                             
-                            Text(getTimeInterval(arrivalTime))
-                                .foregroundColor(arrivalTime < Date() ? .secondary : .primary)
+                            if Date().distance(to: arrivalTime) > 15*60 {
+                                Text(arrivalTime, style: .time)
+                                    .foregroundColor(.secondary)
+                            } else {
+                                Text(getTimeInterval(arrivalTime))
+                                    .foregroundColor(arrivalTime < Date() ? .secondary : .primary)
+                            }
                         }
                     }
                 }

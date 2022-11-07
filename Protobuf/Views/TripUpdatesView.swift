@@ -21,7 +21,7 @@ struct TripUpdatesView: View {
                     Spacer()
                     
                     if let arrivalTime = stopTimeUpdate.arrivalTime {
-                        Text(getTimeInterval(arrivalTime))
+                        Text(arrivalTime, style: .time)
                             .foregroundColor(arrivalTime < Date() ? .secondary : .primary)
                     }
                 }
@@ -29,7 +29,4 @@ struct TripUpdatesView: View {
         }
     }
     
-    private func getTimeInterval(_ arrivalTime: Date) -> String {
-        return RelativeDateTimeFormatter().localizedString(for: arrivalTime, relativeTo: Date())
-    }
 }
