@@ -437,4 +437,47 @@ class ViewModel: NSObject, ObservableObject {
         }
         
     }
+    
+    // MARK: - LocationManager
+    
+    let locationManager = CLLocationManager()
+    var userLocality: String = "Unknown"
+    @Published var coordinate = CLLocationCoordinate2D()
+    func lookUpCurrentLocation() {
+        if let lastLocation = locationManager.location {
+            let geocoder = CLGeocoder()
+            geocoder.reverseGeocodeLocation(lastLocation) { (placemarks, error) in
+                if error == nil, let placemark = placemarks?[0] {
+                    self.userLocality = "\(placemark.subThoroughfare ?? "") \(placemark.thoroughfare ?? "") \(placemark.subLocality ?? "")"
+                } else {
+                    self.userLocality = "Unknown"
+                }
+            }
+        } else {
+            self.userLocality = "Unknown"
+        }
+        ViewModel.logger.info("userLocality=\(self.userLocality)")
+    }
+    
+    override init() {
+        super.init()
+        
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
+        lookUpCurrentLocation()
+    }
+    
+}
+
+extension ViewModel: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+      guard let location = locations.last else { return }
+      coordinate = location.coordinate
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        ViewModel.logger.log("CLLocationManager: \(error.localizedDescription, privacy: .public)")
+    }
 }
