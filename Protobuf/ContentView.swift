@@ -19,7 +19,7 @@ struct ContentView: View {
     
     // 40.7370413,-73.8625352 Home
     // 40.75696,-73.9703863 850 Third Ave
-    private var location = CLLocationCoordinate2D(latitude: 40.7370413, longitude: -73.8625352)
+    @State private var location = CLLocationCoordinate2D(latitude: 40.7370413, longitude: -73.8625352)
     
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 40.712778, longitude: -74.006111),
                                                    latitudinalMeters: CLLocationDistance(2000),
@@ -37,15 +37,20 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Label("Nearby Subway Stations", systemImage: "tram.fill.tunnel")
+            if !viewModel.userLocality.isEmpty && viewModel.userLocality != "Unknown" {
+                Label(viewModel.userLocality, systemImage: "mappin.and.ellipse")
+            } else {
+                Label("Nearby Subway Stations", systemImage: "tram.fill.tunnel")
+            }
             
             if !trainsNearby.isEmpty {
-                NavigationView{
+                NavigationView {
                     List {
                         ForEach(stopsNearby, id:\.self) { stop in
                             if let trains = trainsNearby[stop] {
                                 NavigationLink {
                                     TrainsAtStopView(stop: stop, trains: trains.filter( {$0.arrivalTime != nil} ).sorted(by: {$0.arrivalTime! < $1.arrivalTime!}))
+                                        .navigationTitle(stop.name)
                                 } label: {
                                     HStack {
                                         Text("\(stop.name)")
@@ -65,12 +70,20 @@ struct ContentView: View {
             
             Button {
                 showProgress = true
+                
+                viewModel.lookUpCurrentLocation()
+                
+                if let coordinate =  viewModel.locationManager.location?.coordinate {
+                    location = coordinate
+                }
+                
                 viewModel.getAllData()
             } label: {
                 Label("Refresh", systemImage: "arrow.clockwise.circle")
             }
-
+            .disabled(showProgress)
         }
+        .padding()
         .overlay {
             ProgressView("Please wait...")
                 .progressViewStyle(CircularProgressViewStyle())

@@ -23,6 +23,7 @@ struct TrainsAtStopView: View {
                     NavigationLink {
                         if let tripId = trip.tripId, let tripUpdate = viewModel.tripUpdatesByTripId[tripId] {
                             TripUpdatesView(tripUpdate: tripUpdate[0])
+                                .navigationTitle(getRouteId(of: trip)?.rawValue ?? "")
                         } else {
                             EmptyView()
                         }
@@ -30,15 +31,8 @@ struct TrainsAtStopView: View {
                         HStack {
                             Image(systemName: getDirection(of: train)?.systemName ?? "")
                             
-                            ZStack {
-                                Circle()
-                                    .foregroundColor(getRouteColor(of: trip) ?? .clear)
-                                
-                                Text(getRouteId(of: trip)?.rawValue ?? "")
-                                    .font(.title2)
-                                    .foregroundColor(getRouteIdColor(of: trip))
-                            }
-                            .frame(width: 30, height: 30)
+                            getRouteView(for: trip)
+                                .frame(width: 30, height: 30)
                             
                             //Spacer()
                             
@@ -59,6 +53,17 @@ struct TrainsAtStopView: View {
                     }
                 }
             }
+        }
+    }
+    
+    private func getRouteView(for trip: MTATrip) -> some View {
+        ZStack {
+            Circle()
+                .foregroundColor(getRouteColor(of: trip) ?? .clear)
+            
+            Text(getRouteId(of: trip)?.rawValue ?? "")
+                .font(.title2)
+                .foregroundColor(getRouteIdColor(of: trip))
         }
     }
     
