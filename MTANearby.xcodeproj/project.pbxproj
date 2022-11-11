@@ -63,7 +63,7 @@
 		90A46B6628F228F500DED050 /* MTAVehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTAVehicle.swift; sourceTree = "<group>"; };
 		90A46B6828F229CA00DED050 /* MTAVehicleStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTAVehicleStatus.swift; sourceTree = "<group>"; };
 		90A4BEF028EE424600B210F8 /* MTADirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTADirection.swift; sourceTree = "<group>"; };
-		90A983AF28CFD71B0046A19B /* Protobuf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Protobuf.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		90A983AF28CFD71B0046A19B /* MTANearby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTANearby.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A983B228CFD71B0046A19B /* ProtobufApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtobufApp.swift; sourceTree = "<group>"; };
 		90A983B428CFD71B0046A19B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		90A983B628CFD71C0046A19B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -136,7 +136,7 @@
 		90A983B028CFD71B0046A19B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				90A983AF28CFD71B0046A19B /* Protobuf.app */,
+				90A983AF28CFD71B0046A19B /* MTANearby.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -169,9 +169,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		90A983AE28CFD71B0046A19B /* Protobuf */ = {
+		90A983AE28CFD71B0046A19B /* MTANearby */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 90A983BD28CFD71C0046A19B /* Build configuration list for PBXNativeTarget "Protobuf" */;
+			buildConfigurationList = 90A983BD28CFD71C0046A19B /* Build configuration list for PBXNativeTarget "MTANearby" */;
 			buildPhases = (
 				90A983AB28CFD71B0046A19B /* Sources */,
 				90A983AC28CFD71B0046A19B /* Frameworks */,
@@ -181,14 +181,14 @@
 			);
 			dependencies = (
 			);
-			name = Protobuf;
+			name = MTANearby;
 			packageProductDependencies = (
 				90A983C128CFD79E0046A19B /* SwiftProtobuf */,
 				90A983C528CFDF170046A19B /* SwiftProtobufPluginLibrary */,
 				908EC75E28E255B20020CC92 /* CodableCSV */,
 			);
 			productName = Protobuf;
-			productReference = 90A983AF28CFD71B0046A19B /* Protobuf.app */;
+			productReference = 90A983AF28CFD71B0046A19B /* MTANearby.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -206,7 +206,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 90A983AA28CFD71B0046A19B /* Build configuration list for PBXProject "Protobuf" */;
+			buildConfigurationList = 90A983AA28CFD71B0046A19B /* Build configuration list for PBXProject "MTANearby" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -224,7 +224,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				90A983AE28CFD71B0046A19B /* Protobuf */,
+				90A983AE28CFD71B0046A19B /* MTANearby */,
 			);
 		};
 /* End PBXProject section */
@@ -402,6 +402,8 @@
 				DEVELOPMENT_TEAM = RWVTTVMWBE;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "NYC Subway Near Me";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -432,6 +434,8 @@
 				DEVELOPMENT_TEAM = RWVTTVMWBE;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "NYC Subway Near Me";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -454,7 +458,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		90A983AA28CFD71B0046A19B /* Build configuration list for PBXProject "Protobuf" */ = {
+		90A983AA28CFD71B0046A19B /* Build configuration list for PBXProject "MTANearby" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				90A983BB28CFD71C0046A19B /* Debug */,
@@ -463,7 +467,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		90A983BD28CFD71C0046A19B /* Build configuration list for PBXNativeTarget "Protobuf" */ = {
+		90A983BD28CFD71C0046A19B /* Build configuration list for PBXNativeTarget "MTANearby" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				90A983BE28CFD71C0046A19B /* Debug */,
