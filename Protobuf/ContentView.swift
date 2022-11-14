@@ -33,7 +33,7 @@ struct ContentView: View {
     @State private var trainsNearby = [MTAStop: [MTATrain]]()
     @State private var stopsNearby = [MTAStop]()
     
-    @State private var showProgress = false
+    @State private var showProgress = true
     
     var body: some View {
         VStack {
@@ -92,9 +92,18 @@ struct ContentView: View {
         .onReceive(viewModel.$numberOfUpdatedFeed) { newValue in
             if newValue == MTASubwayFeedURL.allCases.count {
                 showProgress = false
-                stopsNearby = viewModel.stops(near: location)
-                trainsNearby = viewModel.trains(near: location)
             }
+            stopsNearby = viewModel.stops(near: location)
+            trainsNearby = viewModel.trains(near: location)
+        }
+        .onReceive(viewModel.$coordinate) { newValue in
+            viewModel.lookUpCurrentLocation()
+            
+            if let coordinate =  viewModel.locationManager.location?.coordinate {
+                location = coordinate
+            }
+            
+            viewModel.getAllData()
         }
         
     }

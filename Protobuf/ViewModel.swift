@@ -249,33 +249,33 @@ class ViewModel: NSObject, ObservableObject {
             
             ViewModel.logger.info("vehicles.count = \(String(describing: vehicles.count), privacy: .public)")
             
-            if !vehicles.isEmpty {
-                for vehicle in vehicles {
-                    //ViewModel.logger.info("vehicle = \(String(describing: vehicle), privacy: .public)")
-                    if let stopId = vehicle.stopId {
-                        if self.vehiclesByStopId.keys.contains(stopId) {
-                            self.vehiclesByStopId[stopId]?.append(vehicle)
-                        } else {
-                            self.vehiclesByStopId[stopId] = [vehicle]
-                        }
-                    }
-                }
-            }
-            
-            if !tripUpdates.isEmpty {
-                for tripUpdate in tripUpdates {
-                    ViewModel.logger.info("tripUpdate = \(String(describing: tripUpdate), privacy: .public)")
-                    if let tripId = tripUpdate.trip?.tripId {
-                        if self.tripUpdatesByTripId.keys.contains(tripId) {
-                            self.tripUpdatesByTripId[tripId]?.append(tripUpdate)
-                        } else {
-                            self.tripUpdatesByTripId[tripId] = [tripUpdate]
-                        }
-                    }
-                }
-            }
-            
             DispatchQueue.main.async {
+                if !vehicles.isEmpty {
+                    for vehicle in vehicles {
+                        //ViewModel.logger.info("vehicle = \(String(describing: vehicle), privacy: .public)")
+                        if let stopId = vehicle.stopId {
+                            if self.vehiclesByStopId.keys.contains(stopId) {
+                                self.vehiclesByStopId[stopId]?.append(vehicle)
+                            } else {
+                                self.vehiclesByStopId[stopId] = [vehicle]
+                            }
+                        }
+                    }
+                }
+                
+                if !tripUpdates.isEmpty {
+                    for tripUpdate in tripUpdates {
+                        ViewModel.logger.info("tripUpdate = \(String(describing: tripUpdate), privacy: .public)")
+                        if let tripId = tripUpdate.trip?.tripId {
+                            if self.tripUpdatesByTripId.keys.contains(tripId) {
+                                self.tripUpdatesByTripId[tripId]?.append(tripUpdate)
+                            } else {
+                                self.tripUpdatesByTripId[tripId] = [tripUpdate]
+                            }
+                        }
+                    }
+                }
+            
                 self.numberOfUpdatedFeed += 1
             }
             
@@ -466,15 +466,14 @@ class ViewModel: NSObject, ObservableObject {
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
-        lookUpCurrentLocation()
     }
     
 }
 
 extension ViewModel: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-      guard let location = locations.last else { return }
-      coordinate = location.coordinate
+        guard let location = locations.last else { return }
+        coordinate = location.coordinate
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
