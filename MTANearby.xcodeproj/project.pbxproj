@@ -31,7 +31,7 @@
 		90A46B6728F228F500DED050 /* MTAVehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A46B6628F228F500DED050 /* MTAVehicle.swift */; };
 		90A46B6928F229CA00DED050 /* MTAVehicleStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A46B6828F229CA00DED050 /* MTAVehicleStatus.swift */; };
 		90A4BEF128EE424600B210F8 /* MTADirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A4BEF028EE424600B210F8 /* MTADirection.swift */; };
-		90A983B328CFD71B0046A19B /* ProtobufApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A983B228CFD71B0046A19B /* ProtobufApp.swift */; };
+		90A983B328CFD71B0046A19B /* MTANearByApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A983B228CFD71B0046A19B /* MTANearByApp.swift */; };
 		90A983B528CFD71B0046A19B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A983B428CFD71B0046A19B /* ContentView.swift */; };
 		90A983B728CFD71C0046A19B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90A983B628CFD71C0046A19B /* Assets.xcassets */; };
 		90A983BA28CFD71C0046A19B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90A983B928CFD71C0046A19B /* Preview Assets.xcassets */; };
@@ -64,7 +64,7 @@
 		90A46B6828F229CA00DED050 /* MTAVehicleStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTAVehicleStatus.swift; sourceTree = "<group>"; };
 		90A4BEF028EE424600B210F8 /* MTADirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTADirection.swift; sourceTree = "<group>"; };
 		90A983AF28CFD71B0046A19B /* MTANearby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTANearby.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		90A983B228CFD71B0046A19B /* ProtobufApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtobufApp.swift; sourceTree = "<group>"; };
+		90A983B228CFD71B0046A19B /* MTANearByApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTANearByApp.swift; sourceTree = "<group>"; };
 		90A983B428CFD71B0046A19B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		90A983B628CFD71C0046A19B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		90A983B928CFD71C0046A19B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -151,7 +151,7 @@
 				908B1AA028FB6A8E008ACF21 /* Views */,
 				90672E4628CFE15600B4BF74 /* nyct-subway.pb.swift */,
 				90672E4428CFE14E00B4BF74 /* gtfs-realtime.pb.swift */,
-				90A983B228CFD71B0046A19B /* ProtobufApp.swift */,
+				90A983B228CFD71B0046A19B /* MTANearByApp.swift */,
 				90A983B428CFD71B0046A19B /* ContentView.swift */,
 				90672E4228CFE0FF00B4BF74 /* ViewModel.swift */,
 				90A983B628CFD71C0046A19B /* Assets.xcassets */,
@@ -271,7 +271,7 @@
 				90672E4328CFE0FF00B4BF74 /* ViewModel.swift in Sources */,
 				909F55F528F4D02500BEC9B9 /* MTARouteId.swift in Sources */,
 				908CB9EB28FE0964007D163F /* MTATrain.swift in Sources */,
-				90A983B328CFD71B0046A19B /* ProtobufApp.swift in Sources */,
+				90A983B328CFD71B0046A19B /* MTANearByApp.swift in Sources */,
 				908EC76128E255E10020CC92 /* MTAStop.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

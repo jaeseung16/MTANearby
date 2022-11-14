@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct ProtobufApp: App {
+struct MTANearByApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
