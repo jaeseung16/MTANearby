@@ -21,10 +21,6 @@ struct ContentView: View {
     // 40.75696,-73.9703863 850 Third Ave
     @State private var location = CLLocationCoordinate2D(latitude: 40.7370413, longitude: -73.8625352)
     
-    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 40.712778, longitude: -74.006111),
-                                                   latitudinalMeters: CLLocationDistance(2000),
-                                                   longitudinalMeters: CLLocationDistance(2000))
-    
     @State private var stops = ViewModel.mtaStops
     @State private var routes = ViewModel.mtaRoutes
     @State private var stopsByRoute = ViewModel.stopsByRoute
@@ -70,14 +66,7 @@ struct ContentView: View {
             
             Button {
                 showProgress = true
-                
-                viewModel.lookUpCurrentLocation()
-                
-                if let coordinate =  viewModel.locationManager.location?.coordinate {
-                    location = coordinate
-                }
-                
-                viewModel.getAllData()
+                lookUpCurrentLocationAndDownloadAllData()
             } label: {
                 Label("Refresh", systemImage: "arrow.clockwise.circle")
             }
@@ -97,13 +86,7 @@ struct ContentView: View {
             trainsNearby = viewModel.trains(near: location)
         }
         .onReceive(viewModel.$coordinate) { newValue in
-            viewModel.lookUpCurrentLocation()
-            
-            if let coordinate =  viewModel.locationManager.location?.coordinate {
-                location = coordinate
-            }
-            
-            viewModel.getAllData()
+            lookUpCurrentLocationAndDownloadAllData()
         }
         
     }
@@ -113,6 +96,14 @@ struct ContentView: View {
         let stopLocation = CLLocation(latitude: stop.latitude, longitude: stop.longitude)
         
         return Measurement(value: stopLocation.distance(from: clLocation), unit: UnitLength.meters)
+    }
+    
+    private func lookUpCurrentLocationAndDownloadAllData() -> Void {
+        viewModel.lookUpCurrentLocation()
+        if let coordinate =  viewModel.locationManager.location?.coordinate {
+            location = coordinate
+            viewModel.getAllData()
+        }
     }
     
 }
