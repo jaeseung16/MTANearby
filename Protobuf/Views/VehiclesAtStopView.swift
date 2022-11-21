@@ -25,13 +25,7 @@ struct VehiclesAtStopView: View {
                         }
                     } label: {
                         HStack {
-                            // Text("\(trip.tripId ?? "")")
-                            
                             Text("Route: \(getRouteId(of: trip))")
-                            
-                            // Text("\(getOriginTime(of: trip), format: Date.FormatStyle(date: .numeric, time: .standard))")
-                            
-                            // Text("\(vehicle.stopSequence ?? UInt.max)")
                             
                             Spacer()
                             

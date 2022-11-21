@@ -16,7 +16,6 @@ struct StopsView: View {
         
         List {
             ForEach(stops) { stop in
-                //Text("\(stop.id ?? ""): \(stop.name ?? "")")
                 if let key = stop.id {
                     if let vehicles = viewModel.vehiclesByStopId[key] {
                         NavigationLink {
@@ -38,32 +37,5 @@ struct StopsView: View {
                 }
             }
         }
-        
-        /*
-        NavigationView {
-            List {
-                ForEach(Array(stopsById.keys).sorted(by: <), id: \.self) { key in
-                    if let stop = stopsById[key], let vehicles = vehiclesByStopId[key] {
-                        NavigationLink {
-                            VehiclesAtStopView(stop: stop, vehicles: vehicles)
-                        } label: {
-                            HStack {
-                                Text("\(key)")
-                                Spacer()
-                                Text("\(stop.name)")
-                            }
-                        }
-                    } else {
-                        HStack {
-                            Text("\(key)")
-                            Spacer()
-                            Text("\(stopsById[key]?.name ?? "")")
-                        }
-                    }
-                }
-            }
-        }
-         */
-        
     }
 }

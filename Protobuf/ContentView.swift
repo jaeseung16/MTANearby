@@ -45,7 +45,11 @@ struct ContentView: View {
                         ForEach(stopsNearby, id:\.self) { stop in
                             if let trains = trainsNearby[stop] {
                                 NavigationLink {
-                                    TrainsAtStopView(stop: stop, trains: trains.filter( {$0.arrivalTime != nil} ).sorted(by: {$0.arrivalTime! < $1.arrivalTime!}))
+                                    TrainsAtStopView(stop: stop,
+                                                     trains: trains.filter( {$0.arrivalTime != nil} ).sorted(by: {$0.arrivalTime! < $1.arrivalTime!}),
+                                                     region: MKCoordinateRegion(center: location,
+                                                                                latitudinalMeters: CLLocationDistance(3000),
+                                                                                longitudinalMeters: CLLocationDistance(3000)))
                                         .navigationTitle(stop.name)
                                 } label: {
                                     HStack {

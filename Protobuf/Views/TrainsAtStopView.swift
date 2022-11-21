@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct TrainsAtStopView: View {
     @EnvironmentObject private var viewModel: ViewModel
@@ -15,44 +16,48 @@ struct TrainsAtStopView: View {
     
     var stop: MTAStop
     var trains: [MTATrain]
+    @State var region: MKCoordinateRegion
     
     var body: some View {
-        List {
-            ForEach(trains, id: \.self) { train in
-                if let trip = train.trip, let arrivalTime = train.arrivalTime, isValid(arrivalTime) {
-                    NavigationLink {
-                        if let tripId = trip.tripId, let tripUpdate = viewModel.tripUpdatesByTripId[tripId] {
-                            TripUpdatesView(tripUpdate: tripUpdate[0])
-                                .navigationTitle(getRouteId(of: trip)?.rawValue ?? "")
-                        } else {
-                            EmptyView()
-                        }
-                    } label: {
-                        HStack {
-                            Image(systemName: getDirection(of: train)?.systemName ?? "")
-                            
-                            getRouteView(for: trip)
-                                .frame(width: 30, height: 30)
-                            
-                            //Spacer()
-                            
-                            //Text("\(train.status?.rawValue ?? "")")
-                            
-                            //Text("\(train.stopId ?? "")")
-                            
-                            Spacer()
-                            
-                            if Date().distance(to: arrivalTime) > 15*60 {
-                                Text(arrivalTime, style: .time)
-                                    .foregroundColor(.secondary)
+        VStack {
+            Map(coordinateRegion: $region, interactionModes: .zoom, showsUserLocation: true, annotationItems: [stop]) { place in
+                MapPin(coordinate: place.getCoordinate())
+            }
+            .aspectRatio(CGSize(width: 1.0, height: 1.0), contentMode: .fit)
+            
+            List {
+                ForEach(trains, id: \.self) { train in
+                    if let trip = train.trip, let arrivalTime = train.arrivalTime, isValid(arrivalTime) {
+                        NavigationLink {
+                            if let tripId = trip.tripId, let tripUpdate = viewModel.tripUpdatesByTripId[tripId] {
+                                TripUpdatesView(tripUpdate: tripUpdate[0])
+                                    .navigationTitle(getRouteId(of: trip)?.rawValue ?? "")
                             } else {
-                                Text(getTimeInterval(arrivalTime))
-                                    .foregroundColor(arrivalTime < Date() ? .secondary : .primary)
+                                EmptyView()
+                            }
+                        } label: {
+                            HStack {
+                                Image(systemName: getDirection(of: train)?.systemName ?? "")
+                                
+                                getRouteView(for: trip)
+                                    .frame(width: 30, height: 30)
+                                
+                                Spacer()
+                                
+                                if Date().distance(to: arrivalTime) > 15*60 {
+                                    Text(arrivalTime, style: .time)
+                                        .foregroundColor(.secondary)
+                                } else {
+                                    Text(getTimeInterval(arrivalTime))
+                                        .foregroundColor(arrivalTime < Date() ? .secondary : .primary)
+                                }
                             }
                         }
                     }
                 }
             }
+            
+            Spacer()
         }
     }
     

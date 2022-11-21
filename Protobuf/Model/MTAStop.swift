@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 struct MTAStop: Identifiable, Codable, Hashable {
     var id: String
@@ -32,6 +33,9 @@ struct MTAStop: Identifiable, Codable, Hashable {
         case parentStation = 9
     }
     
+    func getCoordinate() -> CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
     
 }
 
