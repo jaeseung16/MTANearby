@@ -21,7 +21,7 @@ struct TrainsAtStopView: View {
     var body: some View {
         VStack {
             Map(coordinateRegion: $region, interactionModes: .zoom, showsUserLocation: true, annotationItems: [stop]) { place in
-                MapPin(coordinate: place.getCoordinate())
+                MapPin(coordinate: place.getCLLocationCoordinate2D())
             }
             .aspectRatio(CGSize(width: 1.0, height: 1.0), contentMode: .fit)
             

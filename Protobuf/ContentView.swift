@@ -11,10 +11,18 @@ import MapKit
 struct ContentView: View {
     @EnvironmentObject private var viewModel: ViewModel
     
-    private var numberFormatter: NumberFormatter {
-        let formatter = NumberFormatter()
-        formatter.maximumFractionDigits = 2
-        return formatter
+    private var rangeFactor = 1.5
+    
+    private var region: MKCoordinateRegion {
+        MKCoordinateRegion(center: location,
+                           latitudinalMeters: CLLocationDistance(viewModel.range * rangeFactor),
+                           longitudinalMeters: CLLocationDistance(viewModel.range * rangeFactor))
+    }
+    
+    private var distanceFormatStyle: Measurement<UnitLength>.FormatStyle {
+        .measurement(width: .abbreviated,
+                     usage: .asProvided,
+                     numberFormatStyle: .number.precision(.fractionLength(1)))
     }
     
     // 40.7370413,-73.8625352 Home
@@ -33,11 +41,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            if !viewModel.userLocality.isEmpty && viewModel.userLocality != "Unknown" {
-                Label(viewModel.userLocality, systemImage: "mappin.and.ellipse")
-            } else {
-                Label("Nearby Subway Stations", systemImage: "tram.fill.tunnel")
-            }
+            locationLabel
             
             if !trainsNearby.isEmpty {
                 NavigationView {
@@ -47,18 +51,10 @@ struct ContentView: View {
                                 NavigationLink {
                                     TrainsAtStopView(stop: stop,
                                                      trains: trains.filter( {$0.arrivalTime != nil} ).sorted(by: {$0.arrivalTime! < $1.arrivalTime!}),
-                                                     region: MKCoordinateRegion(center: location,
-                                                                                latitudinalMeters: CLLocationDistance(3000),
-                                                                                longitudinalMeters: CLLocationDistance(3000)))
+                                                     region: region)
                                         .navigationTitle(stop.name)
                                 } label: {
-                                    HStack {
-                                        Text("\(stop.name)")
-                                        
-                                        Spacer()
-                                        
-                                        Text(distance(to: stop).converted(to: .miles), format: .measurement(width: .abbreviated, usage: .asProvided, numberFormatStyle: .number.precision(.fractionLength(1))))
-                                    }
+                                    label(for: stop)
                                 }
                             }
                         }
@@ -95,10 +91,27 @@ struct ContentView: View {
         
     }
     
+    private var locationLabel: some View {
+        if !viewModel.userLocality.isEmpty && viewModel.userLocality != "Unknown" {
+            return Label(viewModel.userLocality, systemImage: "mappin.and.ellipse")
+        } else {
+            return Label("Nearby Subway Stations", systemImage: "tram.fill.tunnel")
+        }
+    }
+    
+    private func label(for stop: MTAStop) -> some View {
+        HStack {
+            Text("\(stop.name)")
+            
+            Spacer()
+            
+            Text(distance(to: stop).converted(to: .miles), format: distanceFormatStyle)
+        }
+    }
+    
     private func distance(to stop: MTAStop) -> Measurement<UnitLength> {
         let clLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
-        let stopLocation = CLLocation(latitude: stop.latitude, longitude: stop.longitude)
-        
+        let stopLocation = stop.getCLLocation()
         return Measurement(value: stopLocation.distance(from: clLocation), unit: UnitLength.meters)
     }
     

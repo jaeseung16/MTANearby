@@ -80,6 +80,7 @@ class ViewModel: NSObject, ObservableObject {
     
     @Published var updated = false
     @Published var numberOfUpdatedFeed = 0
+    var range = 2000.0
     
     var vehiclesByStopId = [String: [MTAVehicle]]()
     var tripUpdatesByTripId = [String: [MTATripUpdate]]()
@@ -350,7 +351,7 @@ class ViewModel: NSObject, ObservableObject {
     func vehicles(near center: CLLocationCoordinate2D) -> [MTAStop: [MTAVehicle]] {
         var vehicles = [MTAStop: [MTAVehicle]]()
         
-        let radius = CLLocationDistance(2000)
+        let radius = CLLocationDistance(range)
         let circularRegion = CLCircularRegion(center: center, radius: radius, identifier: "\(center)")
         
         let stopsNearBy = ViewModel.mtaStops.filter { mtaStop in

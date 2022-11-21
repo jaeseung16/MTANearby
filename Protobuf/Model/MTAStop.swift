@@ -33,8 +33,12 @@ struct MTAStop: Identifiable, Codable, Hashable {
         case parentStation = 9
     }
     
-    func getCoordinate() -> CLLocationCoordinate2D {
+    func getCLLocationCoordinate2D() -> CLLocationCoordinate2D {
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
+    
+    func getCLLocation() -> CLLocation {
+        return CLLocation(latitude: latitude, longitude: longitude)
     }
     
 }
