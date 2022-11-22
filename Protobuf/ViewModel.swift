@@ -9,6 +9,7 @@ import Foundation
 import os
 import CodableCSV
 import CoreLocation
+import MapKit
 
 class ViewModel: NSObject, ObservableObject {
     static let logger = Logger()
@@ -266,7 +267,7 @@ class ViewModel: NSObject, ObservableObject {
                 
                 if !tripUpdates.isEmpty {
                     for tripUpdate in tripUpdates {
-                        ViewModel.logger.info("tripUpdate = \(String(describing: tripUpdate), privacy: .public)")
+                        //ViewModel.logger.info("tripUpdate = \(String(describing: tripUpdate), privacy: .public)")
                         if let tripId = tripUpdate.trip?.tripId {
                             if self.tripUpdatesByTripId.keys.contains(tripId) {
                                 self.tripUpdatesByTripId[tripId]?.append(tripUpdate)
@@ -444,6 +445,7 @@ class ViewModel: NSObject, ObservableObject {
     let locationManager = CLLocationManager()
     var userLocality: String = "Unknown"
     @Published var coordinate = CLLocationCoordinate2D()
+    @Published var region: MKCoordinateRegion?
     func lookUpCurrentLocation() {
         if let lastLocation = locationManager.location {
             let geocoder = CLGeocoder()

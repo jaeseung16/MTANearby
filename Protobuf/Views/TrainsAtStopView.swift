@@ -16,11 +16,21 @@ struct TrainsAtStopView: View {
     
     var stop: MTAStop
     var trains: [MTATrain]
-    @State var region: MKCoordinateRegion
+    var tripUpdateByTripId: [String: MTATripUpdate]
+    
+    private var region : Binding<MKCoordinateRegion> {
+        Binding {
+            viewModel.region!
+        } set: { region in
+            DispatchQueue.main.async {
+                viewModel.region = region
+            }
+        }
+    }
     
     var body: some View {
         VStack {
-            Map(coordinateRegion: $region, interactionModes: .zoom, showsUserLocation: true, annotationItems: [stop]) { place in
+            Map(coordinateRegion: region, interactionModes: .zoom, showsUserLocation: true, annotationItems: [stop]) { place in
                 MapPin(coordinate: place.getCLLocationCoordinate2D())
             }
             .aspectRatio(CGSize(width: 1.0, height: 1.0), contentMode: .fit)
@@ -29,8 +39,8 @@ struct TrainsAtStopView: View {
                 ForEach(trains, id: \.self) { train in
                     if let trip = train.trip, let arrivalTime = train.arrivalTime, isValid(arrivalTime) {
                         NavigationLink {
-                            if let tripId = trip.tripId, let tripUpdate = viewModel.tripUpdatesByTripId[tripId] {
-                                TripUpdatesView(tripUpdate: tripUpdate[0])
+                            if let tripId = trip.tripId, let tripUpdate = tripUpdateByTripId[tripId] {
+                                TripUpdatesView(tripUpdate: tripUpdate)
                                     .navigationTitle(getRouteId(of: trip)?.rawValue ?? "")
                             } else {
                                 EmptyView()

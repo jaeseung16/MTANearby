@@ -13,12 +13,6 @@ struct ContentView: View {
     
     private var rangeFactor = 1.5
     
-    private var region: MKCoordinateRegion {
-        MKCoordinateRegion(center: location,
-                           latitudinalMeters: CLLocationDistance(viewModel.range * rangeFactor),
-                           longitudinalMeters: CLLocationDistance(viewModel.range * rangeFactor))
-    }
-    
     private var distanceFormatStyle: Measurement<UnitLength>.FormatStyle {
         .measurement(width: .abbreviated,
                      usage: .asProvided,
@@ -50,8 +44,8 @@ struct ContentView: View {
                             if let trains = trainsNearby[stop] {
                                 NavigationLink {
                                     TrainsAtStopView(stop: stop,
-                                                     trains: trains.filter( {$0.arrivalTime != nil} ).sorted(by: {$0.arrivalTime! < $1.arrivalTime!}),
-                                                     region: region)
+                                                     trains: getTrains(from: trains),
+                                                     tripUpdateByTripId: getTripUpdateByTripId(from: trains))
                                         .navigationTitle(stop.name)
                                 } label: {
                                     label(for: stop)
@@ -120,7 +114,25 @@ struct ContentView: View {
         if let coordinate =  viewModel.locationManager.location?.coordinate {
             location = coordinate
             viewModel.getAllData()
+            viewModel.region = MKCoordinateRegion(center: location,
+                                                  latitudinalMeters: CLLocationDistance(viewModel.range * rangeFactor),
+                                                  longitudinalMeters: CLLocationDistance(viewModel.range * rangeFactor))
         }
+    }
+    
+    private func getTrains(from trains: [MTATrain]) -> [MTATrain] {
+        return trains.filter { $0.arrivalTime != nil}
+            .sorted(by: {$0.arrivalTime! < $1.arrivalTime!})
+    }
+    
+    private func getTripUpdateByTripId(from trains: [MTATrain]) -> [String: MTATripUpdate] {
+        var result = [String: MTATripUpdate]()
+        for train in getTrains(from: trains) {
+            if let trip = train.trip, let tripId = trip.tripId, let tripUpdates = viewModel.tripUpdatesByTripId[tripId], !tripUpdates.isEmpty {
+                result[tripId] = tripUpdates[0]
+            }
+        }
+        return result
     }
     
 }
