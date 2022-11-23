@@ -20,7 +20,9 @@ struct TrainsAtStopView: View {
     
     private var region : Binding<MKCoordinateRegion> {
         Binding {
-            viewModel.region!
+            viewModel.region ?? MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 40.712778, longitude: -74.006111),
+                                                   latitudinalMeters: viewModel.regionSpan,
+                                                   longitudinalMeters: viewModel.regionSpan)
         } set: { region in
             DispatchQueue.main.async {
                 viewModel.region = region

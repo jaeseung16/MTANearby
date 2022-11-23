@@ -11,8 +11,6 @@ import MapKit
 struct ContentView: View {
     @EnvironmentObject private var viewModel: ViewModel
     
-    private var rangeFactor = 1.5
-    
     private var distanceFormatStyle: Measurement<UnitLength>.FormatStyle {
         .measurement(width: .abbreviated,
                      usage: .asProvided,
@@ -79,8 +77,10 @@ struct ContentView: View {
             stopsNearby = viewModel.stops(near: location)
             trainsNearby = viewModel.trains(near: location)
         }
-        .onReceive(viewModel.$coordinate) { newValue in
-            lookUpCurrentLocationAndDownloadAllData()
+        .onReceive(viewModel.$coordinate) { _ in
+            if viewModel.coordinate != nil {
+                lookUpCurrentLocationAndDownloadAllData()
+            }
         }
         
     }
@@ -111,12 +111,9 @@ struct ContentView: View {
     
     private func lookUpCurrentLocationAndDownloadAllData() -> Void {
         viewModel.lookUpCurrentLocation()
-        if let coordinate =  viewModel.locationManager.location?.coordinate {
+        if let coordinate =  viewModel.coordinate {
             location = coordinate
             viewModel.getAllData()
-            viewModel.region = MKCoordinateRegion(center: location,
-                                                  latitudinalMeters: CLLocationDistance(viewModel.range * rangeFactor),
-                                                  longitudinalMeters: CLLocationDistance(viewModel.range * rangeFactor))
         }
     }
     

@@ -442,33 +442,24 @@ class ViewModel: NSObject, ObservableObject {
     
     // MARK: - LocationManager
     
-    let locationManager = CLLocationManager()
+    let locationManager = LocationManager()
     var userLocality: String = "Unknown"
-    @Published var coordinate = CLLocationCoordinate2D()
+    @Published var coordinate: CLLocationCoordinate2D?
     @Published var region: MKCoordinateRegion?
+    private var rangeFactor = 1.5
+    
+    var regionSpan: CLLocationDistance {
+        return CLLocationDistance(range * rangeFactor)
+    }
+    
     func lookUpCurrentLocation() {
-        if let lastLocation = locationManager.location {
-            let geocoder = CLGeocoder()
-            geocoder.reverseGeocodeLocation(lastLocation) { (placemarks, error) in
-                if error == nil, let placemark = placemarks?[0] {
-                    self.userLocality = "\(placemark.subThoroughfare ?? "") \(placemark.thoroughfare ?? "") \(placemark.subLocality ?? "")"
-                } else {
-                    self.userLocality = "Unknown"
-                }
-            }
-        } else {
-            self.userLocality = "Unknown"
-        }
-        ViewModel.logger.info("userLocality=\(self.userLocality)")
+        userLocality = locationManager.lookUpCurrentLocation()
     }
     
     override init() {
         super.init()
         
-        self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager.requestWhenInUseAuthorization()
-        self.locationManager.startUpdatingLocation()
+        locationManager.delegate = self
     }
     
 }
@@ -477,6 +468,12 @@ extension ViewModel: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         coordinate = location.coordinate
+        
+        if let coordinate = coordinate {
+            region = MKCoordinateRegion(center: coordinate,
+                                        latitudinalMeters: CLLocationDistance(range * rangeFactor),
+                                        longitudinalMeters: CLLocationDistance(range * rangeFactor))
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
