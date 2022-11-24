@@ -14,4 +14,17 @@ struct MTATrain: Hashable {
     let stopId: String?
     let arrivalTime: Date?
     let departureTime: Date?
+    
+    func getDirection() -> MTADirection? {
+        if let trip = trip, let direction = trip.getDirection() {
+             return direction
+        } else if let last = stopId?.last {
+            if last == "N" {
+                return .north
+            } else if last == "S" {
+                return .south
+            }
+        }
+        return nil
+    }
 }

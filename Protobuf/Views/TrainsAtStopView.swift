@@ -43,13 +43,13 @@ struct TrainsAtStopView: View {
                         NavigationLink {
                             if let tripId = trip.tripId, let tripUpdate = tripUpdateByTripId[tripId] {
                                 TripUpdatesView(tripUpdate: tripUpdate)
-                                    .navigationTitle(getRouteId(of: trip)?.rawValue ?? "")
+                                    .navigationTitle(trip.getRouteId()?.rawValue ?? "")
                             } else {
                                 EmptyView()
                             }
                         } label: {
                             HStack {
-                                Image(systemName: getDirection(of: train)?.systemName ?? "")
+                                Image(systemName: train.getDirection()?.systemName ?? "")
                                 
                                 getRouteView(for: trip)
                                     .frame(width: 30, height: 30)
@@ -78,7 +78,7 @@ struct TrainsAtStopView: View {
             Circle()
                 .foregroundColor(getRouteColor(of: trip) ?? .clear)
             
-            Text(getRouteId(of: trip)?.rawValue ?? "")
+            Text(trip.getRouteId()?.rawValue ?? "")
                 .font(.title2)
                 .foregroundColor(getRouteIdColor(of: trip))
         }
@@ -88,29 +88,15 @@ struct TrainsAtStopView: View {
         return arrivalTime.timeIntervalSinceNow > maxAgo && arrivalTime.timeIntervalSinceNow < maxComing
     }
     
-    private func getRouteId(of trip: MTATrip) -> MTARouteId? {
-        if let tripId = trip.tripId {
-            let routeAndDirection = String(tripId.split(separator: "_")[1])
-            let route = routeAndDirection.split(separator: ".")[0]
-            return MTARouteId(rawValue: String(route))
-        } else {
-            return nil
-        }
-    }
-    
     private func getRouteColor(of trip: MTATrip) -> Color? {
-        if let tripId = trip.tripId {
-            let routeAndDirection = String(tripId.split(separator: "_")[1])
-            let route = routeAndDirection.split(separator: ".")[0]
-            if let routeId = MTARouteId(rawValue: String(route)), let mtaRoute = ViewModel.mtaRoutes.first(where: { $0.id == routeId }) {
-                return Color(uiColor: hexStringToUIColor(hex: mtaRoute.color))
-            }
+        if let routeId = trip.getRouteId(), let mtaRoute = ViewModel.mtaRoutes.first(where: { $0.id == routeId }) {
+            return Color(uiColor: hexStringToUIColor(mtaRoute.color))
         }
         return nil
     }
     
     private func getRouteIdColor(of trip: MTATrip) -> Color {
-        switch getRouteId(of: trip) {
+        switch trip.getRouteId() {
         case .n, .q, .r, .w:
             return .black
         default:
@@ -118,7 +104,7 @@ struct TrainsAtStopView: View {
         }
     }
     
-    private func hexStringToUIColor (hex:String) -> UIColor {
+    private func hexStringToUIColor(_ hex: String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
 
         if (cString.hasPrefix("#")) {
@@ -138,40 +124,6 @@ struct TrainsAtStopView: View {
             blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
             alpha: CGFloat(1.0)
         )
-    }
-    
-    private func getOriginTime(of trip: MTATrip) -> Date {
-        if let tripId = trip.tripId, let timecode = Double(tripId.split(separator: "_")[0]) {
-            let startOfDay = Calendar.current.startOfDay(for: Date())
-            return Date(timeInterval: timecode / 100.0 * 60.0, since: startOfDay)
-        } else {
-            return Date()
-        }
-    }
-    
-    private func getDirection(of trip: MTATrip) -> MTADirection? {
-        if let direction = trip.direction {
-            return direction
-        } else if let tripId = trip.tripId {
-            let routeAndDirection = String(tripId.split(separator: "_")[1])
-            let direction = routeAndDirection.split(separator: ".").last ?? ""
-            return MTADirection(rawValue: String(direction))
-        } else {
-            return nil
-        }
-    }
-    
-    private func getDirection(of train: MTATrain) -> MTADirection? {
-        if let trip = train.trip, let direction = getDirection(of: trip) {
-             return direction
-        } else if let last = train.stopId?.last {
-            if last == "N" {
-                return .north
-            } else if last == "S" {
-                return .south
-            }
-        }
-        return nil
     }
     
     private func getTimeInterval(_ arrivalTime: Date) -> String {
