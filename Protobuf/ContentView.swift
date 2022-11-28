@@ -10,6 +10,8 @@ import MapKit
 
 struct ContentView: View {
     @EnvironmentObject private var viewModel: ViewModel
+    @AppStorage("maxDistance") private var maxDistance = 1000.0
+    @AppStorage("distanceUnit") private var distanceUnit = DistanceUnit.mile
     
     private var distanceFormatStyle: Measurement<UnitLength>.FormatStyle {
         .measurement(width: .abbreviated,
@@ -30,6 +32,7 @@ struct ContentView: View {
     @State private var stopsNearby = [MTAStop]()
     
     @State private var showProgress = true
+    @State private var presentUpdateMaxDistance = false
     
     var body: some View {
         VStack {
@@ -56,11 +59,25 @@ struct ContentView: View {
             
             Spacer()
             
-            Button {
-                showProgress = true
-                lookUpCurrentLocationAndDownloadAllData()
-            } label: {
-                Label("Refresh", systemImage: "arrow.clockwise.circle")
+            HStack {
+                Spacer()
+                
+                Button {
+                    showProgress = true
+                    lookUpCurrentLocationAndDownloadAllData()
+                } label: {
+                    Label("Refresh", systemImage: "arrow.clockwise.circle")
+                }
+                
+                Spacer()
+                
+                Button {
+                    presentUpdateMaxDistance = true
+                } label: {
+                    Label("Max Distance", systemImage: "arrow.up.left.and.down.right.and.arrow.up.right.and.down.left")
+                }
+                
+                Spacer()
             }
             .disabled(showProgress)
         }
@@ -70,15 +87,26 @@ struct ContentView: View {
                 .progressViewStyle(CircularProgressViewStyle())
                 .opacity(showProgress ? 1 : 0)
         }
+        .sheet(isPresented: $presentUpdateMaxDistance, content: {
+            DistanceSettingView(distanceUnit: $distanceUnit, distance: $maxDistance)
+        })
         .onReceive(viewModel.$numberOfUpdatedFeed) { newValue in
             if newValue == MTASubwayFeedURL.allCases.count {
                 showProgress = false
             }
-            stopsNearby = viewModel.stops(near: location)
-            trainsNearby = viewModel.trains(near: location)
+            stopsNearby = viewModel.stops(within: maxDistance, from: location)
+            trainsNearby = viewModel.trains(within: maxDistance, from: location)
         }
         .onReceive(viewModel.$coordinate) { _ in
             if viewModel.coordinate != nil {
+                lookUpCurrentLocationAndDownloadAllData()
+            }
+        }
+        .onChange(of: presentUpdateMaxDistance) { _ in
+            if !presentUpdateMaxDistance {
+                if viewModel.maxDistance != maxDistance {
+                    viewModel.maxDistance = maxDistance
+                }
                 lookUpCurrentLocationAndDownloadAllData()
             }
         }

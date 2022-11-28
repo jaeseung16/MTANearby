@@ -81,7 +81,15 @@ class ViewModel: NSObject, ObservableObject {
     
     @Published var updated = false
     @Published var numberOfUpdatedFeed = 0
-    var range = 2000.0
+    var maxDistance = 1000.0 {
+        didSet {
+            if let coordinate = coordinate {
+                region = MKCoordinateRegion(center: coordinate,
+                                            latitudinalMeters: CLLocationDistance(maxDistance * rangeFactor),
+                                            longitudinalMeters: CLLocationDistance(maxDistance * rangeFactor))
+            }
+        }
+    }
     
     var feedDownloader = MTAFeedDownloader()
     
@@ -129,10 +137,10 @@ class ViewModel: NSObject, ObservableObject {
         } }
     }
     
-    func vehicles(near center: CLLocationCoordinate2D) -> [MTAStop: [MTAVehicle]] {
+    func vehicles(within distance: Double, from center: CLLocationCoordinate2D) -> [MTAStop: [MTAVehicle]] {
         var vehicles = [MTAStop: [MTAVehicle]]()
         
-        let radius = CLLocationDistance(range)
+        let radius = CLLocationDistance(distance)
         let circularRegion = CLCircularRegion(center: center, radius: radius, identifier: "\(center)")
         
         let stopsNearBy = ViewModel.mtaStops.filter { mtaStop in
@@ -153,10 +161,10 @@ class ViewModel: NSObject, ObservableObject {
         return vehicles
     }
     
-    func trains(near center: CLLocationCoordinate2D) -> [MTAStop: [MTATrain]] {
+    func trains(within distance: Double, from center: CLLocationCoordinate2D) -> [MTAStop: [MTATrain]] {
         var trains = [MTAStop: [MTATrain]]()
         
-        let radius = CLLocationDistance(1500)
+        let radius = CLLocationDistance(distance)
         let circularRegion = CLCircularRegion(center: center, radius: radius, identifier: "\(center)")
         
         let stopsNearby = ViewModel.mtaStops.filter { mtaStop in
@@ -204,9 +212,9 @@ class ViewModel: NSObject, ObservableObject {
         return trains
     }
     
-    func stops(near center: CLLocationCoordinate2D) -> [MTAStop] {
+    func stops(within distance: Double, from center: CLLocationCoordinate2D) -> [MTAStop] {
         let location = CLLocation(latitude: center.latitude, longitude: center.longitude)
-        let radius = CLLocationDistance(1500)
+        let radius = CLLocationDistance(distance)
         let circularRegion = CLCircularRegion(center: center, radius: radius, identifier: "\(center)")
         
         return ViewModel.mtaStops.filter { mtaStop in
@@ -226,10 +234,10 @@ class ViewModel: NSObject, ObservableObject {
     var userLocality: String = "Unknown"
     @Published var coordinate: CLLocationCoordinate2D?
     @Published var region: MKCoordinateRegion?
-    private var rangeFactor = 1.5
+    private var rangeFactor = 2.0
     
     var regionSpan: CLLocationDistance {
-        return CLLocationDistance(range * rangeFactor)
+        return CLLocationDistance(maxDistance * rangeFactor)
     }
     
     func lookUpCurrentLocation() {
@@ -243,6 +251,17 @@ class ViewModel: NSObject, ObservableObject {
         locationManager.delegate = self
     }
     
+    convenience init(_ maxDistance: Double) {
+        self.init()
+        self.maxDistance = maxDistance
+    }
+    
+    func updateRegion(center coordinate: CLLocationCoordinate2D) -> Void {
+        region = MKCoordinateRegion(center: coordinate,
+                                    latitudinalMeters: CLLocationDistance(maxDistance * rangeFactor),
+                                    longitudinalMeters: CLLocationDistance(maxDistance * rangeFactor))
+    }
+    
 }
 
 extension ViewModel: CLLocationManagerDelegate {
@@ -251,9 +270,7 @@ extension ViewModel: CLLocationManagerDelegate {
         coordinate = location.coordinate
         
         if let coordinate = coordinate {
-            region = MKCoordinateRegion(center: coordinate,
-                                        latitudinalMeters: CLLocationDistance(range * rangeFactor),
-                                        longitudinalMeters: CLLocationDistance(range * rangeFactor))
+            updateRegion(center: coordinate)
         }
     }
     
