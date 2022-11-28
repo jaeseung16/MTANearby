@@ -119,13 +119,13 @@ class ViewModel: NSObject, ObservableObject {
                 return
             }
             DispatchQueue.main.async {
-                ViewModel.logger.log("wrapper.tripUpdatesByTripId.count = \(wrapper.tripUpdatesByTripId.count, privacy: .public)")
+                //ViewModel.logger.log("wrapper.tripUpdatesByTripId.count = \(wrapper.tripUpdatesByTripId.count, privacy: .public)")
                 if !wrapper.tripUpdatesByTripId.isEmpty {
                     wrapper.tripUpdatesByTripId.forEach { key, updates in
                         self.tripUpdatesByTripId[key] = updates
                     }
                 }
-                ViewModel.logger.log("wrapper.vehiclesByStopId.count = \(wrapper.vehiclesByStopId.count, privacy: .public)")
+                //ViewModel.logger.log("wrapper.vehiclesByStopId.count = \(wrapper.vehiclesByStopId.count, privacy: .public)")
                 if !wrapper.vehiclesByStopId.isEmpty {
                     wrapper.vehiclesByStopId.forEach { key, vehicles in
                         self.vehiclesByStopId[key] = vehicles
@@ -249,6 +249,10 @@ class ViewModel: NSObject, ObservableObject {
         super.init()
         
         locationManager.delegate = self
+        
+        if let _ = UserDefaults.standard.object(forKey: "maxDistance") {
+            self.maxDistance = UserDefaults.standard.double(forKey: "maxDistance")
+        }
     }
     
     convenience init(_ maxDistance: Double) {

@@ -11,10 +11,12 @@ import SwiftUI
 struct MTANearByApp: App {
     @AppStorage("maxDistance") private var maxDistance = 1000.0
     
+    private let viewModel = ViewModel()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(ViewModel(maxDistance))
+                .environmentObject(viewModel)
         }
     }
 }
