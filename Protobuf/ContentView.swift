@@ -30,6 +30,7 @@ struct ContentView: View {
     @State private var vehiclesNearby = [MTAStop: [MTAVehicle]]()
     @State private var trainsNearby = [MTAStop: [MTATrain]]()
     @State private var stopsNearby = [MTAStop]()
+    @State private var lastRefresh = Date()
     
     @State private var showProgress = true
     @State private var presentUpdateMaxDistance = false
@@ -80,6 +81,12 @@ struct ContentView: View {
                 Spacer()
             }
             .disabled(showProgress)
+            
+            HStack {
+                Spacer()
+                Text("Refreshed:")
+                Text(lastRefresh, style: .time)
+            }
         }
         .padding()
         .overlay {
@@ -138,6 +145,7 @@ struct ContentView: View {
     }
     
     private func lookUpCurrentLocationAndDownloadAllData() -> Void {
+        lastRefresh = Date()
         viewModel.lookUpCurrentLocation()
         if let coordinate =  viewModel.coordinate {
             location = coordinate
