@@ -176,8 +176,8 @@ class MTAFeedDownloader {
         if entity.hasAlert {
             let headerText = entity.alert.headerText.translation.first?.text ?? "No Header Text"
             mtaAlert = MTAAlert(delayedTrips: process(alert: entity.alert), headerText: headerText, date: date)
+            MTAFeedDownloader.logger.log("mtaAlert = \(String(describing: mtaAlert), privacy: .public)")
         }
-        MTAFeedDownloader.logger.log("mtaAlert = \(String(describing: mtaAlert), privacy: .public)")
         return mtaAlert
     }
     
@@ -290,7 +290,7 @@ class MTAFeedDownloader {
         var start: Date?
         if startDate != nil && startTime != nil {
             start = dateFormatter.date(from: "\(startDate!) \(startTime!)")
-            ViewModel.logger.info("start = \(String(describing: start), privacy: .public) from \(startDate!) \(startTime!)")
+            // ViewModel.logger.info("start = \(String(describing: start), privacy: .public) from \(startDate!) \(startTime!)")
         } else if startDate != nil {
             // TODO: start time from tripId?
             

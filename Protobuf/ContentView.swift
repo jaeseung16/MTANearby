@@ -64,18 +64,18 @@ struct ContentView: View {
                 Spacer()
                 
                 Button {
+                    presentUpdateMaxDistance = true
+                } label: {
+                    Label("Max Distance", systemImage: "arrow.up.left.and.down.right.and.arrow.up.right.and.down.left")
+                }
+                
+                Spacer()
+
+                Button {
                     showProgress = true
                     lookUpCurrentLocationAndDownloadAllData()
                 } label: {
                     Label("Refresh", systemImage: "arrow.clockwise.circle")
-                }
-                
-                Spacer()
-                
-                Button {
-                    presentUpdateMaxDistance = true
-                } label: {
-                    Label("Max Distance", systemImage: "arrow.up.left.and.down.right.and.arrow.up.right.and.down.left")
                 }
                 
                 Spacer()
@@ -110,11 +110,10 @@ struct ContentView: View {
             }
         }
         .onChange(of: presentUpdateMaxDistance) { _ in
-            if !presentUpdateMaxDistance {
-                if viewModel.maxDistance != maxDistance {
-                    viewModel.maxDistance = maxDistance
-                }
-                lookUpCurrentLocationAndDownloadAllData()
+            if viewModel.maxDistance != maxDistance {
+                viewModel.maxDistance = maxDistance
+                stopsNearby = viewModel.stops(within: maxDistance, from: location)
+                trainsNearby = viewModel.trains(within: maxDistance, from: location)
             }
         }
         
