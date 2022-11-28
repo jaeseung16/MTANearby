@@ -72,7 +72,7 @@ class ViewModel: NSObject, ObservableObject {
             }
         }
         
-        ViewModel.logger.info("\(result)")
+        //ViewModel.logger.info("\(result)")
         
         return result
     }
@@ -83,11 +83,14 @@ class ViewModel: NSObject, ObservableObject {
     @Published var numberOfUpdatedFeed = 0
     var range = 2000.0
     
+    var feedDownloader = MTAFeedDownloader()
+    
     var vehiclesByStopId = [String: [MTAVehicle]]()
     var tripUpdatesByTripId = [String: [MTATripUpdate]]()
     var tripUpdatesByStopId = [String: [MTATripUpdate]]()
     
     func getAllData() -> Void {
+        ViewModel.logger.log("getAllData()")
         if !vehiclesByStopId.isEmpty {
             vehiclesByStopId.removeAll()
         }
@@ -101,252 +104,29 @@ class ViewModel: NSObject, ObservableObject {
         DispatchQueue.main.async {
             self.numberOfUpdatedFeed = 0
         }
-   
-        MTASubwayFeedURL.allCases.forEach { getData(from: $0) }
-    }
-    
-    func getData(from mtaSubwayFeedURL: MTASubwayFeedURL) -> Void {
-        let start = Date()
         
-        let url = mtaSubwayFeedURL.url()!
-        
-        var urlRequest = URLRequest(url: url)
-        urlRequest.setValue("v8NSHelLz0aMJi8Dpdlhw1FowwMvjszO1YCNCg6x", forHTTPHeaderField: "x-api-key")
-
-        let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-            ViewModel.logger.log("mtaSubwayFeedURL = \(mtaSubwayFeedURL.rawValue, privacy: .public)")
-            //ViewModel.logger.info("response = \(String(describing: response))")
-            //ViewModel.logger.info("error = \(String(describing: error?.localizedDescription))")
-            
-            guard let data = data else {
+        MTASubwayFeedURL.allCases.forEach { feedDownloader.download(from: $0) { wrapper, error in
+            guard let wrapper = wrapper else {
+                ViewModel.logger.log("Failed to download MTA feeds: error = \(String(describing: error?.localizedDescription), privacy: .public)")
                 return
             }
-            
-            //ViewModel.logger.log("data = \(String(describing: data))")
-            
-            let feed = try? TransitRealtime_FeedMessage(serializedData: data, extensions: Nyct_u45Subway_Extensions)
-            
-            guard let feed = feed else {
-                ViewModel.logger.error("Cannot parse feed for \(url)")
-                return
-            }
-            
-            if feed.hasHeader {
-                let header = feed.header
-                ViewModel.logger.log("\(header.debugDescription)")
-                
-                //let timestamp = Date(timeIntervalSince1970: TimeInterval(header.timestamp))
-                
-                var mtaTripReplacementPeriods = [MTATripReplacementPeriod]()
-                
-                if header.hasNyctFeedHeader {
-                    let nyctFeedHeader = header.nyctFeedHeader
-                    ViewModel.logger.log("\(String(describing: nyctFeedHeader), privacy: .public)")
-                    
-                    nyctFeedHeader.tripReplacementPeriod.forEach { period in
-                        let routeId = period.hasRouteID ? period.routeID : nil
-                        let replacementPeriod = period.hasReplacementPeriod ? period.replacementPeriod : nil
-                        
-                        let endTime = (replacementPeriod?.hasEnd ?? false) ? Date(timeIntervalSince1970: TimeInterval(replacementPeriod!.end)) : nil
-                        
-                        let mtaTripReplacementPeriod = MTATripReplacementPeriod(routeId: routeId, endTime: endTime)
-                        
-                        mtaTripReplacementPeriods.append(mtaTripReplacementPeriod)
-                    }
-                    
-                }
-                ViewModel.logger.log("\(String(describing: mtaTripReplacementPeriods), privacy: .public)")
-            }
-            
-            let date = Date(timeIntervalSince1970: TimeInterval(feed.header.timestamp))
-            let dateFormatter = DateFormatter()
-            dateFormatter.timeZone = .current
-            dateFormatter.timeStyle = .medium
-            dateFormatter.dateStyle = .medium
-            
-            ViewModel.logger.log("date = \(dateFormatter.string(from: date))")
-            
-            var vehicles = [MTAVehicle]()
-            var tripUpdates = [MTATripUpdate]()
-            
-            feed.entity.forEach { entity in
-                
-                if entity.hasAlert {
-                    let alert = entity.alert
-                    
-                    let headerText = alert.headerText.translation.first?.text ?? "No Header Text"
-                    
-                    let trips = self.process(alert: alert)
-                    
-                    let mtaAlert = MTAAlert(delayedTrips: trips, headerText: headerText, date: date)
-                    
-                    ViewModel.logger.log("mtaAlert = \(String(describing: mtaAlert), privacy: .public)")
-                }
-                
-                if entity.hasVehicle {
-                    let vehicle = entity.vehicle
-                    //let measured = Date(timeIntervalSince1970: TimeInterval(vehicle.timestamp))
-                    
-                    //ViewModel.logger.info("vehicle = \(String(describing: vehicle), privacy: .public)")
-                    //ViewModel.logger.info("date = \(dateFormatter.string(from: measured))")
-                    
-                    // https://developers.google.com/transit/gtfs-realtime/reference#message-vehicleposition
-                    let status = vehicle.hasCurrentStatus ? MTAVehicleStatus(from: vehicle.currentStatus) : .inTransitTo
-                    let stopSequence = vehicle.hasCurrentStopSequence ? UInt(vehicle.currentStopSequence) : nil
-                    let stopId = vehicle.hasStopID ? vehicle.stopID : nil
-                    let trip = vehicle.hasTrip ? self.getMTATrip(from: vehicle.trip) : nil
-                    let date = vehicle.hasTimestamp ? Date(timeIntervalSince1970: TimeInterval(vehicle.timestamp)) : Date()
-                    
-                    let mtaVehicle = MTAVehicle(status: status,
-                                             stopId: stopId,
-                                             stopSequence: stopSequence,
-                                             timestamp: date,
-                                             trip: trip)
-                    
-                    vehicles.append(mtaVehicle)
-                    
-                    //ViewModel.logger.info("mtaVehicle = \(String(describing: mtaVehicle), privacy: .public)")
-                }
-                
-                if entity.hasTripUpdate {
-                    let tripUpdate = entity.tripUpdate
-                    
-                    //ViewModel.logger.info("tripUpdate = \(String(describing: tripUpdate), privacy: .public)")
-                    
-                    var trip: MTATrip?
-                    if tripUpdate.hasTrip {
-                        trip = self.getMTATrip(from: tripUpdate.trip)
-                    }
-                    
-                    var mtaStopTimeUpdates = [MTAStopTimeUpdate]()
-                    
-                    tripUpdate.stopTimeUpdate.forEach { update in
-                        
-                        let stopId = update.hasStopID ? update.stopID : nil
-                        let arrivalTime = update.hasArrival ? Date(timeIntervalSince1970: TimeInterval(update.arrival.time)) : nil
-                        let departureTime = update.hasDeparture ? Date(timeIntervalSince1970: TimeInterval(update.departure.time)) : nil
-                        
-                        let nyctStopTimeUpdate = update.hasNyctStopTimeUpdate ? update.nyctStopTimeUpdate : nil
-                        
-                        let scheduledTrack = (nyctStopTimeUpdate?.hasScheduledTrack ?? false) ? nyctStopTimeUpdate?.scheduledTrack : nil
-                        let actualTrack = (nyctStopTimeUpdate?.hasActualTrack ?? false) ? nyctStopTimeUpdate?.actualTrack : nil
-                        
-                        let mtaStopTimeUpdate = MTAStopTimeUpdate(stopId: stopId,
-                                                                  arrivalTime: arrivalTime,
-                                                                  departureTime: departureTime,
-                                                                  scheduledTrack: scheduledTrack,
-                                                                  actualTrack: actualTrack)
-                        
-                        mtaStopTimeUpdates.append(mtaStopTimeUpdate)
-                        
-                    }
-                    
-                    let mtaTripUpdate = MTATripUpdate(trip: trip, stopTimeUpdates: mtaStopTimeUpdates)
-                    
-                    //ViewModel.logger.info("mtaTripUpdate = \(String(describing: mtaTripUpdate), privacy: .public)")
-                    
-                    tripUpdates.append(mtaTripUpdate)
-                }
-            }
-            
-            ViewModel.logger.info("vehicles.count = \(String(describing: vehicles.count), privacy: .public)")
-            
             DispatchQueue.main.async {
-                if !vehicles.isEmpty {
-                    for vehicle in vehicles {
-                        //ViewModel.logger.info("vehicle = \(String(describing: vehicle), privacy: .public)")
-                        if let stopId = vehicle.stopId {
-                            if self.vehiclesByStopId.keys.contains(stopId) {
-                                self.vehiclesByStopId[stopId]?.append(vehicle)
-                            } else {
-                                self.vehiclesByStopId[stopId] = [vehicle]
-                            }
-                        }
+                ViewModel.logger.log("wrapper.tripUpdatesByTripId.count = \(wrapper.tripUpdatesByTripId.count, privacy: .public)")
+                if !wrapper.tripUpdatesByTripId.isEmpty {
+                    wrapper.tripUpdatesByTripId.forEach { key, updates in
+                        self.tripUpdatesByTripId[key] = updates
                     }
                 }
-                
-                if !tripUpdates.isEmpty {
-                    for tripUpdate in tripUpdates {
-                        //ViewModel.logger.info("tripUpdate = \(String(describing: tripUpdate), privacy: .public)")
-                        if let tripId = tripUpdate.trip?.tripId {
-                            if self.tripUpdatesByTripId.keys.contains(tripId) {
-                                self.tripUpdatesByTripId[tripId]?.append(tripUpdate)
-                            } else {
-                                self.tripUpdatesByTripId[tripId] = [tripUpdate]
-                            }
-                        }
+                ViewModel.logger.log("wrapper.vehiclesByStopId.count = \(wrapper.vehiclesByStopId.count, privacy: .public)")
+                if !wrapper.vehiclesByStopId.isEmpty {
+                    wrapper.vehiclesByStopId.forEach { key, vehicles in
+                        self.vehiclesByStopId[key] = vehicles
                     }
                 }
-            
                 self.numberOfUpdatedFeed += 1
             }
             
-            ViewModel.logger.log("For url=\(url.absoluteString), it took \(DateInterval(start: start, end: Date()).duration) sec")
-        
-        }
-
-        task.resume()
-    }
-    
-    private func process(alert: TransitRealtime_Alert) -> [MTATrip] {
-        //ViewModel.logger.log("alert = \(alert.debugDescription, privacy: .public)")
-        
-        var trips = [MTATrip]()
-        alert.informedEntity.forEach { entity in
-            if entity.hasTrip {
-                let trip = entity.trip
-                
-                if trip.hasNyctTripDescriptor {
-                    //ViewModel.logger.log("nyctTripDescriptor = \(trip.nyctTripDescriptor.debugDescription, privacy: .public)")
-                    
-                    let nyctTrip = trip.nyctTripDescriptor
-                    
-                    let mtaTrip = MTATrip(tripId: trip.tripID,
-                                          routeId: trip.routeID,
-                                          trainId: nyctTrip.trainID,
-                                          direction: MTADirection(from: nyctTrip.direction))
-                    
-                    trips.append(mtaTrip)
-                }
-                
-            }
-        }
-        
-        return trips
-    }
-    
-    private func getMTATrip(from trip: TransitRealtime_TripDescriptor) -> MTATrip {
-        let nyctTrip = trip.nyctTripDescriptor
-        
-        let tripId = trip.hasTripID ? trip.tripID : nil
-        let routeId = trip.hasRouteID ? trip.routeID : nil
-        let trainId = nyctTrip.hasTrainID ? nyctTrip.trainID : nil
-        let direction = nyctTrip.hasDirection ? MTADirection(from: nyctTrip.direction) : nil
-        let assigned = nyctTrip.hasIsAssigned ? nyctTrip.isAssigned : nil
-        
-        let startDate = trip.hasStartDate ? trip.startDate : nil
-        let startTime = trip.hasStartTime ? trip.startTime : nil
-        
-        let dateFormatter = DateFormatter()
-        //dateFormatter.locale = Locale(identifier: "en_US")
-        //dateFormatter.setLocalizedDateFormatFromTemplate("yyyyMMdd HH:mm:ss")
-        dateFormatter.dateFormat = "yyyyMMdd HH:mm:ss"
-        
-        var start: Date?
-        if startDate != nil && startTime != nil {
-            start = dateFormatter.date(from: "\(startDate!) \(startTime!)")
-            ViewModel.logger.info("start = \(String(describing: start), privacy: .public) from \(startDate!) \(startTime!)")
-        } else if startDate != nil {
-            // TODO: start time from tripId?
-            
-        }
-        
-        return MTATrip(tripId: tripId,
-                       routeId: routeId,
-                       start: start,
-                       assigned: assigned,
-                       trainId: trainId,
-                       direction: direction)
+        } }
     }
     
     func vehicles(near center: CLLocationCoordinate2D) -> [MTAStop: [MTAVehicle]] {
@@ -453,6 +233,7 @@ class ViewModel: NSObject, ObservableObject {
     }
     
     func lookUpCurrentLocation() {
+        ViewModel.logger.info("lookUpCurrentLocation()")
         userLocality = locationManager.lookUpCurrentLocation()
     }
     
