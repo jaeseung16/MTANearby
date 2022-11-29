@@ -17,6 +17,7 @@ class LocationManager {
     var delegate: CLLocationManagerDelegate? {
         didSet {
             locationManager.delegate = delegate
+            locationManager.requestLocation()
         }
     }
     
@@ -27,10 +28,10 @@ class LocationManager {
     init() {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
     }
     
     func lookUpCurrentLocation() -> String {
+        locationManager.requestLocation()
         var userLocality = "Unknown"
         if let lastLocation = locationManager.location {
             let geocoder = CLGeocoder()

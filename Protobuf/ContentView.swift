@@ -73,7 +73,8 @@ struct ContentView: View {
 
                 Button {
                     showProgress = true
-                    lookUpCurrentLocationAndDownloadAllData()
+                    viewModel.lookUpCurrentLocation()
+                    downloadAllData()
                 } label: {
                     Label("Refresh", systemImage: "arrow.clockwise.circle")
                 }
@@ -106,7 +107,7 @@ struct ContentView: View {
         }
         .onReceive(viewModel.$coordinate) { _ in
             if viewModel.coordinate != nil {
-                lookUpCurrentLocationAndDownloadAllData()
+                downloadAllData()
             }
         }
         .onChange(of: presentUpdateMaxDistance) { _ in
@@ -143,9 +144,9 @@ struct ContentView: View {
         return Measurement(value: stopLocation.distance(from: clLocation), unit: UnitLength.meters)
     }
     
-    private func lookUpCurrentLocationAndDownloadAllData() -> Void {
+    private func downloadAllData() -> Void {
         lastRefresh = Date()
-        viewModel.lookUpCurrentLocation()
+        
         if let coordinate =  viewModel.coordinate {
             location = coordinate
             viewModel.getAllData()
