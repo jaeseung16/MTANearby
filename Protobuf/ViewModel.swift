@@ -230,10 +230,12 @@ class ViewModel: NSObject, ObservableObject {
     
     // MARK: - LocationManager
     
-    let locationManager = LocationManager()
+    let locationHelper = LocationHelper()
     var userLocality: String = "Unknown"
-    @Published var coordinate: CLLocationCoordinate2D?
-    @Published var region: MKCoordinateRegion?
+    @Published var userLocalityUpdated = false
+    @Published var coordinateUpdated = false
+    var coordinate: CLLocationCoordinate2D?
+    var region: MKCoordinateRegion?
     private var rangeFactor = 2.0
     
     var regionSpan: CLLocationDistance {
@@ -241,23 +243,20 @@ class ViewModel: NSObject, ObservableObject {
     }
     
     func lookUpCurrentLocation() {
-        ViewModel.logger.info("lookUpCurrentLocation()")
-        userLocality = locationManager.lookUpCurrentLocation()
+        locationHelper.lookUpCurrentLocation() { userLocality in
+            self.userLocality = userLocality
+            self.userLocalityUpdated.toggle()
+        }
     }
     
     override init() {
         super.init()
         
-        locationManager.delegate = self
+        locationHelper.delegate = self
         
         if let _ = UserDefaults.standard.object(forKey: "maxDistance") {
             self.maxDistance = UserDefaults.standard.double(forKey: "maxDistance")
         }
-    }
-    
-    convenience init(_ maxDistance: Double) {
-        self.init()
-        self.maxDistance = maxDistance
     }
     
     func updateRegion(center coordinate: CLLocationCoordinate2D) -> Void {
@@ -271,14 +270,17 @@ class ViewModel: NSObject, ObservableObject {
 extension ViewModel: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
-        coordinate = location.coordinate
+        
+        self.coordinate = location.coordinate
+        self.coordinateUpdated.toggle()
         
         if let coordinate = coordinate {
+            lookUpCurrentLocation()
             updateRegion(center: coordinate)
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        ViewModel.logger.log("CLLocationManager: \(error.localizedDescription, privacy: .public)")
+        ViewModel.logger.log("didFailWithError: error = \(error.localizedDescription, privacy: .public)")
     }
 }

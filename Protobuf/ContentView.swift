@@ -31,6 +31,7 @@ struct ContentView: View {
     @State private var trainsNearby = [MTAStop: [MTATrain]]()
     @State private var stopsNearby = [MTAStop]()
     @State private var lastRefresh = Date()
+    @State private var userLocality = "Unknown"
     
     @State private var showProgress = true
     @State private var presentUpdateMaxDistance = false
@@ -92,7 +93,7 @@ struct ContentView: View {
         .padding()
         .overlay {
             ProgressView("Please wait...")
-                .progressViewStyle(CircularProgressViewStyle())
+                .progressViewStyle(.circular)
                 .opacity(showProgress ? 1 : 0)
         }
         .sheet(isPresented: $presentUpdateMaxDistance, content: {
@@ -105,10 +106,11 @@ struct ContentView: View {
             stopsNearby = viewModel.stops(within: maxDistance, from: location)
             trainsNearby = viewModel.trains(within: maxDistance, from: location)
         }
-        .onReceive(viewModel.$coordinate) { _ in
-            if viewModel.coordinate != nil {
-                downloadAllData()
-            }
+        .onReceive(viewModel.$coordinateUpdated) { _ in
+            downloadAllData()
+        }
+        .onReceive(viewModel.$userLocalityUpdated) { _ in
+            userLocality = viewModel.userLocality
         }
         .onChange(of: presentUpdateMaxDistance) { _ in
             if viewModel.maxDistance != maxDistance {
@@ -121,8 +123,8 @@ struct ContentView: View {
     }
     
     private var locationLabel: some View {
-        if !viewModel.userLocality.isEmpty && viewModel.userLocality != "Unknown" {
-            return Label(viewModel.userLocality, systemImage: "mappin.and.ellipse")
+        if !userLocality.isEmpty && userLocality != "Unknown" {
+            return Label(userLocality, systemImage: "mappin.and.ellipse")
         } else {
             return Label("Nearby Subway Stations", systemImage: "tram.fill.tunnel")
         }
@@ -146,8 +148,7 @@ struct ContentView: View {
     
     private func downloadAllData() -> Void {
         lastRefresh = Date()
-        
-        if let coordinate =  viewModel.coordinate {
+        if let coordinate = viewModel.coordinate {
             location = coordinate
             viewModel.getAllData()
         }

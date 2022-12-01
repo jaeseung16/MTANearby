@@ -16,7 +16,7 @@
 		90672E4728CFE15600B4BF74 /* nyct-subway.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90672E4628CFE15600B4BF74 /* nyct-subway.pb.swift */; };
 		906B5EE92935287B00B820A6 /* DistanceUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906B5EE82935287B00B820A6 /* DistanceUnit.swift */; };
 		906B5EEB29353A9E00B820A6 /* DistanceSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906B5EEA29353A9E00B820A6 /* DistanceSettingView.swift */; };
-		90720791292ED615002DA887 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90720790292ED615002DA887 /* LocationManager.swift */; };
+		90720791292ED615002DA887 /* LocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90720790292ED615002DA887 /* LocationHelper.swift */; };
 		9085487128EB902200DE7863 /* MTASubwayFeedURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085487028EB902200DE7863 /* MTASubwayFeedURL.swift */; };
 		9085487428EB96A500DE7863 /* MTAFeedMessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085487328EB96A500DE7863 /* MTAFeedMessageType.swift */; };
 		9085487628EB9CC500DE7863 /* routes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9085487528EB9CC500DE7863 /* routes.txt */; };
@@ -54,7 +54,7 @@
 		90672E4628CFE15600B4BF74 /* nyct-subway.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "nyct-subway.pb.swift"; sourceTree = "<group>"; };
 		906B5EE82935287B00B820A6 /* DistanceUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceUnit.swift; sourceTree = "<group>"; };
 		906B5EEA29353A9E00B820A6 /* DistanceSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceSettingView.swift; sourceTree = "<group>"; };
-		90720790292ED615002DA887 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		90720790292ED615002DA887 /* LocationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHelper.swift; sourceTree = "<group>"; };
 		9085487028EB902200DE7863 /* MTASubwayFeedURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTASubwayFeedURL.swift; sourceTree = "<group>"; };
 		9085487328EB96A500DE7863 /* MTAFeedMessageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTAFeedMessageType.swift; sourceTree = "<group>"; };
 		9085487528EB9CC500DE7863 /* routes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = routes.txt; sourceTree = "<group>"; };
@@ -112,7 +112,7 @@
 				90A46B6628F228F500DED050 /* MTAVehicle.swift */,
 				90A46B6828F229CA00DED050 /* MTAVehicleStatus.swift */,
 				908CB9EA28FE0964007D163F /* MTATrain.swift */,
-				90720790292ED615002DA887 /* LocationManager.swift */,
+				90720790292ED615002DA887 /* LocationHelper.swift */,
 				905AD684293176A8006110E2 /* MTAFeedDownloader.swift */,
 				905AD68629317EE7006110E2 /* MTAFeedWrapper.swift */,
 				906B5EE82935287B00B820A6 /* DistanceUnit.swift */,
@@ -289,7 +289,7 @@
 				90672E4328CFE0FF00B4BF74 /* ViewModel.swift in Sources */,
 				905AD68729317EE7006110E2 /* MTAFeedWrapper.swift in Sources */,
 				909F55F528F4D02500BEC9B9 /* MTARouteId.swift in Sources */,
-				90720791292ED615002DA887 /* LocationManager.swift in Sources */,
+				90720791292ED615002DA887 /* LocationHelper.swift in Sources */,
 				908CB9EB28FE0964007D163F /* MTATrain.swift in Sources */,
 				90A983B328CFD71B0046A19B /* MTANearByApp.swift in Sources */,
 				908EC76128E255E10020CC92 /* MTAStop.swift in Sources */,

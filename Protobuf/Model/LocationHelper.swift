@@ -9,7 +9,7 @@ import Foundation
 import CoreLocation
 import os
 
-class LocationManager {
+class LocationHelper {
     static let logger = Logger()
     
     let locationManager = CLLocationManager()
@@ -17,7 +17,7 @@ class LocationManager {
     var delegate: CLLocationManagerDelegate? {
         didSet {
             locationManager.delegate = delegate
-            locationManager.requestLocation()
+            requestLocation()
         }
     }
     
@@ -30,21 +30,21 @@ class LocationManager {
         locationManager.requestWhenInUseAuthorization()
     }
     
-    func lookUpCurrentLocation() -> String {
+    func requestLocation() -> Void {
         locationManager.requestLocation()
-        var userLocality = "Unknown"
+    }
+    
+    func lookUpCurrentLocation(completionHandler: @escaping (String) -> Void) -> Void {
         if let lastLocation = locationManager.location {
             let geocoder = CLGeocoder()
             geocoder.reverseGeocodeLocation(lastLocation) { (placemarks, error) in
+                var userLocality = "Unknown"
                 if error == nil, let placemark = placemarks?[0] {
                     userLocality = "\(placemark.subThoroughfare ?? "") \(placemark.thoroughfare ?? "") \(placemark.subLocality ?? "")"
-                } else {
-                    userLocality = "Unknown"
                 }
+                completionHandler(userLocality)
             }
         }
-        LocationManager.logger.log("Returning userLocality=\(userLocality, privacy: .public)")
-        return userLocality
     }
     
 }
