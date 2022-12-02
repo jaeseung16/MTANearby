@@ -250,6 +250,9 @@ class ViewModel: NSObject, ObservableObject {
         }
     }
     
+    var maxAgo: TimeInterval = -1 * 60
+    var maxComing: TimeInterval = 30 * 60
+    
     override init() {
         super.init()
         
@@ -257,6 +260,10 @@ class ViewModel: NSObject, ObservableObject {
         
         if let _ = UserDefaults.standard.object(forKey: "maxDistance") {
             self.maxDistance = UserDefaults.standard.double(forKey: "maxDistance")
+        }
+        
+        if let _ = UserDefaults.standard.object(forKey: "maxComing") {
+            self.maxComing = UserDefaults.standard.double(forKey: "maxComing")
         }
     }
     

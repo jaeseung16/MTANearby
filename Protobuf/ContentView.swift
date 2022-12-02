@@ -12,6 +12,7 @@ struct ContentView: View {
     @EnvironmentObject private var viewModel: ViewModel
     @AppStorage("maxDistance") private var maxDistance = 1000.0
     @AppStorage("distanceUnit") private var distanceUnit = DistanceUnit.mile
+    @AppStorage("maxComing") private var maxComing: TimeInterval = 30 * 60
     
     private var distanceFormatStyle: Measurement<UnitLength>.FormatStyle {
         .measurement(width: .abbreviated,
@@ -96,9 +97,9 @@ struct ContentView: View {
                 .progressViewStyle(.circular)
                 .opacity(showProgress ? 1 : 0)
         }
-        .sheet(isPresented: $presentUpdateMaxDistance, content: {
-            DistanceSettingView(distanceUnit: $distanceUnit, distance: $maxDistance)
-        })
+        .sheet(isPresented: $presentUpdateMaxDistance) {
+            SettingsView(distanceUnit: $distanceUnit, distance: $maxDistance, maxComing: $maxComing)
+        }
         .onReceive(viewModel.$numberOfUpdatedFeed) { newValue in
             if newValue == MTASubwayFeedURL.allCases.count {
                 showProgress = false
@@ -111,6 +112,9 @@ struct ContentView: View {
         }
         .onReceive(viewModel.$userLocalityUpdated) { _ in
             userLocality = viewModel.userLocality
+        }
+        .onChange(of: maxComing) { newValue in
+            viewModel.maxComing = newValue
         }
         .onChange(of: presentUpdateMaxDistance) { _ in
             if viewModel.maxDistance != maxDistance {
