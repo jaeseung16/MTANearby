@@ -20,8 +20,6 @@ class MTAFeedDownloader {
     private let httpHeaderForApiKey = "x-api-key"
     private let apiKey = "v8NSHelLz0aMJi8Dpdlhw1FowwMvjszO1YCNCg6x"
     
-    var numberOfUpdatedFeed = 0
-    
     private var feedDateFormatter: DateFormatter {
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = .current

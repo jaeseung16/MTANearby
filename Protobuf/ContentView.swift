@@ -33,8 +33,9 @@ struct ContentView: View {
     @State private var lastRefresh = Date()
     @State private var userLocality = "Unknown"
     
-    @State private var showProgress = true
+    @State private var showProgress = false
     @State private var presentUpdateMaxDistance = false
+    @State private var presentAlert = false
     
     var body: some View {
         VStack {
@@ -73,9 +74,8 @@ struct ContentView: View {
                 Spacer()
 
                 Button {
-                    showProgress = true
                     viewModel.lookUpCurrentLocation()
-                    downloadAllData()
+                    downloadAllDataByButton()
                 } label: {
                     Label("Refresh", systemImage: "arrow.clockwise.circle")
                 }
@@ -106,7 +106,7 @@ struct ContentView: View {
             stopsNearby = viewModel.stops(within: maxDistance, from: location)
             trainsNearby = viewModel.trains(within: maxDistance, from: location)
         }
-        .onReceive(viewModel.$coordinateUpdated) { _ in
+        .onReceive(viewModel.$locationUpdated) { _ in
             downloadAllData()
         }
         .onReceive(viewModel.$userLocalityUpdated) { _ in
@@ -117,6 +117,11 @@ struct ContentView: View {
                 viewModel.maxDistance = maxDistance
                 stopsNearby = viewModel.stops(within: maxDistance, from: location)
                 trainsNearby = viewModel.trains(within: maxDistance, from: location)
+            }
+        }
+        .alert(Text("Can't determine your current location"), isPresented: $presentAlert) {
+            Button("OK") {
+                
             }
         }
         
@@ -146,11 +151,21 @@ struct ContentView: View {
         return Measurement(value: stopLocation.distance(from: clLocation), unit: UnitLength.meters)
     }
     
+    private func downloadAllDataByButton() -> Void {
+        if !showProgress {
+            showProgress = true
+            downloadAllData()
+        }
+    }
+    
     private func downloadAllData() -> Void {
         lastRefresh = Date()
-        if let coordinate = viewModel.coordinate {
+        if let coordinate = viewModel.location?.coordinate {
             location = coordinate
             viewModel.getAllData()
+        } else if showProgress {
+            presentAlert.toggle()
+            showProgress = false
         }
     }
     
