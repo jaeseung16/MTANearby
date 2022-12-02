@@ -15,7 +15,7 @@
 		90672E4528CFE14E00B4BF74 /* gtfs-realtime.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90672E4428CFE14E00B4BF74 /* gtfs-realtime.pb.swift */; };
 		90672E4728CFE15600B4BF74 /* nyct-subway.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90672E4628CFE15600B4BF74 /* nyct-subway.pb.swift */; };
 		906B5EE92935287B00B820A6 /* DistanceUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906B5EE82935287B00B820A6 /* DistanceUnit.swift */; };
-		906B5EEB29353A9E00B820A6 /* DistanceSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906B5EEA29353A9E00B820A6 /* DistanceSettingView.swift */; };
+		906B5EEB29353A9E00B820A6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906B5EEA29353A9E00B820A6 /* SettingsView.swift */; };
 		90720791292ED615002DA887 /* LocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90720790292ED615002DA887 /* LocationHelper.swift */; };
 		9085487128EB902200DE7863 /* MTASubwayFeedURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085487028EB902200DE7863 /* MTASubwayFeedURL.swift */; };
 		9085487428EB96A500DE7863 /* MTAFeedMessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085487328EB96A500DE7863 /* MTAFeedMessageType.swift */; };
@@ -53,7 +53,7 @@
 		90672E4428CFE14E00B4BF74 /* gtfs-realtime.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "gtfs-realtime.pb.swift"; sourceTree = "<group>"; };
 		90672E4628CFE15600B4BF74 /* nyct-subway.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "nyct-subway.pb.swift"; sourceTree = "<group>"; };
 		906B5EE82935287B00B820A6 /* DistanceUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceUnit.swift; sourceTree = "<group>"; };
-		906B5EEA29353A9E00B820A6 /* DistanceSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceSettingView.swift; sourceTree = "<group>"; };
+		906B5EEA29353A9E00B820A6 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		90720790292ED615002DA887 /* LocationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHelper.swift; sourceTree = "<group>"; };
 		9085487028EB902200DE7863 /* MTASubwayFeedURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTASubwayFeedURL.swift; sourceTree = "<group>"; };
 		9085487328EB96A500DE7863 /* MTAFeedMessageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTAFeedMessageType.swift; sourceTree = "<group>"; };
@@ -127,7 +127,7 @@
 				908CB9EC28FE1084007D163F /* TrainsAtStopView.swift */,
 				908B1AA128FB6AC5008ACF21 /* TripUpdatesView.swift */,
 				909B161F28FA1C7A002D8A33 /* VehiclesAtStopView.swift */,
-				906B5EEA29353A9E00B820A6 /* DistanceSettingView.swift */,
+				906B5EEA29353A9E00B820A6 /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -277,7 +277,7 @@
 				90A46B6928F229CA00DED050 /* MTAVehicleStatus.swift in Sources */,
 				909B162028FA1C7A002D8A33 /* VehiclesAtStopView.swift in Sources */,
 				90672E4528CFE14E00B4BF74 /* gtfs-realtime.pb.swift in Sources */,
-				906B5EEB29353A9E00B820A6 /* DistanceSettingView.swift in Sources */,
+				906B5EEB29353A9E00B820A6 /* SettingsView.swift in Sources */,
 				90672E4728CFE15600B4BF74 /* nyct-subway.pb.swift in Sources */,
 				909F55F728F4D89600BEC9B9 /* StopsView.swift in Sources */,
 				909F55F328F4B2F900BEC9B9 /* MTATripReplacementPeriod.swift in Sources */,
