@@ -143,6 +143,11 @@ struct ContentView: View {
                 Text("Refreshed:")
                 Text(lastRefresh, style: .time)
             }
+            
+            #if os(iOS)
+            BannerAd()
+                .frame(height: 50)
+            #endif
         }
     }
     

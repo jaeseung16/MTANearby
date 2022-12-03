@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		905385FB293C0D70000750EA /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 905385FA293C0D70000750EA /* GoogleMobileAds */; };
+		905385FD293C0EED000750EA /* BannerAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905385FC293C0EED000750EA /* BannerAdViewController.swift */; };
+		905385FF293C0EF5000750EA /* BannerAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905385FE293C0EF5000750EA /* BannerAd.swift */; };
+		90538600293C1041000750EA /* MTANearby-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 90F65AF2291EFA22001E8204 /* MTANearby-Info.plist */; };
 		9059965728F37F5A006FD733 /* MTAStopTimeUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9059965628F37F5A006FD733 /* MTAStopTimeUpdate.swift */; };
 		9059965928F37F6A006FD733 /* MTATripUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9059965828F37F6A006FD733 /* MTATripUpdate.swift */; };
 		905AD685293176A8006110E2 /* MTAFeedDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905AD684293176A8006110E2 /* MTAFeedDownloader.swift */; };
@@ -41,10 +45,11 @@
 		90A983B728CFD71C0046A19B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90A983B628CFD71C0046A19B /* Assets.xcassets */; };
 		90A983BA28CFD71C0046A19B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90A983B928CFD71C0046A19B /* Preview Assets.xcassets */; };
 		90A983C228CFD79E0046A19B /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = 90A983C128CFD79E0046A19B /* SwiftProtobuf */; };
-		90A983C628CFDF170046A19B /* SwiftProtobufPluginLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 90A983C528CFDF170046A19B /* SwiftProtobufPluginLibrary */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		905385FC293C0EED000750EA /* BannerAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerAdViewController.swift; sourceTree = "<group>"; };
+		905385FE293C0EF5000750EA /* BannerAd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerAd.swift; sourceTree = "<group>"; };
 		9059965628F37F5A006FD733 /* MTAStopTimeUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTAStopTimeUpdate.swift; sourceTree = "<group>"; };
 		9059965828F37F6A006FD733 /* MTATripUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTATripUpdate.swift; sourceTree = "<group>"; };
 		905AD684293176A8006110E2 /* MTAFeedDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTAFeedDownloader.swift; sourceTree = "<group>"; };
@@ -86,8 +91,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				905385FB293C0D70000750EA /* GoogleMobileAds in Frameworks */,
 				908EC75F28E255B20020CC92 /* CodableCSV in Frameworks */,
-				90A983C628CFDF170046A19B /* SwiftProtobufPluginLibrary in Frameworks */,
 				90A983C228CFD79E0046A19B /* SwiftProtobuf in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -95,6 +100,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		905385F8293C0C0A000750EA /* AdMob */ = {
+			isa = PBXGroup;
+			children = (
+				905385FE293C0EF5000750EA /* BannerAd.swift */,
+				905385FC293C0EED000750EA /* BannerAdViewController.swift */,
+			);
+			path = AdMob;
+			sourceTree = "<group>";
+		};
 		9085487228EB967E00DE7863 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +175,7 @@
 		90A983B128CFD71B0046A19B /* Protobuf */ = {
 			isa = PBXGroup;
 			children = (
+				905385F8293C0C0A000750EA /* AdMob */,
 				908EC75728E251EF0020CC92 /* Resources */,
 				9085487228EB967E00DE7863 /* Model */,
 				908B1AA028FB6A8E008ACF21 /* Views */,
@@ -201,8 +216,8 @@
 			name = MTANearby;
 			packageProductDependencies = (
 				90A983C128CFD79E0046A19B /* SwiftProtobuf */,
-				90A983C528CFDF170046A19B /* SwiftProtobufPluginLibrary */,
 				908EC75E28E255B20020CC92 /* CodableCSV */,
+				905385FA293C0D70000750EA /* GoogleMobileAds */,
 			);
 			productName = Protobuf;
 			productReference = 90A983AF28CFD71B0046A19B /* MTANearby.app */;
@@ -234,8 +249,8 @@
 			mainGroup = 90A983A628CFD71B0046A19B;
 			packageReferences = (
 				90A983C028CFD79E0046A19B /* XCRemoteSwiftPackageReference "swift-protobuf" */,
-				90A983C428CFDF170046A19B /* XCRemoteSwiftPackageReference "swift-protobuf" */,
 				908EC75D28E255B10020CC92 /* XCRemoteSwiftPackageReference "CodableCSV" */,
+				905385F9293C0D70000750EA /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			productRefGroup = 90A983B028CFD71B0046A19B /* Products */;
 			projectDirPath = "";
@@ -251,6 +266,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90538600293C1041000750EA /* MTANearby-Info.plist in Resources */,
 				90A983BA28CFD71C0046A19B /* Preview Assets.xcassets in Resources */,
 				908EC75928E252070020CC92 /* stops.txt in Resources */,
 				9085487628EB9CC500DE7863 /* routes.txt in Resources */,
@@ -281,6 +297,7 @@
 				90672E4728CFE15600B4BF74 /* nyct-subway.pb.swift in Sources */,
 				909F55F728F4D89600BEC9B9 /* StopsView.swift in Sources */,
 				909F55F328F4B2F900BEC9B9 /* MTATripReplacementPeriod.swift in Sources */,
+				905385FF293C0EF5000750EA /* BannerAd.swift in Sources */,
 				905AD685293176A8006110E2 /* MTAFeedDownloader.swift in Sources */,
 				9085487A28EB9EDE00DE7863 /* MTAAlert.swift in Sources */,
 				908B1AA228FB6AC5008ACF21 /* TripUpdatesView.swift in Sources */,
@@ -292,6 +309,7 @@
 				90720791292ED615002DA887 /* LocationHelper.swift in Sources */,
 				908CB9EB28FE0964007D163F /* MTATrain.swift in Sources */,
 				90A983B328CFD71B0046A19B /* MTANearByApp.swift in Sources */,
+				905385FD293C0EED000750EA /* BannerAdViewController.swift in Sources */,
 				908EC76128E255E10020CC92 /* MTAStop.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -439,6 +457,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.resonance.MTANearby;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -473,6 +492,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.resonance.MTANearby;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -505,6 +525,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		905385F9293C0D70000750EA /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 		908EC75D28E255B10020CC92 /* XCRemoteSwiftPackageReference "CodableCSV" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dehesa/CodableCSV";
@@ -521,17 +549,14 @@
 				minimumVersion = 1.6.0;
 			};
 		};
-		90A983C428CFDF170046A19B /* XCRemoteSwiftPackageReference "swift-protobuf" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-protobuf.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.6.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		905385FA293C0D70000750EA /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 905385F9293C0D70000750EA /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
 		908EC75E28E255B20020CC92 /* CodableCSV */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 908EC75D28E255B10020CC92 /* XCRemoteSwiftPackageReference "CodableCSV" */;
@@ -541,11 +566,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 90A983C028CFD79E0046A19B /* XCRemoteSwiftPackageReference "swift-protobuf" */;
 			productName = SwiftProtobuf;
-		};
-		90A983C528CFDF170046A19B /* SwiftProtobufPluginLibrary */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 90A983C428CFDF170046A19B /* XCRemoteSwiftPackageReference "swift-protobuf" */;
-			productName = SwiftProtobufPluginLibrary;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
