@@ -11,9 +11,6 @@ import MapKit
 struct TrainsAtStopView: View {
     @EnvironmentObject private var viewModel: ViewModel
     
-    private let maxAgo: TimeInterval = -1 * 60
-    private let maxComing: TimeInterval = 30 * 60
-    
     var stop: MTAStop
     var trains: [MTATrain]
     var tripUpdateByTripId: [String: MTATripUpdate]
@@ -48,28 +45,32 @@ struct TrainsAtStopView: View {
                                 EmptyView()
                             }
                         } label: {
-                            HStack {
-                                Image(systemName: train.getDirection()?.systemName ?? "")
-                                
-                                getRouteView(for: trip)
-                                    .frame(width: 30, height: 30)
-                                
-                                Spacer()
-                                
-                                if Date().distance(to: arrivalTime) > 15*60 {
-                                    Text(arrivalTime, style: .time)
-                                        .foregroundColor(.secondary)
-                                } else {
-                                    Text(getTimeInterval(arrivalTime))
-                                        .foregroundColor(arrivalTime < Date() ? .secondary : .primary)
-                                }
-                            }
+                            getLabel(for: train, trip: trip, arrivalTime: arrivalTime)
                         }
                     }
                 }
             }
             
             Spacer()
+        }
+    }
+    
+    private func getLabel(for train: MTATrain, trip: MTATrip, arrivalTime: Date) -> some View {
+        HStack {
+            Image(systemName: train.getDirection()?.systemName ?? "")
+            
+            getRouteView(for: trip)
+                .frame(width: 30, height: 30)
+            
+            Spacer()
+            
+            if Date().distance(to: arrivalTime) > 15*60 {
+                Text(arrivalTime, style: .time)
+                    .foregroundColor(.secondary)
+            } else {
+                Text(getTimeInterval(arrivalTime))
+                    .foregroundColor(arrivalTime < Date() ? .secondary : .primary)
+            }
         }
     }
     
@@ -85,7 +86,7 @@ struct TrainsAtStopView: View {
     }
     
     private func isValid(_ arrivalTime: Date) -> Bool {
-        return arrivalTime.timeIntervalSinceNow > maxAgo && arrivalTime.timeIntervalSinceNow < maxComing
+        return arrivalTime.timeIntervalSinceNow > viewModel.maxAgo && arrivalTime.timeIntervalSinceNow < viewModel.maxComing
     }
     
     private func getRouteColor(of trip: MTATrip) -> Color? {

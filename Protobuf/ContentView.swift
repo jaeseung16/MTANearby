@@ -20,15 +20,8 @@ struct ContentView: View {
                      numberFormatStyle: .number.precision(.fractionLength(1)))
     }
     
-    // 40.7370413,-73.8625352 Home
-    // 40.75696,-73.9703863 850 Third Ave
-    @State private var location = CLLocationCoordinate2D(latitude: 40.7370413, longitude: -73.8625352)
+    @State private var location = CLLocationCoordinate2D(latitude: 40.712778, longitude: -74.006111) // NYC City Hall
     
-    @State private var stops = ViewModel.mtaStops
-    @State private var routes = ViewModel.mtaRoutes
-    @State private var stopsByRoute = ViewModel.stopsByRoute
-    @State private var stopsById = ViewModel.stopsById
-    @State private var vehiclesNearby = [MTAStop: [MTAVehicle]]()
     @State private var trainsNearby = [MTAStop: [MTATrain]]()
     @State private var stopsNearby = [MTAStop]()
     @State private var lastRefresh = Date()
@@ -37,6 +30,10 @@ struct ContentView: View {
     @State private var showProgress = false
     @State private var presentUpdateMaxDistance = false
     @State private var presentAlert = false
+    
+    private var kmSelected: Bool {
+        distanceUnit == .km
+    }
     
     var body: some View {
         VStack {
@@ -49,11 +46,15 @@ struct ContentView: View {
                             if let trains = trainsNearby[stop] {
                                 NavigationLink {
                                     TrainsAtStopView(stop: stop,
-                                                     trains: getTrains(from: trains),
+                                                     trains: getSortedTrains(from: trains),
                                                      tripUpdateByTripId: getTripUpdateByTripId(from: trains))
                                         .navigationTitle(stop.name)
                                 } label: {
-                                    label(for: stop)
+                                    if kmSelected {
+                                        label(for: stop, distanceUnit: .km)
+                                    } else {
+                                        label(for: stop, distanceUnit: .mile)
+                                    }
                                 }
                             }
                         }
@@ -63,33 +64,7 @@ struct ContentView: View {
             
             Spacer()
             
-            HStack {
-                Spacer()
-                
-                Button {
-                    presentUpdateMaxDistance = true
-                } label: {
-                    Label("Max Distance", systemImage: "arrow.up.left.and.down.right.and.arrow.up.right.and.down.left")
-                }
-                
-                Spacer()
-
-                Button {
-                    viewModel.lookUpCurrentLocation()
-                    downloadAllDataByButton()
-                } label: {
-                    Label("Refresh", systemImage: "arrow.clockwise.circle")
-                }
-                
-                Spacer()
-            }
-            .disabled(showProgress)
-            
-            HStack {
-                Spacer()
-                Text("Refreshed:")
-                Text(lastRefresh, style: .time)
-            }
+            bottomView
         }
         .padding()
         .overlay {
@@ -139,13 +114,45 @@ struct ContentView: View {
         }
     }
     
-    private func label(for stop: MTAStop) -> some View {
+    private var bottomView: some View {
+        VStack {
+            HStack {
+                Spacer()
+                
+                Button {
+                    presentUpdateMaxDistance = true
+                } label: {
+                    Label("Settings", systemImage: "arrow.up.left.and.down.right.and.arrow.up.right.and.down.left")
+                }
+                
+                Spacer()
+
+                Button {
+                    viewModel.lookUpCurrentLocation()
+                    downloadAllDataByButton()
+                } label: {
+                    Label("Refresh", systemImage: "arrow.clockwise.circle")
+                }
+                
+                Spacer()
+            }
+            .disabled(showProgress)
+            
+            HStack {
+                Spacer()
+                Text("Refreshed:")
+                Text(lastRefresh, style: .time)
+            }
+        }
+    }
+    
+    private func label(for stop: MTAStop, distanceUnit: DistanceUnit) -> some View {
         HStack {
             Text("\(stop.name)")
             
             Spacer()
             
-            Text(distance(to: stop).converted(to: .miles), format: distanceFormatStyle)
+            Text(distance(to: stop).converted(to: distanceUnit.unitLength), format: distanceFormatStyle)
         }
     }
     
@@ -175,7 +182,10 @@ struct ContentView: View {
     
     private func getTrains(from trains: [MTATrain]) -> [MTATrain] {
         return trains.filter { $0.arrivalTime != nil}
-            .sorted(by: {$0.arrivalTime! < $1.arrivalTime!})
+    }
+    
+    private func getSortedTrains(from trains: [MTATrain]) -> [MTATrain] {
+        return getTrains(from: trains).sorted(by: {$0.arrivalTime! < $1.arrivalTime!})
     }
     
     private func getTripUpdateByTripId(from trains: [MTATrain]) -> [String: MTATripUpdate] {
