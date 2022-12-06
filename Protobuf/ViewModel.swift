@@ -273,6 +273,10 @@ class ViewModel: NSObject, ObservableObject {
                                     longitudinalMeters: CLLocationDistance(maxDistance * rangeFactor))
     }
     
+    func requestLocation() {
+        locationHelper.requestLocation()
+    }
+    
 }
 
 extension ViewModel: CLLocationManagerDelegate {

@@ -128,7 +128,7 @@ struct ContentView: View {
                 Spacer()
 
                 Button {
-                    viewModel.lookUpCurrentLocation()
+                    viewModel.requestLocation()
                     downloadAllDataByButton()
                 } label: {
                     Label("Refresh", systemImage: "arrow.clockwise.circle")
