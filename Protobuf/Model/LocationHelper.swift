@@ -17,7 +17,7 @@ class LocationHelper {
     var delegate: CLLocationManagerDelegate? {
         didSet {
             locationManager.delegate = delegate
-            requestLocation()
+            locationManager.startUpdatingLocation()
         }
     }
     
@@ -28,10 +28,6 @@ class LocationHelper {
     init() {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
-    }
-    
-    func requestLocation() -> Void {
-        locationManager.requestLocation()
     }
     
     func lookUpCurrentLocation(completionHandler: @escaping (String) -> Void) -> Void {

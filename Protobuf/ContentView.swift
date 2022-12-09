@@ -79,11 +79,12 @@ struct ContentView: View {
             if newValue == MTASubwayFeedURL.allCases.count {
                 showProgress = false
             }
-            stopsNearby = viewModel.stops(within: maxDistance, from: location)
-            trainsNearby = viewModel.trains(within: maxDistance, from: location)
+            if viewModel.location != nil {
+                updateStopsAndTrainsNearby()
+            }
         }
         .onReceive(viewModel.$locationUpdated) { _ in
-            downloadAllData()
+            updateStopsAndTrainsNearby()
         }
         .onReceive(viewModel.$userLocalityUpdated) { _ in
             userLocality = viewModel.userLocality
@@ -94,8 +95,7 @@ struct ContentView: View {
         .onChange(of: presentUpdateMaxDistance) { _ in
             if viewModel.maxDistance != maxDistance {
                 viewModel.maxDistance = maxDistance
-                stopsNearby = viewModel.stops(within: maxDistance, from: location)
-                trainsNearby = viewModel.trains(within: maxDistance, from: location)
+                updateStopsAndTrainsNearby()
             }
         }
         .alert(Text("Can't determine your current location"), isPresented: $presentAlert) {
@@ -128,7 +128,6 @@ struct ContentView: View {
                 Spacer()
 
                 Button {
-                    viewModel.requestLocation()
                     downloadAllDataByButton()
                 } label: {
                     Label("Refresh", systemImage: "arrow.clockwise.circle")
@@ -176,8 +175,7 @@ struct ContentView: View {
     
     private func downloadAllData() -> Void {
         lastRefresh = Date()
-        if let coordinate = viewModel.location?.coordinate {
-            location = coordinate
+        if (viewModel.location?.coordinate) != nil {
             viewModel.getAllData()
         } else if showProgress {
             presentAlert.toggle()
@@ -201,6 +199,14 @@ struct ContentView: View {
             }
         }
         return result
+    }
+    
+    private func updateStopsAndTrainsNearby() -> Void {
+        if let coordinate = viewModel.location?.coordinate {
+            location = coordinate
+            stopsNearby = viewModel.stops(within: maxDistance, from: location)
+            trainsNearby = viewModel.trains(within: maxDistance, from: location)
+        }
     }
     
 }

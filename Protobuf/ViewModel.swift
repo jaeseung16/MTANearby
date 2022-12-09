@@ -265,16 +265,14 @@ class ViewModel: NSObject, ObservableObject {
         if let _ = UserDefaults.standard.object(forKey: "maxComing") {
             self.maxComing = UserDefaults.standard.double(forKey: "maxComing")
         }
+        
+        getAllData()
     }
     
     func updateRegion(center coordinate: CLLocationCoordinate2D) -> Void {
         region = MKCoordinateRegion(center: coordinate,
                                     latitudinalMeters: CLLocationDistance(maxDistance * rangeFactor),
                                     longitudinalMeters: CLLocationDistance(maxDistance * rangeFactor))
-    }
-    
-    func requestLocation() {
-        locationHelper.requestLocation()
     }
     
 }
