@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct TripUpdatesView: View {
-    @EnvironmentObject private var viewModel: ViewModel
-    
     @State var tripUpdate: MTATripUpdate
     
     var body: some View {
