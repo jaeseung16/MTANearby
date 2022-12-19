@@ -184,11 +184,11 @@ struct ContentView: View {
     }
     
     private func getTrains(from trains: [MTATrain]) -> [MTATrain] {
-        return trains.filter { $0.arrivalTime != nil}
+        return trains.filter { $0.eventTime != nil}
     }
     
     private func getSortedTrains(from trains: [MTATrain]) -> [MTATrain] {
-        return getTrains(from: trains).sorted(by: {$0.arrivalTime! < $1.arrivalTime!})
+        return getTrains(from: trains).sorted(by: {$0.eventTime! < $1.eventTime!})
     }
     
     private func getTripUpdateByTripId(from trains: [MTATrain]) -> [String: MTATripUpdate] {

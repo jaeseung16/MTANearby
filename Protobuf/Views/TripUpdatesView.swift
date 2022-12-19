@@ -20,9 +20,9 @@ struct TripUpdatesView: View {
                     
                     Spacer()
                     
-                    if let arrivalTime = stopTimeUpdate.arrivalTime {
-                        Text(arrivalTime, style: .time)
-                            .foregroundColor(arrivalTime < Date() ? .secondary : .primary)
+                    if let eventTime = stopTimeUpdate.eventTime {
+                        Text(eventTime, style: .time)
+                            .foregroundColor(eventTime < Date() ? .secondary : .primary)
                     }
                 }
             }

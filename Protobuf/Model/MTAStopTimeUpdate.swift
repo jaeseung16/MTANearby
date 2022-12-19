@@ -17,4 +17,8 @@ struct MTAStopTimeUpdate: Identifiable {
     let departureTime: Date?
     let scheduledTrack: String?
     let actualTrack: String?
+    
+    var eventTime: Date? {
+        return arrivalTime ?? departureTime
+    }
 }

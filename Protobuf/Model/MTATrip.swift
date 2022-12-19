@@ -11,7 +11,6 @@ struct MTATrip: CustomStringConvertible, Hashable {
     var tripId: String?
     var routeId: String?
     var start: Date?
-    var scheduleRelationship: String?
     var assigned: Bool?
     var trainId: String?
     var direction: MTADirection?

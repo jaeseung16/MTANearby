@@ -15,6 +15,10 @@ struct MTATrain: Hashable {
     let arrivalTime: Date?
     let departureTime: Date?
     
+    var eventTime: Date? {
+        return arrivalTime ?? departureTime
+    }
+    
     func getDirection() -> MTADirection? {
         if let trip = trip, let direction = trip.getDirection() {
              return direction

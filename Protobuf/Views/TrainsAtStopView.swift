@@ -36,7 +36,7 @@ struct TrainsAtStopView: View {
             
             List {
                 ForEach(trains, id: \.self) { train in
-                    if let trip = train.trip, let arrivalTime = train.arrivalTime, isValid(arrivalTime) {
+                    if let trip = train.trip, let eventTime = train.eventTime, isValid(eventTime) {
                         NavigationLink {
                             if let tripId = trip.tripId, let tripUpdate = tripUpdateByTripId[tripId] {
                                 TripUpdatesView(tripUpdate: tripUpdate)
@@ -45,7 +45,7 @@ struct TrainsAtStopView: View {
                                 EmptyView()
                             }
                         } label: {
-                            getLabel(for: train, trip: trip, arrivalTime: arrivalTime)
+                            getLabel(for: train, trip: trip, arrivalTime: eventTime)
                         }
                     }
                 }
@@ -85,8 +85,8 @@ struct TrainsAtStopView: View {
         }
     }
     
-    private func isValid(_ arrivalTime: Date) -> Bool {
-        return arrivalTime.timeIntervalSinceNow > viewModel.maxAgo && arrivalTime.timeIntervalSinceNow < viewModel.maxComing
+    private func isValid(_ eventTime: Date) -> Bool {
+        return eventTime.timeIntervalSinceNow > viewModel.maxAgo && eventTime.timeIntervalSinceNow < viewModel.maxComing
     }
     
     private func getRouteColor(of trip: MTATrip) -> Color? {

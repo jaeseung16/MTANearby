@@ -173,7 +173,7 @@ class ViewModel: NSObject, ObservableObject {
         }
         
         let stopIds = stopsNearby.map { $0.id }
-        
+        //ViewModel.logger.info("tripUpdatesByTripId=\(self.tripUpdatesByTripId, privacy: .public)")
         for tripId in tripUpdatesByTripId.keys {
             if let tripUpdates = tripUpdatesByTripId[tripId] {
                 for tripUpdate in tripUpdates {
