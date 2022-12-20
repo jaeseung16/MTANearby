@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TripUpdatesView: View {
-    @State var tripUpdate: MTATripUpdate
+    var tripUpdate: MTATripUpdate
     
     var body: some View {
         List {
