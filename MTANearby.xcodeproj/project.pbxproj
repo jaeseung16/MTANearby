@@ -21,6 +21,22 @@
 		906B5EE92935287B00B820A6 /* DistanceUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906B5EE82935287B00B820A6 /* DistanceUnit.swift */; };
 		906B5EEB29353A9E00B820A6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906B5EEA29353A9E00B820A6 /* SettingsView.swift */; };
 		90720791292ED615002DA887 /* LocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90720790292ED615002DA887 /* LocationHelper.swift */; };
+		9079EEC42958C91100F8F6FE /* RestDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9079EEC32958C91100F8F6FE /* RestDownloader.swift */; };
+		9079EECC2959057800F8F6FE /* MTANearbyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9079EECB2959057800F8F6FE /* MTANearbyTests.swift */; };
+		90805430295A2830001AB1A1 /* RestResponseWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9080542F295A2830001AB1A1 /* RestResponseWrapper.swift */; };
+		90805432295A2872001AB1A1 /* RestVehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90805431295A2872001AB1A1 /* RestVehicle.swift */; };
+		90805434295A2896001AB1A1 /* RestVehicleStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90805433295A2896001AB1A1 /* RestVehicleStatus.swift */; };
+		90805436295A28BD001AB1A1 /* RestDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90805435295A28BD001AB1A1 /* RestDirection.swift */; };
+		90805438295A28D4001AB1A1 /* RestTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90805437295A28D4001AB1A1 /* RestTrip.swift */; };
+		9080543A295A2904001AB1A1 /* RestTripUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90805439295A2904001AB1A1 /* RestTripUpdate.swift */; };
+		9080543C295A2922001AB1A1 /* RestStopTimeUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9080543B295A2922001AB1A1 /* RestStopTimeUpdate.swift */; };
+		9080543D295A57A6001AB1A1 /* RestResponseWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9080542F295A2830001AB1A1 /* RestResponseWrapper.swift */; };
+		9080543E295A581D001AB1A1 /* RestVehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90805431295A2872001AB1A1 /* RestVehicle.swift */; };
+		9080543F295A5821001AB1A1 /* RestTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90805437295A28D4001AB1A1 /* RestTrip.swift */; };
+		90805440295A5825001AB1A1 /* RestDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90805435295A28BD001AB1A1 /* RestDirection.swift */; };
+		90805441295A5827001AB1A1 /* RestStopTimeUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9080543B295A2922001AB1A1 /* RestStopTimeUpdate.swift */; };
+		90805442295A582A001AB1A1 /* RestTripUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90805439295A2904001AB1A1 /* RestTripUpdate.swift */; };
+		90805443295A582F001AB1A1 /* RestVehicleStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90805433295A2896001AB1A1 /* RestVehicleStatus.swift */; };
 		9085487128EB902200DE7863 /* MTASubwayFeedURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085487028EB902200DE7863 /* MTASubwayFeedURL.swift */; };
 		9085487428EB96A500DE7863 /* MTAFeedMessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085487328EB96A500DE7863 /* MTAFeedMessageType.swift */; };
 		9085487628EB9CC500DE7863 /* routes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9085487528EB9CC500DE7863 /* routes.txt */; };
@@ -47,6 +63,16 @@
 		90A983C228CFD79E0046A19B /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = 90A983C128CFD79E0046A19B /* SwiftProtobuf */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		9079EECD2959057800F8F6FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 90A983A728CFD71B0046A19B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 90A983AE28CFD71B0046A19B;
+			remoteInfo = MTANearby;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		905385FC293C0EED000750EA /* BannerAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerAdViewController.swift; sourceTree = "<group>"; };
 		905385FE293C0EF5000750EA /* BannerAd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerAd.swift; sourceTree = "<group>"; };
@@ -60,6 +86,16 @@
 		906B5EE82935287B00B820A6 /* DistanceUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceUnit.swift; sourceTree = "<group>"; };
 		906B5EEA29353A9E00B820A6 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		90720790292ED615002DA887 /* LocationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHelper.swift; sourceTree = "<group>"; };
+		9079EEC32958C91100F8F6FE /* RestDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestDownloader.swift; sourceTree = "<group>"; };
+		9079EEC92959057800F8F6FE /* MTANearbyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MTANearbyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9079EECB2959057800F8F6FE /* MTANearbyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTANearbyTests.swift; sourceTree = "<group>"; };
+		9080542F295A2830001AB1A1 /* RestResponseWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestResponseWrapper.swift; sourceTree = "<group>"; };
+		90805431295A2872001AB1A1 /* RestVehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestVehicle.swift; sourceTree = "<group>"; };
+		90805433295A2896001AB1A1 /* RestVehicleStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestVehicleStatus.swift; sourceTree = "<group>"; };
+		90805435295A28BD001AB1A1 /* RestDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestDirection.swift; sourceTree = "<group>"; };
+		90805437295A28D4001AB1A1 /* RestTrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestTrip.swift; sourceTree = "<group>"; };
+		90805439295A2904001AB1A1 /* RestTripUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestTripUpdate.swift; sourceTree = "<group>"; };
+		9080543B295A2922001AB1A1 /* RestStopTimeUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestStopTimeUpdate.swift; sourceTree = "<group>"; };
 		9085487028EB902200DE7863 /* MTASubwayFeedURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTASubwayFeedURL.swift; sourceTree = "<group>"; };
 		9085487328EB96A500DE7863 /* MTAFeedMessageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTAFeedMessageType.swift; sourceTree = "<group>"; };
 		9085487528EB9CC500DE7863 /* routes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = routes.txt; sourceTree = "<group>"; };
@@ -87,6 +123,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9079EEC62959057800F8F6FE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		90A983AC28CFD71B0046A19B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -109,9 +152,32 @@
 			path = AdMob;
 			sourceTree = "<group>";
 		};
+		9079EECA2959057800F8F6FE /* MTANearbyTests */ = {
+			isa = PBXGroup;
+			children = (
+				9079EECB2959057800F8F6FE /* MTANearbyTests.swift */,
+			);
+			path = MTANearbyTests;
+			sourceTree = "<group>";
+		};
+		9080542E295A281A001AB1A1 /* REST */ = {
+			isa = PBXGroup;
+			children = (
+				9080542F295A2830001AB1A1 /* RestResponseWrapper.swift */,
+				90805431295A2872001AB1A1 /* RestVehicle.swift */,
+				90805433295A2896001AB1A1 /* RestVehicleStatus.swift */,
+				90805435295A28BD001AB1A1 /* RestDirection.swift */,
+				90805437295A28D4001AB1A1 /* RestTrip.swift */,
+				90805439295A2904001AB1A1 /* RestTripUpdate.swift */,
+				9080543B295A2922001AB1A1 /* RestStopTimeUpdate.swift */,
+			);
+			path = REST;
+			sourceTree = "<group>";
+		};
 		9085487228EB967E00DE7863 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9080542E295A281A001AB1A1 /* REST */,
 				9085487928EB9EDE00DE7863 /* MTAAlert.swift */,
 				90A4BEF028EE424600B210F8 /* MTADirection.swift */,
 				9085487328EB96A500DE7863 /* MTAFeedMessageType.swift */,
@@ -130,6 +196,7 @@
 				905AD684293176A8006110E2 /* MTAFeedDownloader.swift */,
 				905AD68629317EE7006110E2 /* MTAFeedWrapper.swift */,
 				906B5EE82935287B00B820A6 /* DistanceUnit.swift */,
+				9079EEC32958C91100F8F6FE /* RestDownloader.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -160,6 +227,7 @@
 			children = (
 				90F65AF2291EFA22001E8204 /* MTANearby-Info.plist */,
 				90A983B128CFD71B0046A19B /* Protobuf */,
+				9079EECA2959057800F8F6FE /* MTANearbyTests */,
 				90A983B028CFD71B0046A19B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -168,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				90A983AF28CFD71B0046A19B /* MTANearby.app */,
+				9079EEC92959057800F8F6FE /* MTANearbyTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -201,6 +270,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		9079EEC82959057800F8F6FE /* MTANearbyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9079EECF2959057800F8F6FE /* Build configuration list for PBXNativeTarget "MTANearbyTests" */;
+			buildPhases = (
+				9079EEC52959057800F8F6FE /* Sources */,
+				9079EEC62959057800F8F6FE /* Frameworks */,
+				9079EEC72959057800F8F6FE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9079EECE2959057800F8F6FE /* PBXTargetDependency */,
+			);
+			name = MTANearbyTests;
+			productName = MTANearbyTests;
+			productReference = 9079EEC92959057800F8F6FE /* MTANearbyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		90A983AE28CFD71B0046A19B /* MTANearby */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 90A983BD28CFD71C0046A19B /* Build configuration list for PBXNativeTarget "MTANearby" */;
@@ -230,9 +317,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1340;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
+					9079EEC82959057800F8F6FE = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 90A983AE28CFD71B0046A19B;
+					};
 					90A983AE28CFD71B0046A19B = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
@@ -257,11 +348,19 @@
 			projectRoot = "";
 			targets = (
 				90A983AE28CFD71B0046A19B /* MTANearby */,
+				9079EEC82959057800F8F6FE /* MTANearbyTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		9079EEC72959057800F8F6FE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		90A983AD28CFD71B0046A19B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -277,19 +376,39 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		9079EEC52959057800F8F6FE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9080543D295A57A6001AB1A1 /* RestResponseWrapper.swift in Sources */,
+				90805442295A582A001AB1A1 /* RestTripUpdate.swift in Sources */,
+				9080543E295A581D001AB1A1 /* RestVehicle.swift in Sources */,
+				9080543F295A5821001AB1A1 /* RestTrip.swift in Sources */,
+				90805443295A582F001AB1A1 /* RestVehicleStatus.swift in Sources */,
+				9079EECC2959057800F8F6FE /* MTANearbyTests.swift in Sources */,
+				90805440295A5825001AB1A1 /* RestDirection.swift in Sources */,
+				90805441295A5827001AB1A1 /* RestStopTimeUpdate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		90A983AB28CFD71B0046A19B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				9085487428EB96A500DE7863 /* MTAFeedMessageType.swift in Sources */,
 				9059965728F37F5A006FD733 /* MTAStopTimeUpdate.swift in Sources */,
+				90805430295A2830001AB1A1 /* RestResponseWrapper.swift in Sources */,
 				906B5EE92935287B00B820A6 /* DistanceUnit.swift in Sources */,
 				908CB9ED28FE1084007D163F /* TrainsAtStopView.swift in Sources */,
 				9059965928F37F6A006FD733 /* MTATripUpdate.swift in Sources */,
 				9085487C28EB9F4300DE7863 /* MTATrip.swift in Sources */,
 				9085487128EB902200DE7863 /* MTASubwayFeedURL.swift in Sources */,
+				90805434295A2896001AB1A1 /* RestVehicleStatus.swift in Sources */,
 				90A46B6728F228F500DED050 /* MTAVehicle.swift in Sources */,
+				90805438295A28D4001AB1A1 /* RestTrip.swift in Sources */,
+				9080543C295A2922001AB1A1 /* RestStopTimeUpdate.swift in Sources */,
 				90A983B528CFD71B0046A19B /* ContentView.swift in Sources */,
+				90805432295A2872001AB1A1 /* RestVehicle.swift in Sources */,
 				90A46B6928F229CA00DED050 /* MTAVehicleStatus.swift in Sources */,
 				909B162028FA1C7A002D8A33 /* VehiclesAtStopView.swift in Sources */,
 				90672E4528CFE14E00B4BF74 /* gtfs-realtime.pb.swift in Sources */,
@@ -297,6 +416,7 @@
 				90672E4728CFE15600B4BF74 /* nyct-subway.pb.swift in Sources */,
 				909F55F728F4D89600BEC9B9 /* StopsView.swift in Sources */,
 				909F55F328F4B2F900BEC9B9 /* MTATripReplacementPeriod.swift in Sources */,
+				90805436295A28BD001AB1A1 /* RestDirection.swift in Sources */,
 				905385FF293C0EF5000750EA /* BannerAd.swift in Sources */,
 				905AD685293176A8006110E2 /* MTAFeedDownloader.swift in Sources */,
 				9085487A28EB9EDE00DE7863 /* MTAAlert.swift in Sources */,
@@ -309,14 +429,70 @@
 				90720791292ED615002DA887 /* LocationHelper.swift in Sources */,
 				908CB9EB28FE0964007D163F /* MTATrain.swift in Sources */,
 				90A983B328CFD71B0046A19B /* MTANearByApp.swift in Sources */,
+				9079EEC42958C91100F8F6FE /* RestDownloader.swift in Sources */,
 				905385FD293C0EED000750EA /* BannerAdViewController.swift in Sources */,
+				9080543A295A2904001AB1A1 /* RestTripUpdate.swift in Sources */,
 				908EC76128E255E10020CC92 /* MTAStop.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		9079EECE2959057800F8F6FE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 90A983AE28CFD71B0046A19B /* MTANearby */;
+			targetProxy = 9079EECD2959057800F8F6FE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		9079EED02959057800F8F6FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RWVTTVMWBE;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.resonance.jlee.MTANearbyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MTANearby.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MTANearby";
+			};
+			name = Debug;
+		};
+		9079EED12959057800F8F6FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RWVTTVMWBE;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.resonance.jlee.MTANearbyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MTANearby.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MTANearby";
+			};
+			name = Release;
+		};
 		90A983BB28CFD71C0046A19B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -437,7 +613,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_ASSET_PATHS = "\"Protobuf/Preview Content\"";
 				DEVELOPMENT_TEAM = U8VSJXRJTQ;
 				ENABLE_PREVIEWS = YES;
@@ -452,6 +628,7 @@
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "location-services";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -472,7 +649,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_ASSET_PATHS = "\"Protobuf/Preview Content\"";
 				DEVELOPMENT_TEAM = U8VSJXRJTQ;
 				ENABLE_PREVIEWS = YES;
@@ -487,6 +664,7 @@
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "location-services";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -504,6 +682,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9079EECF2959057800F8F6FE /* Build configuration list for PBXNativeTarget "MTANearbyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9079EED02959057800F8F6FE /* Debug */,
+				9079EED12959057800F8F6FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		90A983AA28CFD71B0046A19B /* Build configuration list for PBXProject "MTANearby" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

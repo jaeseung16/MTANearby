@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MTADirection: String {
+enum MTADirection: String, Codable {
     case east = "E"
     case west = "W"
     case south = "S"
@@ -16,7 +16,20 @@ enum MTADirection: String {
     init(from direction: NyctTripDescriptor.Direction) {
         switch direction {
         case .north:
+            self = .north
+        case .south:
+            self = .south
+        case .east:
             self = .east
+        case .west:
+            self = .west
+        }
+    }
+    
+    init(from direction: RestDirection) {
+        switch direction {
+        case .north:
+            self = .north
         case .south:
             self = .south
         case .east:

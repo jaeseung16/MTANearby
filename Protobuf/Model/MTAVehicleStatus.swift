@@ -22,4 +22,15 @@ enum MTAVehicleStatus: String {
             self = .inTransitTo
         }
     }
+    
+    init(from direction: RestVehicleStatus) {
+        switch direction {
+        case .incomingAt:
+            self = .incomingAt
+        case .stoppedAt:
+            self = .stoppedAt
+        case .inTransitTo:
+            self = .inTransitTo
+        }
+    }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MTAVehicle: Hashable {    
+struct MTAVehicle: Hashable {
     let status: MTAVehicleStatus
     let stopId: String?
     let stopSequence: UInt?
