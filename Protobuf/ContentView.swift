@@ -29,7 +29,8 @@ struct ContentView: View {
     
     @State private var showProgress = false
     @State private var presentUpdateMaxDistance = false
-    @State private var presentAlert = false
+    @State private var presentAlertLocationUnkown = false
+    @State private var presentAlertFeedUnavailable = false
     
     private var kmSelected: Bool {
         distanceUnit == .km
@@ -90,6 +91,9 @@ struct ContentView: View {
         .onReceive(viewModel.$userLocalityUpdated) { _ in
             userLocality = viewModel.userLocality
         }
+        .onReceive(viewModel.$feedAvailable) { _ in
+            presentAlertFeedUnavailable = !viewModel.feedAvailable
+        }
         .onChange(of: maxComing) { newValue in
             viewModel.maxComing = newValue
         }
@@ -99,7 +103,12 @@ struct ContentView: View {
                 updateStopsAndTrainsNearby()
             }
         }
-        .alert(Text("Can't determine your current location"), isPresented: $presentAlert) {
+        .alert(Text("Can't determine your current location"), isPresented: $presentAlertLocationUnkown) {
+            Button("OK") {
+                
+            }
+        }
+        .alert(Text("Can't access MTA feed"), isPresented: $presentAlertFeedUnavailable) {
             Button("OK") {
                 
             }
@@ -177,9 +186,16 @@ struct ContentView: View {
     private func downloadAllData() -> Void {
         lastRefresh = Date()
         if (viewModel.location?.coordinate) != nil {
-            viewModel.getAllData()
+            viewModel.getAllData() { result in
+                switch result {
+                case .success(let success):
+                    presentAlertFeedUnavailable = !success
+                case .failure:
+                    presentAlertFeedUnavailable.toggle()
+                }
+            }
         } else if showProgress {
-            presentAlert.toggle()
+            presentAlertLocationUnkown.toggle()
             showProgress = false
         }
     }
