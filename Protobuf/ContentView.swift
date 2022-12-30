@@ -233,7 +233,7 @@ struct ContentView: View {
             
             if stopsNearby.isEmpty {
                 presentAlertNotInNYC = !presentedAlertNotInNYC
-            } else {
+            } else if presentedAlertNotInNYC {
                 presentedAlertNotInNYC = false
             }
         }
