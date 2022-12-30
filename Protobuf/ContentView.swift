@@ -31,6 +31,8 @@ struct ContentView: View {
     @State private var presentUpdateMaxDistance = false
     @State private var presentAlertLocationUnkown = false
     @State private var presentAlertFeedUnavailable = false
+    @State private var presentAlertNotInNYC = false
+    @State private var presentedAlertNotInNYC = false
     
     private var kmSelected: Bool {
         distanceUnit == .km
@@ -111,6 +113,11 @@ struct ContentView: View {
         .alert(Text("Can't access MTA feed"), isPresented: $presentAlertFeedUnavailable) {
             Button("OK") {
                 
+            }
+        }
+        .alert(Text("There are no nearby subway stations"), isPresented: $presentAlertNotInNYC) {
+            Button("OK") {
+                presentedAlertNotInNYC = true
             }
         }
         
@@ -223,6 +230,12 @@ struct ContentView: View {
             location = coordinate
             stopsNearby = viewModel.stops(within: maxDistance, from: location)
             trainsNearby = viewModel.trains(within: maxDistance, from: location)
+            
+            if stopsNearby.isEmpty {
+                presentAlertNotInNYC = !presentedAlertNotInNYC
+            } else {
+                presentedAlertNotInNYC = false
+            }
         }
     }
     
