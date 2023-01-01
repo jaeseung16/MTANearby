@@ -8,17 +8,11 @@
 import Foundation
 import os
 
-enum MTAFeedDownloadError: Error {
-    case noURL
-    case noData
-    case cannotParse
-}
-
 class MTAFeedDownloader {
     static let logger = Logger()
     
-    private let httpHeaderForApiKey = "x-api-key"
-    private let apiKey = "v8NSHelLz0aMJi8Dpdlhw1FowwMvjszO1YCNCg6x"
+    private let httpHeaderForApiKey = MTAFeedConstant.httpHeaderForApiKey
+    private let apiKey = MTAFeedConstant.apiKey
     
     private var feedDateFormatter: DateFormatter {
         let dateFormatter = DateFormatter()
@@ -104,7 +98,7 @@ class MTAFeedDownloader {
             
         }
         
-        MTAFeedDownloader.logger.info("vehicles.count = \(String(describing: vehicles.count), privacy: .public)")
+        // MTAFeedDownloader.logger.info("vehicles.count = \(String(describing: vehicles.count), privacy: .public)")
         
         var vehiclesByStopId = [String: [MTAVehicle]]()
         if !vehicles.isEmpty {
@@ -124,7 +118,6 @@ class MTAFeedDownloader {
         var tripUpdatesByTripId = [String: [MTATripUpdate]]()
         if !tripUpdates.isEmpty {
             for tripUpdate in tripUpdates {
-                //ViewModel.logger.info("tripUpdate = \(String(describing: tripUpdate), privacy: .public)")
                 if let tripId = tripUpdate.trip?.tripId {
                     if tripUpdatesByTripId.keys.contains(tripId) {
                         tripUpdatesByTripId[tripId]?.append(tripUpdate)

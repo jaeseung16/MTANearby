@@ -43,6 +43,8 @@
 		9085487828EB9D0C00DE7863 /* MTARoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085487728EB9D0C00DE7863 /* MTARoute.swift */; };
 		9085487A28EB9EDE00DE7863 /* MTAAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085487928EB9EDE00DE7863 /* MTAAlert.swift */; };
 		9085487C28EB9F4300DE7863 /* MTATrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085487B28EB9F4300DE7863 /* MTATrip.swift */; };
+		908A06AE2960F8620040F3E2 /* MTAFeedDownloadError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908A06AD2960F8620040F3E2 /* MTAFeedDownloadError.swift */; };
+		908A06B22960FA7B0040F3E2 /* MTAFeedConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908A06B12960FA7B0040F3E2 /* MTAFeedConstant.swift */; };
 		908B1AA228FB6AC5008ACF21 /* TripUpdatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908B1AA128FB6AC5008ACF21 /* TripUpdatesView.swift */; };
 		908CB9EB28FE0964007D163F /* MTATrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908CB9EA28FE0964007D163F /* MTATrain.swift */; };
 		908CB9ED28FE1084007D163F /* TrainsAtStopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908CB9EC28FE1084007D163F /* TrainsAtStopView.swift */; };
@@ -102,6 +104,8 @@
 		9085487728EB9D0C00DE7863 /* MTARoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTARoute.swift; sourceTree = "<group>"; };
 		9085487928EB9EDE00DE7863 /* MTAAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTAAlert.swift; sourceTree = "<group>"; };
 		9085487B28EB9F4300DE7863 /* MTATrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTATrip.swift; sourceTree = "<group>"; };
+		908A06AD2960F8620040F3E2 /* MTAFeedDownloadError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTAFeedDownloadError.swift; sourceTree = "<group>"; };
+		908A06B12960FA7B0040F3E2 /* MTAFeedConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTAFeedConstant.swift; sourceTree = "<group>"; };
 		908B1AA128FB6AC5008ACF21 /* TripUpdatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripUpdatesView.swift; sourceTree = "<group>"; };
 		908CB9EA28FE0964007D163F /* MTATrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTATrain.swift; sourceTree = "<group>"; };
 		908CB9EC28FE1084007D163F /* TrainsAtStopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainsAtStopView.swift; sourceTree = "<group>"; };
@@ -177,6 +181,7 @@
 		9085487228EB967E00DE7863 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				908A06AC2960F70F0040F3E2 /* Helper */,
 				9080542E295A281A001AB1A1 /* REST */,
 				9085487928EB9EDE00DE7863 /* MTAAlert.swift */,
 				90A4BEF028EE424600B210F8 /* MTADirection.swift */,
@@ -192,13 +197,22 @@
 				90A46B6628F228F500DED050 /* MTAVehicle.swift */,
 				90A46B6828F229CA00DED050 /* MTAVehicleStatus.swift */,
 				908CB9EA28FE0964007D163F /* MTATrain.swift */,
-				90720790292ED615002DA887 /* LocationHelper.swift */,
-				905AD684293176A8006110E2 /* MTAFeedDownloader.swift */,
 				905AD68629317EE7006110E2 /* MTAFeedWrapper.swift */,
 				906B5EE82935287B00B820A6 /* DistanceUnit.swift */,
-				9079EEC32958C91100F8F6FE /* RestDownloader.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		908A06AC2960F70F0040F3E2 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				90720790292ED615002DA887 /* LocationHelper.swift */,
+				908A06AD2960F8620040F3E2 /* MTAFeedDownloadError.swift */,
+				905AD684293176A8006110E2 /* MTAFeedDownloader.swift */,
+				9079EEC32958C91100F8F6FE /* RestDownloader.swift */,
+				908A06B12960FA7B0040F3E2 /* MTAFeedConstant.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		908B1AA028FB6A8E008ACF21 /* Views */ = {
@@ -404,6 +418,7 @@
 				9085487C28EB9F4300DE7863 /* MTATrip.swift in Sources */,
 				9085487128EB902200DE7863 /* MTASubwayFeedURL.swift in Sources */,
 				90805434295A2896001AB1A1 /* RestVehicleStatus.swift in Sources */,
+				908A06AE2960F8620040F3E2 /* MTAFeedDownloadError.swift in Sources */,
 				90A46B6728F228F500DED050 /* MTAVehicle.swift in Sources */,
 				90805438295A28D4001AB1A1 /* RestTrip.swift in Sources */,
 				9080543C295A2922001AB1A1 /* RestStopTimeUpdate.swift in Sources */,
@@ -426,6 +441,7 @@
 				90672E4328CFE0FF00B4BF74 /* ViewModel.swift in Sources */,
 				905AD68729317EE7006110E2 /* MTAFeedWrapper.swift in Sources */,
 				909F55F528F4D02500BEC9B9 /* MTARouteId.swift in Sources */,
+				908A06B22960FA7B0040F3E2 /* MTAFeedConstant.swift in Sources */,
 				90720791292ED615002DA887 /* LocationHelper.swift in Sources */,
 				908CB9EB28FE0964007D163F /* MTATrain.swift in Sources */,
 				90A983B328CFD71B0046A19B /* MTANearByApp.swift in Sources */,
