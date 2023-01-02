@@ -33,6 +33,8 @@ struct ContentView: View {
     @State private var presentAlertFeedUnavailable = false
     @State private var presentAlertNotInNYC = false
     @State private var presentedAlertNotInNYC = false
+    @State private var timer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
+    @State private var refreshable = false
     
     private var kmSelected: Bool {
         distanceUnit == .km
@@ -96,6 +98,9 @@ struct ContentView: View {
         .onReceive(viewModel.$feedAvailable) { _ in
             presentAlertFeedUnavailable = !viewModel.feedAvailable
         }
+        .onReceive(timer) { _ in
+            refreshable = lastRefresh.distance(to: Date()) > 60
+        }
         .onChange(of: maxComing) { newValue in
             viewModel.maxComing = newValue
         }
@@ -149,6 +154,7 @@ struct ContentView: View {
                 } label: {
                     Label("Refresh", systemImage: "arrow.clockwise.circle")
                 }
+                .disabled(!refreshable)
                 
                 Spacer()
             }
@@ -184,6 +190,7 @@ struct ContentView: View {
     }
     
     private func downloadAllDataByButton() -> Void {
+        refreshable = false
         if !showProgress {
             showProgress = true
             downloadAllData()
