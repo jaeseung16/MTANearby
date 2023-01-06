@@ -37,10 +37,6 @@ class RestDownloader {
     }
     
     private func download(from location: CLLocation?, completionHandler: @escaping (Result<RestResponseWrapper, MTAFeedDownloadError>) -> Void) -> Void {
-        if let location = location {
-            urlRequest.httpBody = getHttpBodyForRequest(from: location)
-        }
-        
         let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             let start = Date()
             //RestDownloader.logger.log("Downloading feeds from mtaSubwayFeedURL = \(url, privacy: .public)")
