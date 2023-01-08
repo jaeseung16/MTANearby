@@ -2,6 +2,8 @@
 
 The app provides the information on train schedules at the subway stations in New York City near a user.
 
+[<img src="https://linkmaker.itunes.apple.com/assets/shared/badges/en-us/appstore-lrg.svg">](https://apps.apple.com/us/app/nyc-subway-near-me/id6444370229)
+
 # How to Use
 ## NYC subway stations near a user
   - A list of NYC subway stations sorted by the distance from a user
