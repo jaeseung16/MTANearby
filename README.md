@@ -5,6 +5,9 @@ The app provides the information on train schedules at the subway stations in Ne
 [<img src="https://linkmaker.itunes.apple.com/assets/shared/badges/en-us/appstore-lrg.svg">](https://apps.apple.com/us/app/nyc-subway-near-me/id6444370229)
 
 # How to Use
+
+[Demo video](https://studio.youtube.com/video/I7C8X6wQ4W4/edit)
+
 ## NYC subway stations near a user
   - A list of NYC subway stations sorted by the distance from a user
   - A user can set the maximum distance (up to 3 km or 1.9 miles) to control the list
