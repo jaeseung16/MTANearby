@@ -48,7 +48,7 @@ struct ContentView: View {
                 NavigationView {
                     List {
                         ForEach(stopsNearby, id:\.self) { stop in
-                            if let trains = trainsNearby[stop] {
+                            if let trains = getTrains(at: stop) {
                                 NavigationLink {
                                     TrainsAtStopView(stop: stop,
                                                      trains: getSortedTrains(from: trains),
@@ -214,17 +214,18 @@ struct ContentView: View {
         }
     }
     
-    private func getTrains(from trains: [MTATrain]) -> [MTATrain] {
-        return trains.filter { $0.eventTime != nil}
+    
+    private func getTrains(at stop: MTAStop) -> [MTATrain]? {
+        return trainsNearby[stop]?.filter { $0.eventTime != nil }
     }
     
     private func getSortedTrains(from trains: [MTATrain]) -> [MTATrain] {
-        return getTrains(from: trains).sorted(by: {$0.eventTime! < $1.eventTime!})
+        return trains.sorted(by: { $0.eventTime! < $1.eventTime! })
     }
     
     private func getTripUpdateByTripId(from trains: [MTATrain]) -> [String: MTATripUpdate] {
         var result = [String: MTATripUpdate]()
-        for train in getTrains(from: trains) {
+        for train in trains {
             if let trip = train.trip, let tripId = trip.tripId, let tripUpdates = viewModel.tripUpdatesByTripId[tripId], !tripUpdates.isEmpty {
                 result[tripId] = tripUpdates[0]
             }
