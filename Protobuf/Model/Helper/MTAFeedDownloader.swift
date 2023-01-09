@@ -9,7 +9,7 @@ import Foundation
 import os
 
 class MTAFeedDownloader {
-    static let logger = Logger()
+    private static let logger = Logger()
     
     private let httpHeaderForApiKey = MTAFeedConstant.httpHeaderForApiKey
     private let apiKey = MTAFeedConstant.apiKey
@@ -63,7 +63,7 @@ class MTAFeedDownloader {
             
             let feed = try? TransitRealtime_FeedMessage(serializedData: data, extensions: Nyct_u45Subway_Extensions)
             guard let feed = feed else {
-                ViewModel.logger.error("Cannot parse feed data from \(url, privacy: .public)")
+                MTAFeedDownloader.logger.error("Cannot parse feed data from \(url, privacy: .public)")
                 completionHandler(.failure(.cannotParse))
                 return
             }

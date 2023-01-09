@@ -10,7 +10,7 @@ import CoreLocation
 import os
 
 class LocationHelper {
-    static let logger = Logger()
+    private static let logger = Logger()
     
     let locationManager = CLLocationManager()
     let geocoder = CLGeocoder()

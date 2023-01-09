@@ -12,50 +12,29 @@ import CoreLocation
 import MapKit
 
 class ViewModel: NSObject, ObservableObject {
-    static let logger = Logger()
+    private static let logger = Logger()
     
-    static var mtaStops: [MTAStop] {
-        guard let stopsURL = Bundle.main.url(forResource: "stops", withExtension: "txt") else {
-            ViewModel.logger.error("No file named stops.txt")
-            return [MTAStop]()
+    static var mtaStops: [MTAStop] = ViewModel.read(from: "stops", type: MTAStop.self)
+    
+    static var mtaRoutes: [MTARoute] = ViewModel.read(from: "routes", type: MTARoute.self)
+        
+    private static func read<T>(from resource: String, type: T.Type) -> [T] where T: Decodable {
+        guard let stopsURL = Bundle.main.url(forResource: resource, withExtension: "txt") else {
+            ViewModel.logger.error("No file named \(resource).txt")
+            return [T]()
         }
         
         guard let contents = try? String(contentsOf: stopsURL) else {
             ViewModel.logger.error("The file doesn't contain anything")
-            return [MTAStop]()
+            return [T]()
         }
         
         let decoder = CSVDecoder { $0.headerStrategy = .firstLine }
         
-        guard let result = try? decoder.decode([MTAStop].self, from: contents) else {
+        guard let result = try? decoder.decode([T].self, from: contents) else {
             ViewModel.logger.error("Cannot decode \(stopsURL) to Stop")
-            return [MTAStop]()
+            return [T]()
         }
-        
-        //ViewModel.logger.info("\(result)")
-        
-        return result
-    }
-    
-    static var mtaRoutes: [MTARoute] {
-        guard let stopsURL = Bundle.main.url(forResource: "routes", withExtension: "txt") else {
-            ViewModel.logger.error("No file named routes.txt")
-            return [MTARoute]()
-        }
-        
-        guard let contents = try? String(contentsOf: stopsURL) else {
-            ViewModel.logger.error("The file doesn't contain anything")
-            return [MTARoute]()
-        }
-        
-        let decoder = CSVDecoder { $0.headerStrategy = .firstLine }
-        
-        guard let result = try? decoder.decode([MTARoute].self, from: contents) else {
-            ViewModel.logger.error("Cannot decode \(stopsURL) to Stop")
-            return [MTARoute]()
-        }
-        
-        //ViewModel.logger.info("\(result)")
         
         return result
     }

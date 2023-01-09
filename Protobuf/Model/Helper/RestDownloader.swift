@@ -10,7 +10,7 @@ import os
 import CoreLocation
 
 class RestDownloader {
-    static let logger = Logger()
+    private static let logger = Logger()
     
     let url: URL
     var urlRequest: URLRequest
