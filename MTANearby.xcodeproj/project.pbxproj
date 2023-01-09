@@ -10,7 +10,6 @@
 		905385FB293C0D70000750EA /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 905385FA293C0D70000750EA /* GoogleMobileAds */; };
 		905385FD293C0EED000750EA /* BannerAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905385FC293C0EED000750EA /* BannerAdViewController.swift */; };
 		905385FF293C0EF5000750EA /* BannerAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905385FE293C0EF5000750EA /* BannerAd.swift */; };
-		90538600293C1041000750EA /* MTANearby-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 90F65AF2291EFA22001E8204 /* MTANearby-Info.plist */; };
 		9059965728F37F5A006FD733 /* MTAStopTimeUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9059965628F37F5A006FD733 /* MTAStopTimeUpdate.swift */; };
 		9059965928F37F6A006FD733 /* MTATripUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9059965828F37F6A006FD733 /* MTATripUpdate.swift */; };
 		905AD685293176A8006110E2 /* MTAFeedDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905AD684293176A8006110E2 /* MTAFeedDownloader.swift */; };
@@ -332,7 +331,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1340;
+				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					9079EEC82959057800F8F6FE = {
 						CreatedOnToolsVersion = 14.2;
@@ -379,7 +378,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90538600293C1041000750EA /* MTANearby-Info.plist in Resources */,
 				90A983BA28CFD71C0046A19B /* Preview Assets.xcassets in Resources */,
 				908EC75928E252070020CC92 /* stops.txt in Resources */,
 				9085487628EB9CC500DE7863 /* routes.txt in Resources */,
@@ -629,7 +627,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Protobuf/Preview Content\"";
 				DEVELOPMENT_TEAM = U8VSJXRJTQ;
 				ENABLE_PREVIEWS = YES;
@@ -649,7 +647,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.resonance.MTANearby;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -665,7 +663,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Protobuf/Preview Content\"";
 				DEVELOPMENT_TEAM = U8VSJXRJTQ;
 				ENABLE_PREVIEWS = YES;
@@ -685,7 +683,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.resonance.MTANearby;
 				PRODUCT_NAME = "$(TARGET_NAME)";
