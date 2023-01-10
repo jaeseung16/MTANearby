@@ -152,6 +152,7 @@ struct ContentView: View {
         VStack {
             HStack {
                 Spacer()
+                Spacer()
                 
                 Button {
                     presentUpdateMaxDistance = true
@@ -159,7 +160,7 @@ struct ContentView: View {
                     Image(systemName: "arrow.up.left.and.down.right.and.arrow.up.right.and.down.left")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 16.0, height: 16.0)
+                        .frame(width: 20.0, height: 20.0)
                 }
                 .buttonStyle(.plain)
                 
@@ -171,7 +172,7 @@ struct ContentView: View {
                     Image(systemName: "arrow.clockwise")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 16.0, height: 16.0)
+                        .frame(width: 20.0, height: 20.0)
                 }
                 .buttonStyle(.plain)
                 
@@ -183,15 +184,16 @@ struct ContentView: View {
                     Image(systemName: "arrow.clockwise.circle")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 16.0, height: 16.0)
+                        .frame(width: 20.0, height: 20.0)
                 }
                 .buttonStyle(.plain)
                 .disabled(!refreshable)
                 
                 Spacer()
+                Spacer()
             }
             .disabled(showProgress)
-            .frame(height: 24.0)
+            .frame(height: 30.0)
         }
     }
     
