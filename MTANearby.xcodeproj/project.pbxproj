@@ -66,6 +66,7 @@
 		907F0E27296E066A005DA23E /* ArrivalTimeSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907F0E26296E066A005DA23E /* ArrivalTimeSettingView.swift */; };
 		907F0E29296E0C46005DA23E /* WatchTrainsAtStopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907F0E28296E0C46005DA23E /* WatchTrainsAtStopView.swift */; };
 		907F0E2B296E123D005DA23E /* WatchRouteLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907F0E2A296E123D005DA23E /* WatchRouteLabel.swift */; };
+		907F0E2C296E1E5E005DA23E /* WatchMTANearby Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 907F0DEA296DD8B6005DA23E /* WatchMTANearby Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		90805430295A2830001AB1A1 /* RestResponseWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9080542F295A2830001AB1A1 /* RestResponseWrapper.swift */; };
 		90805432295A2872001AB1A1 /* RestVehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90805431295A2872001AB1A1 /* RestVehicle.swift */; };
 		90805434295A2896001AB1A1 /* RestVehicleStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90805433295A2896001AB1A1 /* RestVehicleStatus.swift */; };
@@ -116,7 +117,28 @@
 			remoteGlobalIDString = 90A983AE28CFD71B0046A19B;
 			remoteInfo = MTANearby;
 		};
+		907F0E2D296E1E5E005DA23E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 90A983A728CFD71B0046A19B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 907F0DE9296DD8B6005DA23E;
+			remoteInfo = "WatchMTANearby Watch App";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		907F0E2F296E1E5F005DA23E /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				907F0E2C296E1E5E005DA23E /* WatchMTANearby Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		905385FC293C0EED000750EA /* BannerAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerAdViewController.swift; sourceTree = "<group>"; };
@@ -426,10 +448,12 @@
 				90A983AB28CFD71B0046A19B /* Sources */,
 				90A983AC28CFD71B0046A19B /* Frameworks */,
 				90A983AD28CFD71B0046A19B /* Resources */,
+				907F0E2F296E1E5F005DA23E /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				907F0E2E296E1E5E005DA23E /* PBXTargetDependency */,
 			);
 			name = MTANearby;
 			packageProductDependencies = (
@@ -636,6 +660,11 @@
 			target = 90A983AE28CFD71B0046A19B /* MTANearby */;
 			targetProxy = 9079EECD2959057800F8F6FE /* PBXContainerItemProxy */;
 		};
+		907F0E2E296E1E5E005DA23E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 907F0DE9296DD8B6005DA23E /* WatchMTANearby Watch App */;
+			targetProxy = 907F0E2D296E1E5E005DA23E /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -694,20 +723,20 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchMTANearby Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = RWVTTVMWBE;
+				DEVELOPMENT_TEAM = U8VSJXRJTQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = WatchMTANearby;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "our location is used to provide train schedule at the nearby stations";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.resonance.MTANearby;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = .watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.resonance.MTANearby.watchkitextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -727,20 +756,20 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchMTANearby Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = RWVTTVMWBE;
+				DEVELOPMENT_TEAM = U8VSJXRJTQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = WatchMTANearby;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "our location is used to provide train schedule at the nearby stations";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.resonance.MTANearby;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = .watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.resonance.MTANearby.watchkitextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
