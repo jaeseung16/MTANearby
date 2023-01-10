@@ -282,6 +282,7 @@ class ViewModel: NSObject, ObservableObject {
     
     var maxAgo: TimeInterval = -1 * 60
     var maxComing: TimeInterval = 30 * 60
+    @Published var maxComingUpdated = false
     
     override init() {
         super.init()

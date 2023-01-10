@@ -23,6 +23,49 @@
 		90783D8A296CC3960038A25B /* RouteLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90783D89296CC3960038A25B /* RouteLabel.swift */; };
 		9079EEC42958C91100F8F6FE /* RestDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9079EEC32958C91100F8F6FE /* RestDownloader.swift */; };
 		9079EECC2959057800F8F6FE /* MTANearbyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9079EECB2959057800F8F6FE /* MTANearbyTests.swift */; };
+		907F0DED296DD8B6005DA23E /* WatchMTANearbyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907F0DEC296DD8B6005DA23E /* WatchMTANearbyApp.swift */; };
+		907F0DEF296DD8B6005DA23E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907F0DEE296DD8B6005DA23E /* ContentView.swift */; };
+		907F0DF1296DD8B7005DA23E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 907F0DF0296DD8B7005DA23E /* Assets.xcassets */; };
+		907F0DF4296DD8B7005DA23E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 907F0DF3296DD8B7005DA23E /* Preview Assets.xcassets */; };
+		907F0DF8296DDB73005DA23E /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90672E4228CFE0FF00B4BF74 /* ViewModel.swift */; };
+		907F0DFB296DDBF9005DA23E /* CodableCSV in Frameworks */ = {isa = PBXBuildFile; productRef = 907F0DFA296DDBF9005DA23E /* CodableCSV */; };
+		907F0DFC296DDC09005DA23E /* DistanceUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906B5EE82935287B00B820A6 /* DistanceUnit.swift */; };
+		907F0DFD296DDC16005DA23E /* LocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90720790292ED615002DA887 /* LocationHelper.swift */; };
+		907F0DFE296DDC19005DA23E /* MTAFeedDownloadError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908A06AD2960F8620040F3E2 /* MTAFeedDownloadError.swift */; };
+		907F0DFF296DDC1B005DA23E /* MTAFeedDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905AD684293176A8006110E2 /* MTAFeedDownloader.swift */; };
+		907F0E00296DDC1E005DA23E /* RestDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9079EEC32958C91100F8F6FE /* RestDownloader.swift */; };
+		907F0E01296DDC20005DA23E /* MTAFeedConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908A06B12960FA7B0040F3E2 /* MTAFeedConstant.swift */; };
+		907F0E02296DDC25005DA23E /* RestResponseWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9080542F295A2830001AB1A1 /* RestResponseWrapper.swift */; };
+		907F0E03296DDC28005DA23E /* RestVehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90805431295A2872001AB1A1 /* RestVehicle.swift */; };
+		907F0E04296DDC2B005DA23E /* RestVehicleStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90805433295A2896001AB1A1 /* RestVehicleStatus.swift */; };
+		907F0E05296DDC2D005DA23E /* RestDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90805435295A28BD001AB1A1 /* RestDirection.swift */; };
+		907F0E06296DDC2F005DA23E /* RestTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90805437295A28D4001AB1A1 /* RestTrip.swift */; };
+		907F0E07296DDC32005DA23E /* RestTripUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90805439295A2904001AB1A1 /* RestTripUpdate.swift */; };
+		907F0E08296DDC34005DA23E /* RestStopTimeUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9080543B295A2922001AB1A1 /* RestStopTimeUpdate.swift */; };
+		907F0E09296DDC36005DA23E /* MTAAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085487928EB9EDE00DE7863 /* MTAAlert.swift */; };
+		907F0E0A296DDC38005DA23E /* MTADirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A4BEF028EE424600B210F8 /* MTADirection.swift */; };
+		907F0E0B296DDC3B005DA23E /* MTAFeedMessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085487328EB96A500DE7863 /* MTAFeedMessageType.swift */; };
+		907F0E0C296DDC3D005DA23E /* MTARoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085487728EB9D0C00DE7863 /* MTARoute.swift */; };
+		907F0E0D296DDC41005DA23E /* MTARouteId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909F55F428F4D02500BEC9B9 /* MTARouteId.swift */; };
+		907F0E0E296DDC46005DA23E /* MTAStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908EC76028E255E10020CC92 /* MTAStop.swift */; };
+		907F0E0F296DDC4A005DA23E /* MTAStopTimeUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9059965628F37F5A006FD733 /* MTAStopTimeUpdate.swift */; };
+		907F0E10296DDC4C005DA23E /* MTASubwayFeedURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085487028EB902200DE7863 /* MTASubwayFeedURL.swift */; };
+		907F0E11296DDC4E005DA23E /* MTATrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085487B28EB9F4300DE7863 /* MTATrip.swift */; };
+		907F0E12296DDC51005DA23E /* MTATripReplacementPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909F55F228F4B2F900BEC9B9 /* MTATripReplacementPeriod.swift */; };
+		907F0E13296DDC54005DA23E /* MTATripUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9059965828F37F6A006FD733 /* MTATripUpdate.swift */; };
+		907F0E14296DDC57005DA23E /* MTAVehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A46B6628F228F500DED050 /* MTAVehicle.swift */; };
+		907F0E15296DDC59005DA23E /* MTAVehicleStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A46B6828F229CA00DED050 /* MTAVehicleStatus.swift */; };
+		907F0E16296DDC5B005DA23E /* MTATrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908CB9EA28FE0964007D163F /* MTATrain.swift */; };
+		907F0E17296DDC5D005DA23E /* MTAFeedWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905AD68629317EE7006110E2 /* MTAFeedWrapper.swift */; };
+		907F0E18296DDC6E005DA23E /* nyct-subway.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90672E4628CFE15600B4BF74 /* nyct-subway.pb.swift */; };
+		907F0E19296DDC70005DA23E /* gtfs-realtime.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90672E4428CFE14E00B4BF74 /* gtfs-realtime.pb.swift */; };
+		907F0E1B296DDC82005DA23E /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = 907F0E1A296DDC82005DA23E /* SwiftProtobuf */; };
+		907F0E1C296DDC87005DA23E /* routes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9085487528EB9CC500DE7863 /* routes.txt */; };
+		907F0E1D296DDC89005DA23E /* stops.txt in Resources */ = {isa = PBXBuildFile; fileRef = 908EC75828E252070020CC92 /* stops.txt */; };
+		907F0E25296E014E005DA23E /* DistanceSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907F0E24296E014E005DA23E /* DistanceSettingView.swift */; };
+		907F0E27296E066A005DA23E /* ArrivalTimeSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907F0E26296E066A005DA23E /* ArrivalTimeSettingView.swift */; };
+		907F0E29296E0C46005DA23E /* WatchTrainsAtStopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907F0E28296E0C46005DA23E /* WatchTrainsAtStopView.swift */; };
+		907F0E2B296E123D005DA23E /* WatchRouteLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907F0E2A296E123D005DA23E /* WatchRouteLabel.swift */; };
 		90805430295A2830001AB1A1 /* RestResponseWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9080542F295A2830001AB1A1 /* RestResponseWrapper.swift */; };
 		90805432295A2872001AB1A1 /* RestVehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90805431295A2872001AB1A1 /* RestVehicle.swift */; };
 		90805434295A2896001AB1A1 /* RestVehicleStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90805433295A2896001AB1A1 /* RestVehicleStatus.swift */; };
@@ -92,6 +135,15 @@
 		9079EEC32958C91100F8F6FE /* RestDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestDownloader.swift; sourceTree = "<group>"; };
 		9079EEC92959057800F8F6FE /* MTANearbyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MTANearbyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9079EECB2959057800F8F6FE /* MTANearbyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTANearbyTests.swift; sourceTree = "<group>"; };
+		907F0DEA296DD8B6005DA23E /* WatchMTANearby Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchMTANearby Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		907F0DEC296DD8B6005DA23E /* WatchMTANearbyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchMTANearbyApp.swift; sourceTree = "<group>"; };
+		907F0DEE296DD8B6005DA23E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		907F0DF0296DD8B7005DA23E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		907F0DF3296DD8B7005DA23E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		907F0E24296E014E005DA23E /* DistanceSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceSettingView.swift; sourceTree = "<group>"; };
+		907F0E26296E066A005DA23E /* ArrivalTimeSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivalTimeSettingView.swift; sourceTree = "<group>"; };
+		907F0E28296E0C46005DA23E /* WatchTrainsAtStopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchTrainsAtStopView.swift; sourceTree = "<group>"; };
+		907F0E2A296E123D005DA23E /* WatchRouteLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchRouteLabel.swift; sourceTree = "<group>"; };
 		9080542F295A2830001AB1A1 /* RestResponseWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestResponseWrapper.swift; sourceTree = "<group>"; };
 		90805431295A2872001AB1A1 /* RestVehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestVehicle.swift; sourceTree = "<group>"; };
 		90805433295A2896001AB1A1 /* RestVehicleStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestVehicleStatus.swift; sourceTree = "<group>"; };
@@ -135,6 +187,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		907F0DE7296DD8B6005DA23E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				907F0DFB296DDBF9005DA23E /* CodableCSV in Frameworks */,
+				907F0E1B296DDC82005DA23E /* SwiftProtobuf in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		90A983AC28CFD71B0046A19B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -163,6 +224,36 @@
 				9079EECB2959057800F8F6FE /* MTANearbyTests.swift */,
 			);
 			path = MTANearbyTests;
+			sourceTree = "<group>";
+		};
+		907F0DEB296DD8B6005DA23E /* WatchMTANearby Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				907F0DEC296DD8B6005DA23E /* WatchMTANearbyApp.swift */,
+				907F0DEE296DD8B6005DA23E /* ContentView.swift */,
+				907F0DF0296DD8B7005DA23E /* Assets.xcassets */,
+				907F0DF2296DD8B7005DA23E /* Preview Content */,
+				907F0E24296E014E005DA23E /* DistanceSettingView.swift */,
+				907F0E26296E066A005DA23E /* ArrivalTimeSettingView.swift */,
+				907F0E28296E0C46005DA23E /* WatchTrainsAtStopView.swift */,
+				907F0E2A296E123D005DA23E /* WatchRouteLabel.swift */,
+			);
+			path = "WatchMTANearby Watch App";
+			sourceTree = "<group>";
+		};
+		907F0DF2296DD8B7005DA23E /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				907F0DF3296DD8B7005DA23E /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		907F0DF9296DDBF9005DA23E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		9080542E295A281A001AB1A1 /* REST */ = {
@@ -244,7 +335,9 @@
 				90F65AF2291EFA22001E8204 /* MTANearby-Info.plist */,
 				90A983B128CFD71B0046A19B /* Protobuf */,
 				9079EECA2959057800F8F6FE /* MTANearbyTests */,
+				907F0DEB296DD8B6005DA23E /* WatchMTANearby Watch App */,
 				90A983B028CFD71B0046A19B /* Products */,
+				907F0DF9296DDBF9005DA23E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -253,6 +346,7 @@
 			children = (
 				90A983AF28CFD71B0046A19B /* MTANearby.app */,
 				9079EEC92959057800F8F6FE /* MTANearbyTests.xctest */,
+				907F0DEA296DD8B6005DA23E /* WatchMTANearby Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -304,6 +398,27 @@
 			productReference = 9079EEC92959057800F8F6FE /* MTANearbyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		907F0DE9296DD8B6005DA23E /* WatchMTANearby Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 907F0DF7296DD8B7005DA23E /* Build configuration list for PBXNativeTarget "WatchMTANearby Watch App" */;
+			buildPhases = (
+				907F0DE6296DD8B6005DA23E /* Sources */,
+				907F0DE7296DD8B6005DA23E /* Frameworks */,
+				907F0DE8296DD8B6005DA23E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "WatchMTANearby Watch App";
+			packageProductDependencies = (
+				907F0DFA296DDBF9005DA23E /* CodableCSV */,
+				907F0E1A296DDC82005DA23E /* SwiftProtobuf */,
+			);
+			productName = "WatchMTANearby Watch App";
+			productReference = 907F0DEA296DD8B6005DA23E /* WatchMTANearby Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
 		90A983AE28CFD71B0046A19B /* MTANearby */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 90A983BD28CFD71C0046A19B /* Build configuration list for PBXNativeTarget "MTANearby" */;
@@ -340,6 +455,9 @@
 						CreatedOnToolsVersion = 14.2;
 						TestTargetID = 90A983AE28CFD71B0046A19B;
 					};
+					907F0DE9296DD8B6005DA23E = {
+						CreatedOnToolsVersion = 14.2;
+					};
 					90A983AE28CFD71B0046A19B = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
@@ -365,6 +483,7 @@
 			targets = (
 				90A983AE28CFD71B0046A19B /* MTANearby */,
 				9079EEC82959057800F8F6FE /* MTANearbyTests */,
+				907F0DE9296DD8B6005DA23E /* WatchMTANearby Watch App */,
 			);
 		};
 /* End PBXProject section */
@@ -374,6 +493,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		907F0DE8296DD8B6005DA23E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				907F0E1D296DDC89005DA23E /* stops.txt in Resources */,
+				907F0DF4296DD8B7005DA23E /* Preview Assets.xcassets in Resources */,
+				907F0DF1296DD8B7005DA23E /* Assets.xcassets in Resources */,
+				907F0E1C296DDC87005DA23E /* routes.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,6 +533,50 @@
 				9079EECC2959057800F8F6FE /* MTANearbyTests.swift in Sources */,
 				90805440295A5825001AB1A1 /* RestDirection.swift in Sources */,
 				90805441295A5827001AB1A1 /* RestStopTimeUpdate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		907F0DE6296DD8B6005DA23E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				907F0E0E296DDC46005DA23E /* MTAStop.swift in Sources */,
+				907F0E06296DDC2F005DA23E /* RestTrip.swift in Sources */,
+				907F0E27296E066A005DA23E /* ArrivalTimeSettingView.swift in Sources */,
+				907F0E07296DDC32005DA23E /* RestTripUpdate.swift in Sources */,
+				907F0E02296DDC25005DA23E /* RestResponseWrapper.swift in Sources */,
+				907F0DFC296DDC09005DA23E /* DistanceUnit.swift in Sources */,
+				907F0E05296DDC2D005DA23E /* RestDirection.swift in Sources */,
+				907F0E13296DDC54005DA23E /* MTATripUpdate.swift in Sources */,
+				907F0E29296E0C46005DA23E /* WatchTrainsAtStopView.swift in Sources */,
+				907F0DEF296DD8B6005DA23E /* ContentView.swift in Sources */,
+				907F0E0D296DDC41005DA23E /* MTARouteId.swift in Sources */,
+				907F0E15296DDC59005DA23E /* MTAVehicleStatus.swift in Sources */,
+				907F0E0C296DDC3D005DA23E /* MTARoute.swift in Sources */,
+				907F0DF8296DDB73005DA23E /* ViewModel.swift in Sources */,
+				907F0DFE296DDC19005DA23E /* MTAFeedDownloadError.swift in Sources */,
+				907F0E00296DDC1E005DA23E /* RestDownloader.swift in Sources */,
+				907F0E17296DDC5D005DA23E /* MTAFeedWrapper.swift in Sources */,
+				907F0E08296DDC34005DA23E /* RestStopTimeUpdate.swift in Sources */,
+				907F0DED296DD8B6005DA23E /* WatchMTANearbyApp.swift in Sources */,
+				907F0E0F296DDC4A005DA23E /* MTAStopTimeUpdate.swift in Sources */,
+				907F0E01296DDC20005DA23E /* MTAFeedConstant.swift in Sources */,
+				907F0E14296DDC57005DA23E /* MTAVehicle.swift in Sources */,
+				907F0E25296E014E005DA23E /* DistanceSettingView.swift in Sources */,
+				907F0E16296DDC5B005DA23E /* MTATrain.swift in Sources */,
+				907F0E18296DDC6E005DA23E /* nyct-subway.pb.swift in Sources */,
+				907F0E04296DDC2B005DA23E /* RestVehicleStatus.swift in Sources */,
+				907F0DFF296DDC1B005DA23E /* MTAFeedDownloader.swift in Sources */,
+				907F0E2B296E123D005DA23E /* WatchRouteLabel.swift in Sources */,
+				907F0E0A296DDC38005DA23E /* MTADirection.swift in Sources */,
+				907F0E11296DDC4E005DA23E /* MTATrip.swift in Sources */,
+				907F0E0B296DDC3B005DA23E /* MTAFeedMessageType.swift in Sources */,
+				907F0DFD296DDC16005DA23E /* LocationHelper.swift in Sources */,
+				907F0E10296DDC4C005DA23E /* MTASubwayFeedURL.swift in Sources */,
+				907F0E12296DDC51005DA23E /* MTATripReplacementPeriod.swift in Sources */,
+				907F0E03296DDC28005DA23E /* RestVehicle.swift in Sources */,
+				907F0E09296DDC36005DA23E /* MTAAlert.swift in Sources */,
+				907F0E19296DDC70005DA23E /* gtfs-realtime.pb.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,6 +682,72 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MTANearby.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MTANearby";
+			};
+			name = Release;
+		};
+		907F0DF5296DD8B7005DA23E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"WatchMTANearby Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = RWVTTVMWBE;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = WatchMTANearby;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "our location is used to provide train schedule at the nearby stations";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "";
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = .watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Debug;
+		};
+		907F0DF6296DD8B7005DA23E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"WatchMTANearby Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = RWVTTVMWBE;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = WatchMTANearby;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "our location is used to provide train schedule at the nearby stations";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "";
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = .watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.1;
 			};
 			name = Release;
 		};
@@ -709,6 +949,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		907F0DF7296DD8B7005DA23E /* Build configuration list for PBXNativeTarget "WatchMTANearby Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				907F0DF5296DD8B7005DA23E /* Debug */,
+				907F0DF6296DD8B7005DA23E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		90A983AA28CFD71B0046A19B /* Build configuration list for PBXProject "MTANearby" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -761,6 +1010,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 905385F9293C0D70000750EA /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
 			productName = GoogleMobileAds;
+		};
+		907F0DFA296DDBF9005DA23E /* CodableCSV */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 908EC75D28E255B10020CC92 /* XCRemoteSwiftPackageReference "CodableCSV" */;
+			productName = CodableCSV;
+		};
+		907F0E1A296DDC82005DA23E /* SwiftProtobuf */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 90A983C028CFD79E0046A19B /* XCRemoteSwiftPackageReference "swift-protobuf" */;
+			productName = SwiftProtobuf;
 		};
 		908EC75E28E255B20020CC92 /* CodableCSV */ = {
 			isa = XCSwiftPackageProductDependency;
