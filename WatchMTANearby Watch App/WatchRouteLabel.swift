@@ -17,7 +17,7 @@ struct WatchRouteLabel: View {
                 .foregroundColor(getRouteColor(of: trip) ?? .clear)
             
             Text(trip.getRouteId()?.rawValue ?? "")
-                .font(.body)
+                .font(.title3)
                 .foregroundColor(getRouteIdColor(of: trip))
         }
     }

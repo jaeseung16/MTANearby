@@ -42,13 +42,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            locationLabel
-                .font(.caption2)
-            
-            Divider()
-            
             if !trainsNearby.isEmpty {
-                NavigationView {
                     List {
                         ForEach(stopsNearby, id:\.self) { stop in
                             if let trains = getTrains(at: stop) {
@@ -66,9 +60,11 @@ struct ContentView: View {
                             }
                         }
                     }
-                    .listStyle(.plain)
-                }
-                .navigationViewStyle(.stack)
+            } else {
+                ProgressView("Please wait...")
+                    .progressViewStyle(.circular)
+                    .opacity(showProgress ? 1 : 0)
+                Spacer()
             }
             
             Divider()
@@ -79,11 +75,6 @@ struct ContentView: View {
         }
         .padding(1.0)
         .ignoresSafeArea(.container, edges: .bottom)
-        .overlay {
-            ProgressView("Please wait...")
-                .progressViewStyle(.circular)
-                .opacity(showProgress ? 1 : 0)
-        }
         .sheet(isPresented: $presentUpdateMaxDistance) {
             DistanceSettingView(distanceUnit: $distanceUnit, distance: $maxDistance)
                 .toolbar {
@@ -127,7 +118,6 @@ struct ContentView: View {
         .onChange(of: maxComing) { _ in
             if viewModel.maxComing != maxComing {
                 viewModel.maxComing = maxComing
-                viewModel.maxComingUpdated.toggle()
             }
         }
         .onChange(of: maxDistance) { _ in
@@ -153,12 +143,9 @@ struct ContentView: View {
         }
     }
     
-    private var locationLabel: some View {
-        if !userLocality.isEmpty && userLocality != "Unknown" {
-            return Label(userLocality, systemImage: "mappin.and.ellipse")
-        } else {
-            return Label("Nearby Subway Stations", systemImage: "tram.fill.tunnel")
-        }
+    private var locationTitle: Text {
+        Text("\(!userLocality.isEmpty && userLocality != "Unknown" ? userLocality : "Nearby Subway Stations")")
+            .font(.caption2)
     }
     
     private var bottomView: some View {
@@ -205,12 +192,6 @@ struct ContentView: View {
             }
             .disabled(showProgress)
             .frame(height: 24.0)
-            
-            HStack {
-                Text("Refreshed:")
-                Text(lastRefresh, style: .time)
-            }
-            .font(.footnote)
         }
     }
     

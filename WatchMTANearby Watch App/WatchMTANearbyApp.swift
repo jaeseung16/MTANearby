@@ -15,8 +15,11 @@ struct WatchMTANearby_Watch_AppApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(viewModel)
+            NavigationView {
+                ContentView()
+                    .navigationTitle(Text("NYC Subway Near Me").fontWeight(.bold))
+                    .environmentObject(viewModel)
+            }
         }
     }
 }

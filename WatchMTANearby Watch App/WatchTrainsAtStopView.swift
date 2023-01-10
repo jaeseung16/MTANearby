@@ -23,9 +23,11 @@ struct WatchTrainsAtStopView: View {
                     }
                 }
             }
+            .listStyle(.plain)
             
             Spacer()
         }
+        .ignoresSafeArea(.container, edges: .bottom)
     }
     
     private func label(for train: MTATrain, trip: MTATrip, arrivalTime: Date) -> some View {
