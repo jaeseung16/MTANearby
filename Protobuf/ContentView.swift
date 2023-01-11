@@ -144,7 +144,7 @@ struct ContentView: View {
                 Button {
                     presentUpdateMaxDistance = true
                 } label: {
-                    Label("Settings", systemImage: "arrow.up.left.and.down.right.and.arrow.up.right.and.down.left")
+                    Label("Settings", systemImage: "gear")
                 }
                 
                 Spacer()
