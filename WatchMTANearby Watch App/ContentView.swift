@@ -230,6 +230,7 @@ struct ContentView: View {
                     presentAlertFeedUnavailable = !success
                 case .failure:
                     presentAlertFeedUnavailable.toggle()
+                    showProgress = false
                 }
             }
         } else if showProgress {
