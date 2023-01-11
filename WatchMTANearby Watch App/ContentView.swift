@@ -200,10 +200,14 @@ struct ContentView: View {
     private func label(for stop: MTAStop, distanceUnit: DistanceUnit) -> some View {
         HStack {
             Text("\(stop.name)")
+                .font(.body)
+                .allowsTightening(true)
             
             Spacer()
             
             Text(distance(to: stop).converted(to: distanceUnit.unitLength), format: distanceFormatStyle)
+                .font(.caption)
+                .foregroundColor(.secondary)
         }
     }
     

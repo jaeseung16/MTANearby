@@ -34,7 +34,7 @@ struct WatchTrainsAtStopView: View {
         HStack {
             Image(systemName: train.getDirection()?.systemName ?? "")
                 .resizable()
-                .frame(width: 24, height: 24)
+                .frame(width: 21, height: 21)
             
             WatchRouteLabel(trip: trip)
                 .frame(width: 30, height: 30)
@@ -46,7 +46,7 @@ struct WatchTrainsAtStopView: View {
                     .foregroundColor(.secondary)
             } else {
                 Text(timeInterval(to: arrivalTime))
-                    .foregroundColor(arrivalTime < Date() ? .secondary : .primary)
+                    .foregroundColor(arrivalTime < Date() ? .secondary : .green)
             }
         }
     }
