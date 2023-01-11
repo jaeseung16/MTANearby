@@ -157,7 +157,7 @@ struct ContentView: View {
                 Button {
                     presentUpdateMaxDistance = true
                 } label: {
-                    Image(systemName: "arrow.up.left.and.down.right.and.arrow.up.right.and.down.left")
+                    Image(systemName: "ruler")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 20.0, height: 20.0)
@@ -169,7 +169,7 @@ struct ContentView: View {
                 Button {
                     presentUpdateMaxArrivalTime = true
                 } label: {
-                    Image(systemName: "arrow.clockwise")
+                    Image(systemName: "clock")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 20.0, height: 20.0)
