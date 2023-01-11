@@ -141,6 +141,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9006A364296EE8C200303A4B /* WatchMTANearby-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "WatchMTANearby-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		905385FC293C0EED000750EA /* BannerAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerAdViewController.swift; sourceTree = "<group>"; };
 		905385FE293C0EF5000750EA /* BannerAd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerAd.swift; sourceTree = "<group>"; };
 		9059965628F37F5A006FD733 /* MTAStopTimeUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTAStopTimeUpdate.swift; sourceTree = "<group>"; };
@@ -251,6 +252,7 @@
 		907F0DEB296DD8B6005DA23E /* WatchMTANearby Watch App */ = {
 			isa = PBXGroup;
 			children = (
+				9006A364296EE8C200303A4B /* WatchMTANearby-Watch-App-Info.plist */,
 				907F0DEC296DD8B6005DA23E /* WatchMTANearbyApp.swift */,
 				907F0DEE296DD8B6005DA23E /* ContentView.swift */,
 				907F0DF0296DD8B7005DA23E /* Assets.xcassets */,
@@ -726,6 +728,7 @@
 				DEVELOPMENT_TEAM = U8VSJXRJTQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "WatchMTANearby-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = WatchMTANearby;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "our location is used to provide train schedule at the nearby stations";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -759,6 +762,7 @@
 				DEVELOPMENT_TEAM = U8VSJXRJTQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "WatchMTANearby-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = WatchMTANearby;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "our location is used to provide train schedule at the nearby stations";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -900,7 +904,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"Protobuf/Preview Content\"";
 				DEVELOPMENT_TEAM = U8VSJXRJTQ;
 				ENABLE_PREVIEWS = YES;
@@ -936,7 +940,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"Protobuf/Preview Content\"";
 				DEVELOPMENT_TEAM = U8VSJXRJTQ;
 				ENABLE_PREVIEWS = YES;
