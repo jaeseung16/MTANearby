@@ -17,5 +17,5 @@ struct MTAFeedConstant {
     static let applicationXWWWFormUrlencoded = "application/x-www-form-urlencoded"
     static let post = "POST"
     
-    static let restUrlString = "http://ec2-3-141-202-225.us-east-2.compute.amazonaws.com:8080/mtafeedmonitor/json"
+    static let restUrlString = "http://ec2-18-221-101-145.us-east-2.compute.amazonaws.com:8080/mtafeedmonitor/json"
 }
