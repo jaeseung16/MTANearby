@@ -1,4 +1,5 @@
 {
+  "originHash" : "3315d2e7aec5e28f18d2f41802ecb9cd98979f1f450c33030b21b2d0041e8640",
   "pins" : [
     {
       "identity" : "codablecsv",
@@ -10,48 +11,12 @@
       }
     },
     {
-      "identity" : "googleappmeasurement",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/google/GoogleAppMeasurement.git",
-      "state" : {
-        "revision" : "71eb6700dd53a851473c48d392f00a3ab26699a6",
-        "version" : "10.1.0"
-      }
-    },
-    {
-      "identity" : "googleutilities",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/google/GoogleUtilities.git",
-      "state" : {
-        "revision" : "6db6edb48bdd9943426562c7f042a5492de5ba3d",
-        "version" : "7.10.0"
-      }
-    },
-    {
-      "identity" : "nanopb",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/firebase/nanopb.git",
-      "state" : {
-        "revision" : "819d0a2173aff699fb8c364b6fb906f7cdb1a692",
-        "version" : "2.30909.0"
-      }
-    },
-    {
-      "identity" : "promises",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/google/promises.git",
-      "state" : {
-        "revision" : "3e4e743631e86c8c70dbc6efdc7beaa6e90fd3bb",
-        "version" : "2.1.1"
-      }
-    },
-    {
       "identity" : "swift-package-manager-google-mobile-ads",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/googleads/swift-package-manager-google-mobile-ads.git",
       "state" : {
-        "revision" : "88363fbe76de1a163ddb234b7379096449026d26",
-        "version" : "9.13.0"
+        "revision" : "c79144a4a0a5bbc2019f9030af66d6573e348daf",
+        "version" : "12.11.0"
       }
     },
     {
@@ -59,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/googleads/swift-package-manager-google-user-messaging-platform.git",
       "state" : {
-        "revision" : "3b924ce3313a5fd2fc6a8dc889a8c38f76890fe3",
-        "version" : "2.0.0"
+        "revision" : "69b53394c5258b3fe688e625a998047d1f393497",
+        "version" : "3.0.0"
       }
     },
     {
@@ -73,5 +38,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
