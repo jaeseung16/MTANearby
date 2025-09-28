@@ -107,6 +107,8 @@
 		90CFFFDA2E89A13A0071993F /* gtfs-realtime.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CFFFD82E89A13A0071993F /* gtfs-realtime.pb.swift */; };
 		90CFFFDC2E89A1580071993F /* nyct-subway.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CFFFDB2E89A1580071993F /* nyct-subway.pb.swift */; };
 		90CFFFDD2E89A1580071993F /* nyct-subway.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CFFFDB2E89A1580071993F /* nyct-subway.pb.swift */; };
+		90CFFFE22E89AE9F0071993F /* AppIcon-iOS26.icon in Resources */ = {isa = PBXBuildFile; fileRef = 90CFFFE12E89AE9F0071993F /* AppIcon-iOS26.icon */; };
+		90CFFFE32E89AE9F0071993F /* AppIcon-iOS26.icon in Resources */ = {isa = PBXBuildFile; fileRef = 90CFFFE12E89AE9F0071993F /* AppIcon-iOS26.icon */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -199,6 +201,7 @@
 		90A983B928CFD71C0046A19B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		90CFFFD82E89A13A0071993F /* gtfs-realtime.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "gtfs-realtime.pb.swift"; sourceTree = "<group>"; };
 		90CFFFDB2E89A1580071993F /* nyct-subway.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "nyct-subway.pb.swift"; sourceTree = "<group>"; };
+		90CFFFE12E89AE9F0071993F /* AppIcon-iOS26.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = "AppIcon-iOS26.icon"; sourceTree = "<group>"; };
 		90F65AF2291EFA22001E8204 /* MTANearby-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "MTANearby-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -388,6 +391,7 @@
 				90A983B428CFD71B0046A19B /* ContentView.swift */,
 				90672E4228CFE0FF00B4BF74 /* ViewModel.swift */,
 				90A983B628CFD71C0046A19B /* Assets.xcassets */,
+				90CFFFE12E89AE9F0071993F /* AppIcon-iOS26.icon */,
 				90A983B828CFD71C0046A19B /* Preview Content */,
 			);
 			path = Protobuf;
@@ -527,6 +531,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				907F0E1D296DDC89005DA23E /* stops.txt in Resources */,
+				90CFFFE32E89AE9F0071993F /* AppIcon-iOS26.icon in Resources */,
 				907F0DF4296DD8B7005DA23E /* Preview Assets.xcassets in Resources */,
 				907F0DF1296DD8B7005DA23E /* Assets.xcassets in Resources */,
 				907F0E1C296DDC87005DA23E /* routes.txt in Resources */,
@@ -538,6 +543,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				90A983BA28CFD71C0046A19B /* Preview Assets.xcassets in Resources */,
+				90CFFFE22E89AE9F0071993F /* AppIcon-iOS26.icon in Resources */,
 				908EC75928E252070020CC92 /* stops.txt in Resources */,
 				9085487628EB9CC500DE7863 /* routes.txt in Resources */,
 				90A983B728CFD71C0046A19B /* Assets.xcassets in Resources */,
@@ -907,7 +913,7 @@
 		90A983BE28CFD71C0046A19B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-iOS26";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -925,7 +931,7 @@
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "location-services";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -943,7 +949,7 @@
 		90A983BF28CFD71C0046A19B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-iOS26";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -961,7 +967,7 @@
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "location-services";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
