@@ -11,12 +11,13 @@ import CodableCSV
 import CoreLocation
 import MapKit
 
+@MainActor
 class ViewModel: NSObject, ObservableObject {
     private static let logger = Logger()
     
-    static var mtaStops: [MTAStop] = ViewModel.read(from: "stops", type: MTAStop.self)
+    static let mtaStops: [MTAStop] = ViewModel.read(from: "stops", type: MTAStop.self)
     
-    static var mtaRoutes: [MTARoute] = ViewModel.read(from: "routes", type: MTARoute.self)
+    static let mtaRoutes: [MTARoute] = ViewModel.read(from: "routes", type: MTARoute.self)
         
     private static func read<T>(from resource: String, type: T.Type) -> [T] where T: Decodable {
         guard let stopsURL = Bundle.main.url(forResource: resource, withExtension: "txt") else {
@@ -56,7 +57,7 @@ class ViewModel: NSObject, ObservableObject {
         return result
     }
     
-    static var stopsById: [String: MTAStop] = Dictionary(uniqueKeysWithValues: mtaStops.map { ($0.id, $0) })
+    static let stopsById: [String: MTAStop] = Dictionary(uniqueKeysWithValues: mtaStops.map { ($0.id, $0) })
     
     @Published var feedAvailable = true
     @Published var numberOfUpdatedFeed = 0
@@ -314,7 +315,7 @@ class ViewModel: NSObject, ObservableObject {
     
 }
 
-extension ViewModel: CLLocationManagerDelegate {
+extension ViewModel: @MainActor CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
 
@@ -332,3 +333,4 @@ extension ViewModel: CLLocationManagerDelegate {
         location = nil
     }
 }
+
