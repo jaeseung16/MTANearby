@@ -9,6 +9,7 @@ import Foundation
 import os
 import CoreLocation
 
+@available(*, deprecated)
 class RestDownloader {
     private static let logger = Logger()
     

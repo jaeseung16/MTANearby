@@ -228,14 +228,15 @@ struct ContentView: View {
     private func downloadAllData() -> Void {
         lastRefresh = Date()
         if (viewModel.location?.coordinate) != nil {
-            viewModel.getAllData() { result in
-                switch result {
-                case .success(let success):
-                    presentAlertFeedUnavailable = !success
-                case .failure:
+            Task {
+                let success = await viewModel.getAllData()
+                
+                if success {
+                    presentAlertFeedUnavailable = false
+                } else {
                     presentAlertFeedUnavailable.toggle()
-                    showProgress = false
                 }
+                showProgress = false
             }
         } else if showProgress {
             presentAlertLocationUnkown.toggle()

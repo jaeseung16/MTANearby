@@ -72,13 +72,12 @@ class ViewModel: NSObject, ObservableObject {
     }
     
     var feedDownloader = MTAFeedDownloader()
-    var restDownloader = RestDownloader()
     
     var vehiclesByStopId = [String: [MTAVehicle]]()
     var tripUpdatesByTripId = [String: [MTATripUpdate]]()
     var tripUpdatesByStopId = [String: [MTATripUpdate]]()
     
-    func getAllData(completionHandler: @escaping (Result<Bool, Error>) -> Void) -> Void {
+    func getAllData() async -> Bool {
         ViewModel.logger.log("getAllData()")
         if !vehiclesByStopId.isEmpty {
             vehiclesByStopId.removeAll()
@@ -89,64 +88,15 @@ class ViewModel: NSObject, ObservableObject {
         if !tripUpdatesByStopId.isEmpty {
             tripUpdatesByStopId.removeAll()
         }
-        
-        DispatchQueue.main.async {
-            self.numberOfUpdatedFeed = 0
-        }
-        
-        downloadAll() { result in
-            completionHandler(result)
-        }
+        return await downloadAll()
     }
     
-    private func downloadAll(completionHandler: @escaping (Result<Bool, Error>) -> Void) -> Void {
-        restDownloader.download(from: location) { wrapper, error in
-            guard let wrapper = wrapper else {
-                ViewModel.logger.log("Failed to download MTA feeds from REST, trying mta.info: error = \(String(describing: error?.localizedDescription), privacy: .public)")
-                self.downloadFromMTAInfo() { result in
-                    completionHandler(result)
-                }
-                return
-            }
-            
-            //ViewModel.logger.log("wrapper=\(String(describing: wrapper), privacy: .public)")
-            
-            DispatchQueue.main.async {
-                //ViewModel.logger.log("wrapper.tripUpdatesByTripId.count = \(wrapper.tripUpdatesByTripId.count, privacy: .public)")
-                if !wrapper.tripUpdatesByTripId.isEmpty {
-                    wrapper.tripUpdatesByTripId.forEach { key, updates in
-                        self.tripUpdatesByTripId[key] = updates
-                        //ViewModel.logger.log("tripUpdatesByTripId.key = \(key, privacy: .public)")
-                    }
-                }
-                //ViewModel.logger.log("wrapper.vehiclesByStopId.count = \(wrapper.vehiclesByStopId.count, privacy: .public)")
-                if !wrapper.vehiclesByStopId.isEmpty {
-                    wrapper.vehiclesByStopId.forEach { key, vehicles in
-                        self.vehiclesByStopId[key] = vehicles
-                        //ViewModel.logger.log("vehiclesByStopId.key = \(key, privacy: .public)")
-                    }
-                }
-                self.numberOfUpdatedFeed += MTASubwayFeedURL.allCases.count
-                //ViewModel.logger.log("numberOfUpdatedFeed=\(self.numberOfUpdatedFeed, privacy: .public)")
+    private func downloadAll() async -> Bool {
+        numberOfUpdatedFeed = 0
+        for mtaSubwayFeedURL in MTASubwayFeedURL.allCases {
+            do {
+                let wrapper = try await feedDownloader.download(from: mtaSubwayFeedURL)
                 
-                completionHandler(.success(true))
-            }
-        }
-    }
-    
-    private func downloadFromMTAInfo(completionHandler: @escaping (Result<Bool, Error>) -> Void) -> Void {
-        MTASubwayFeedURL.allCases.forEach { feedDownloader.download(from: $0) { wrapper, error in
-            guard let wrapper = wrapper else {
-                ViewModel.logger.log("Failed to download MTA feeds from mta.info: error = \(String(describing: error?.localizedDescription), privacy: .public)")
-                if let error = error {
-                    completionHandler(.failure(error))
-                } else {
-                    completionHandler(.success(false))
-                }
-                return
-            }
-            
-            DispatchQueue.main.async {
                 //ViewModel.logger.log("wrapper.tripUpdatesByTripId.count = \(wrapper.tripUpdatesByTripId.count, privacy: .public)")
                 if !wrapper.tripUpdatesByTripId.isEmpty {
                     wrapper.tripUpdatesByTripId.forEach { key, updates in
@@ -161,11 +111,12 @@ class ViewModel: NSObject, ObservableObject {
                 }
                 self.numberOfUpdatedFeed += 1
                 ViewModel.logger.log("numberOfUpdatedFeed=\(self.numberOfUpdatedFeed, privacy: .public)")
-                completionHandler(.success(true))
+                
+            } catch {
+                ViewModel.logger.log("Failed to download MTA feeds from \(mtaSubwayFeedURL.rawValue): error = \(String(describing: error.localizedDescription), privacy: .public)")
             }
         }
-            
-        }
+        return numberOfUpdatedFeed > 0
     }
     
     func vehicles(within distance: Double, from center: CLLocationCoordinate2D) -> [MTAStop: [MTAVehicle]] {
@@ -295,13 +246,8 @@ class ViewModel: NSObject, ObservableObject {
             self.maxComing = UserDefaults.standard.double(forKey: "maxComing")
         }
         
-        getAllData() { result in
-            switch result {
-            case .success(let success):
-                self.feedAvailable = success
-            case .failure:
-                self.feedAvailable = false
-            }
+        Task {
+            self.feedAvailable = await getAllData()
         }
     }
     
