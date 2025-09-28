@@ -101,10 +101,10 @@ struct ContentView: View {
         .onReceive(timer) { _ in
             refreshable = lastRefresh.distance(to: Date()) > 60
         }
-        .onChange(of: maxComing) { newValue in
+        .onChange(of: maxComing) { _, newValue in
             viewModel.maxComing = newValue
         }
-        .onChange(of: presentUpdateMaxDistance) { _ in
+        .onChange(of: presentUpdateMaxDistance) { _, _ in
             if viewModel.maxDistance != maxDistance {
                 viewModel.maxDistance = maxDistance
                 updateStopsAndTrainsNearby()
