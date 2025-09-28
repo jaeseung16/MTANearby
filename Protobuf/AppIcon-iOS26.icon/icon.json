@@ -6,8 +6,8 @@
     {
       "layers" : [
         {
-          "image-name" : "finderlayer3 2.svg",
-          "name" : "finderlayer3 2"
+          "image-name" : "finderlayer3.svg",
+          "name" : "finderlayer3"
         }
       ],
       "shadow" : {
@@ -22,8 +22,8 @@
     {
       "layers" : [
         {
-          "image-name" : "finderlayer2 2.svg",
-          "name" : "finderlayer2 2"
+          "image-name" : "finderlayer2.svg",
+          "name" : "finderlayer2"
         }
       ],
       "shadow" : {
@@ -38,8 +38,8 @@
     {
       "layers" : [
         {
-          "image-name" : "finderlayer1 2.svg",
-          "name" : "finderlayer1 2"
+          "image-name" : "finderlayer1.svg",
+          "name" : "finderlayer1"
         }
       ],
       "shadow" : {

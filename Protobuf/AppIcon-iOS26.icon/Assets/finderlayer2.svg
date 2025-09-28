@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_4_Layer" data-name="4 – Layer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: blue;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        font-family: Arial-BoldMT, Arial;
+        font-size: 160px;
+        font-weight: 700;
+      }
+
+      .cls-2 {
+        fill: #fff;
+        letter-spacing: -.02em;
+      }
+
+      .cls-3 {
+        fill: #ff8000;
+      }
+    </style>
+  </defs>
+  <text class="cls-1" transform="translate(149.04 180.99)"><tspan x="0" y="0">N</tspan></text>
+  <text class="cls-2" transform="translate(458.19 180.99)"><tspan x="0" y="0">Y</tspan></text>
+  <text class="cls-3" transform="translate(759.41 181.07)"><tspan x="0" y="0">C</tspan></text>
+</svg>
