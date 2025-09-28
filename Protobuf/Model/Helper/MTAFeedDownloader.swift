@@ -61,7 +61,7 @@ class MTAFeedDownloader {
             
             //MTAFeedDownloader.logger.log("data = \(String(describing: data))")
             
-            let feed = try? TransitRealtime_FeedMessage(serializedData: data, extensions: Nyct_u45Subway_Extensions)
+            let feed = try? TransitRealtime_FeedMessage(serializedBytes: data, extensions: Nyct_u45Subway_Extensions)
             guard let feed = feed else {
                 MTAFeedDownloader.logger.error("Cannot parse feed data from \(url, privacy: .public)")
                 completionHandler(.failure(.cannotParse))

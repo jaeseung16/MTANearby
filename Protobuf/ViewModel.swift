@@ -25,7 +25,7 @@ class ViewModel: NSObject, ObservableObject {
             return [T]()
         }
         
-        guard let contents = try? String(contentsOf: stopsURL) else {
+        guard let contents = try? String(contentsOf: stopsURL, encoding: .utf8) else {
             ViewModel.logger.error("The file doesn't contain anything")
             return [T]()
         }
