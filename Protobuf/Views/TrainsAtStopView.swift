@@ -29,10 +29,35 @@ struct TrainsAtStopView: View {
     
     var body: some View {
         VStack {
-            Map(coordinateRegion: region, interactionModes: .zoom, showsUserLocation: true, annotationItems: [stop]) { place in
-                MapMarker(coordinate: place.getCLLocationCoordinate2D())
+            if #available(iOS 17.0, *) {
+                MapReader { proxy in
+                    Map(
+                        initialPosition: .region(
+                            viewModel.region ?? MKCoordinateRegion(
+                                center: CLLocationCoordinate2D(latitude: 40.712778, longitude: -74.006111),
+                                latitudinalMeters: viewModel.regionSpan,
+                                longitudinalMeters: viewModel.regionSpan
+                            )
+                        ),
+                        interactionModes: .zoom
+                    ) {
+                        UserAnnotation()
+                        Marker("", coordinate: stop.getCLLocationCoordinate2D())
+                    }
+                    .onMapCameraChange { context in
+                        let region = context.region
+                        DispatchQueue.main.async {
+                            viewModel.region = region
+                        }
+                    }
+                }
+                .aspectRatio(CGSize(width: 1.0, height: 1.0), contentMode: .fit)
+            } else {
+                Map(coordinateRegion: region, interactionModes: .zoom, showsUserLocation: true, annotationItems: [stop]) { place in
+                    MapMarker(coordinate: place.getCLLocationCoordinate2D())
+                }
+                .aspectRatio(CGSize(width: 1.0, height: 1.0), contentMode: .fit)
             }
-            .aspectRatio(CGSize(width: 1.0, height: 1.0), contentMode: .fit)
             
             List {
                 ForEach(trains, id: \.self) { train in
