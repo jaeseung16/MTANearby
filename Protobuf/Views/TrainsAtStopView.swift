@@ -39,7 +39,7 @@ struct TrainsAtStopView: View {
                                 longitudinalMeters: viewModel.regionSpan
                             )
                         ),
-                        interactionModes: .zoom
+                        interactionModes: .all
                     ) {
                         UserAnnotation()
                         Marker("", coordinate: stop.getCLLocationCoordinate2D())
