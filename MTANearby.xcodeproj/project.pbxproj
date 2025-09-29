@@ -19,7 +19,6 @@
 		906B5EEB29353A9E00B820A6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906B5EEA29353A9E00B820A6 /* SettingsView.swift */; };
 		90720791292ED615002DA887 /* LocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90720790292ED615002DA887 /* LocationHelper.swift */; };
 		90783D8A296CC3960038A25B /* RouteLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90783D89296CC3960038A25B /* RouteLabel.swift */; };
-		9079EEC42958C91100F8F6FE /* RestDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9079EEC32958C91100F8F6FE /* RestDownloader.swift */; };
 		9079EECC2959057800F8F6FE /* MTANearbyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9079EECB2959057800F8F6FE /* MTANearbyTests.swift */; };
 		907F0DED296DD8B6005DA23E /* WatchMTANearbyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907F0DEC296DD8B6005DA23E /* WatchMTANearbyApp.swift */; };
 		907F0DEF296DD8B6005DA23E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907F0DEE296DD8B6005DA23E /* ContentView.swift */; };
@@ -31,7 +30,6 @@
 		907F0DFD296DDC16005DA23E /* LocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90720790292ED615002DA887 /* LocationHelper.swift */; };
 		907F0DFE296DDC19005DA23E /* MTAFeedDownloadError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908A06AD2960F8620040F3E2 /* MTAFeedDownloadError.swift */; };
 		907F0DFF296DDC1B005DA23E /* MTAFeedDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905AD684293176A8006110E2 /* MTAFeedDownloader.swift */; };
-		907F0E00296DDC1E005DA23E /* RestDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9079EEC32958C91100F8F6FE /* RestDownloader.swift */; };
 		907F0E01296DDC20005DA23E /* MTAFeedConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908A06B12960FA7B0040F3E2 /* MTAFeedConstant.swift */; };
 		907F0E02296DDC25005DA23E /* RestResponseWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9080542F295A2830001AB1A1 /* RestResponseWrapper.swift */; };
 		907F0E03296DDC28005DA23E /* RestVehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90805431295A2872001AB1A1 /* RestVehicle.swift */; };
@@ -155,7 +153,6 @@
 		906B5EEA29353A9E00B820A6 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		90720790292ED615002DA887 /* LocationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHelper.swift; sourceTree = "<group>"; };
 		90783D89296CC3960038A25B /* RouteLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteLabel.swift; sourceTree = "<group>"; };
-		9079EEC32958C91100F8F6FE /* RestDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestDownloader.swift; sourceTree = "<group>"; };
 		9079EEC92959057800F8F6FE /* MTANearbyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MTANearbyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9079EECB2959057800F8F6FE /* MTANearbyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTANearbyTests.swift; sourceTree = "<group>"; };
 		907F0DEA296DD8B6005DA23E /* WatchMTANearby Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchMTANearby Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -328,7 +325,6 @@
 				90720790292ED615002DA887 /* LocationHelper.swift */,
 				908A06AD2960F8620040F3E2 /* MTAFeedDownloadError.swift */,
 				905AD684293176A8006110E2 /* MTAFeedDownloader.swift */,
-				9079EEC32958C91100F8F6FE /* RestDownloader.swift */,
 				908A06B12960FA7B0040F3E2 /* MTAFeedConstant.swift */,
 			);
 			path = Helper;
@@ -589,7 +585,6 @@
 				907F0DF8296DDB73005DA23E /* ViewModel.swift in Sources */,
 				907F0DFE296DDC19005DA23E /* MTAFeedDownloadError.swift in Sources */,
 				90CFFFD92E89A13A0071993F /* gtfs-realtime.pb.swift in Sources */,
-				907F0E00296DDC1E005DA23E /* RestDownloader.swift in Sources */,
 				907F0E17296DDC5D005DA23E /* MTAFeedWrapper.swift in Sources */,
 				907F0E08296DDC34005DA23E /* RestStopTimeUpdate.swift in Sources */,
 				907F0DED296DD8B6005DA23E /* WatchMTANearbyApp.swift in Sources */,
@@ -653,7 +648,6 @@
 				90720791292ED615002DA887 /* LocationHelper.swift in Sources */,
 				908CB9EB28FE0964007D163F /* MTATrain.swift in Sources */,
 				90A983B328CFD71B0046A19B /* MTANearByApp.swift in Sources */,
-				9079EEC42958C91100F8F6FE /* RestDownloader.swift in Sources */,
 				905385FD293C0EED000750EA /* BannerAdViewController.swift in Sources */,
 				9080543A295A2904001AB1A1 /* RestTripUpdate.swift in Sources */,
 				908EC76128E255E10020CC92 /* MTAStop.swift in Sources */,
