@@ -36,96 +36,102 @@ struct ContentView: View {
     @State private var timer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
     @State private var refreshable = false
     
+    @State private var selectedStop: MTAStop? = nil
+    @State private var selectedTrain: MTATrain? = nil
+    
     private var kmSelected: Bool {
         distanceUnit == .km
     }
     
     var body: some View {
-        VStack {
-            locationLabel
-            
-            if !trainsNearby.isEmpty {
-                NavigationView {
-                    List {
-                        ForEach(stopsNearby, id:\.self) { stop in
-                            if let trains = getTrains(at: stop) {
-                                NavigationLink {
-                                    TrainsAtStopView(stop: stop,
-                                                     trains: getSortedTrains(from: trains),
-                                                     tripUpdateByTripId: getTripUpdateByTripId(from: trains))
-                                        .navigationTitle(stop.name)
-                                } label: {
-                                    if kmSelected {
-                                        label(for: stop, distanceUnit: .km)
-                                    } else {
-                                        label(for: stop, distanceUnit: .mile)
+            VStack {
+                locationLabel
+                
+                if !trainsNearby.isEmpty {
+                    NavigationSplitView {
+                        List(selection: $selectedStop) {
+                            ForEach(stopsNearby, id:\.self) { stop in
+                                if getTrains(at: stop) != nil {
+                                    NavigationLink(value: stop) {
+                                        label(for: stop, distanceUnit: kmSelected ? .km : .mile)
                                     }
                                 }
                             }
                         }
+                    } content: {
+                        if let selectedStop = selectedStop, let trains = getTrains(at: selectedStop) {
+                            TrainsAtStopView(stop: selectedStop,
+                                             trains: getSortedTrains(from: trains),
+                                             tripUpdateByTripId: getTripUpdateByTripId(from: trains),
+                                             selectedTrain: $selectedTrain)
+                            .navigationTitle(selectedStop.name)
+                        }
+                    } detail: {
+                        if let selectedTrain = selectedTrain {
+                                TripUpdatesView(tripUpdate: getTripUpdate(for: selectedTrain))
+                                    .navigationTitle(selectedTrain.trip?.getRouteId()?.rawValue ?? "")
+                        }
                     }
                 }
-                .navigationViewStyle(.stack)
+                
+                Spacer()
+                
+                bottomView
             }
-            
-            Spacer()
-            
-            bottomView
-        }
-        .padding()
-        .overlay {
-            ProgressView("Please wait...")
-                .progressViewStyle(.circular)
-                .opacity(showProgress ? 1 : 0)
-        }
-        .sheet(isPresented: $presentUpdateMaxDistance) {
-            SettingsView(distanceUnit: $distanceUnit, distance: $maxDistance, maxComing: $maxComing)
-        }
-        .onReceive(viewModel.$numberOfUpdatedFeed) { newValue in
-            if newValue == MTASubwayFeedURL.allCases.count {
-                showProgress = false
+            .padding()
+            .overlay {
+                ProgressView("Please wait...")
+                    .progressViewStyle(.circular)
+                    .opacity(showProgress ? 1 : 0)
             }
-            if viewModel.location != nil {
+            .sheet(isPresented: $presentUpdateMaxDistance) {
+                SettingsView(distanceUnit: $distanceUnit, distance: $maxDistance, maxComing: $maxComing)
+            }
+            .onReceive(viewModel.$numberOfUpdatedFeed) { newValue in
+                if newValue == MTASubwayFeedURL.allCases.count {
+                    showProgress = false
+                }
+                if viewModel.location != nil {
+                    updateStopsAndTrainsNearby()
+                }
+            }
+            .onReceive(viewModel.$locationUpdated) { _ in
                 updateStopsAndTrainsNearby()
             }
-        }
-        .onReceive(viewModel.$locationUpdated) { _ in
-            updateStopsAndTrainsNearby()
-        }
-        .onReceive(viewModel.$userLocalityUpdated) { _ in
-            userLocality = viewModel.userLocality
-        }
-        .onReceive(viewModel.$feedAvailable) { _ in
-            presentAlertFeedUnavailable = !viewModel.feedAvailable
-        }
-        .onReceive(timer) { _ in
-            refreshable = lastRefresh.distance(to: Date()) > 60
-        }
-        .onChange(of: maxComing) { _, newValue in
-            viewModel.maxComing = newValue
-        }
-        .onChange(of: presentUpdateMaxDistance) { _, _ in
-            if viewModel.maxDistance != maxDistance {
-                viewModel.maxDistance = maxDistance
-                updateStopsAndTrainsNearby()
+            .onReceive(viewModel.$userLocalityUpdated) { _ in
+                userLocality = viewModel.userLocality
             }
-        }
-        .alert(Text("Can't determine your current location"), isPresented: $presentAlertLocationUnkown) {
-            Button("OK") {
-                
+            .onReceive(viewModel.$feedAvailable) { _ in
+                presentAlertFeedUnavailable = !viewModel.feedAvailable
             }
-        }
-        .alert(Text("Can't access MTA feed"), isPresented: $presentAlertFeedUnavailable) {
-            Button("OK") {
-                
+            .onReceive(timer) { _ in
+                refreshable = lastRefresh.distance(to: Date()) > 60
             }
-        }
-        .alert(Text("There are no nearby subway stations"), isPresented: $presentAlertNotInNYC) {
-            Button("OK") {
-                presentedAlertNotInNYC = true
+            .onChange(of: maxComing) { _, newValue in
+                viewModel.maxComing = newValue
             }
-        }
-        
+            .onChange(of: presentUpdateMaxDistance) { _, _ in
+                if viewModel.maxDistance != maxDistance {
+                    viewModel.maxDistance = maxDistance
+                    updateStopsAndTrainsNearby()
+                }
+            }
+            .alert(Text("Can't determine your current location"), isPresented: $presentAlertLocationUnkown) {
+                Button("OK") {
+                    
+                }
+            }
+            .alert(Text("Can't access MTA feed"), isPresented: $presentAlertFeedUnavailable) {
+                Button("OK") {
+                    
+                }
+            }
+            .alert(Text("There are no nearby subway stations"), isPresented: $presentAlertNotInNYC) {
+                Button("OK") {
+                    presentedAlertNotInNYC = true
+                }
+            }
+
     }
     
     private var locationLabel: some View {
@@ -233,6 +239,13 @@ struct ContentView: View {
             }
         }
         return result
+    }
+    
+    private func getTripUpdate(for train: MTATrain) -> MTATripUpdate? {
+        if let tripId = train.trip?.tripId, let tripUpdates = viewModel.tripUpdatesByTripId[tripId] {
+            return tripUpdates.first
+        }
+        return nil
     }
     
     private func updateStopsAndTrainsNearby() -> Void {

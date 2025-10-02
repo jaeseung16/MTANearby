@@ -14,6 +14,7 @@ struct TrainsAtStopView: View {
     var stop: MTAStop
     var trains: [MTATrain]
     var tripUpdateByTripId: [String: MTATripUpdate]
+    @Binding var selectedTrain: MTATrain?
     
     private var region : Binding<MKCoordinateRegion> {
         Binding {
@@ -59,19 +60,13 @@ struct TrainsAtStopView: View {
                 .aspectRatio(CGSize(width: 1.0, height: 1.0), contentMode: .fit)
             }
             
-            List {
+            List(selection: $selectedTrain) {
                 ForEach(trains, id: \.self) { train in
                     if let trip = train.trip, let eventTime = train.eventTime, isValid(eventTime) {
-                        NavigationLink {
-                            if let tripId = trip.tripId, let tripUpdate = tripUpdateByTripId[tripId] {
-                                TripUpdatesView(tripUpdate: tripUpdate)
-                                    .navigationTitle(trip.getRouteId()?.rawValue ?? "")
-                            } else {
-                                EmptyView()
-                            }
-                        } label: {
+                        NavigationLink(value: train) {
                             label(for: train, trip: trip, arrivalTime: eventTime)
                         }
+                        .id(train)
                     }
                 }
             }
