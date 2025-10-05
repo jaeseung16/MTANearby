@@ -36,41 +36,47 @@ struct ContentView: View {
     @State private var timer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
     @State private var refreshable = false
     
+    @State private var selectedStop: MTAStop? = nil
+    @State private var selectedTrain: MTATrain? = nil
+    
     private var kmSelected: Bool {
         distanceUnit == .km
     }
     
     var body: some View {
         VStack {
-            locationLabel
-            
-            if !trainsNearby.isEmpty {
-                NavigationView {
-                    List {
-                        ForEach(stopsNearby, id:\.self) { stop in
-                            if let trains = getTrains(at: stop) {
-                                NavigationLink {
-                                    TrainsAtStopView(stop: stop,
-                                                     trains: getSortedTrains(from: trains),
-                                                     tripUpdateByTripId: getTripUpdateByTripId(from: trains))
-                                        .navigationTitle(stop.name)
-                                } label: {
-                                    if kmSelected {
-                                        label(for: stop, distanceUnit: .km)
-                                    } else {
-                                        label(for: stop, distanceUnit: .mile)
+            NavigationSplitView {
+                VStack {
+                    locationLabel
+                    
+                    if !trainsNearby.isEmpty {
+                        List(selection: $selectedStop) {
+                            ForEach(stopsNearby, id:\.self) { stop in
+                                if getTrains(at: stop) != nil {
+                                    NavigationLink(value: stop) {
+                                        label(for: stop, distanceUnit: kmSelected ? .km : .mile)
                                     }
                                 }
                             }
                         }
                     }
+                    
+                    Spacer()
+                    
+                    bottomView
                 }
-                .navigationViewStyle(.stack)
+            } content: {
+                if let selectedStop = selectedStop, let trains = getTrains(at: selectedStop) {
+                    TrainsAtStopView(stop: selectedStop,
+                                     trains: getSortedTrains(from: trains),
+                                     tripUpdateByTripId: getTripUpdateByTripId(from: trains),
+                                     selectedTrain: $selectedTrain)
+                }
+            } detail: {
+                if let selectedTrain = selectedTrain {
+                    TripUpdatesView(tripUpdate: getTripUpdate(for: selectedTrain))
+                }
             }
-            
-            Spacer()
-            
-            bottomView
         }
         .padding()
         .overlay {
@@ -101,10 +107,10 @@ struct ContentView: View {
         .onReceive(timer) { _ in
             refreshable = lastRefresh.distance(to: Date()) > 60
         }
-        .onChange(of: maxComing) { newValue in
+        .onChange(of: maxComing) { _, newValue in
             viewModel.maxComing = newValue
         }
-        .onChange(of: presentUpdateMaxDistance) { _ in
+        .onChange(of: presentUpdateMaxDistance) { _, _ in
             if viewModel.maxDistance != maxDistance {
                 viewModel.maxDistance = maxDistance
                 updateStopsAndTrainsNearby()
@@ -125,7 +131,6 @@ struct ContentView: View {
                 presentedAlertNotInNYC = true
             }
         }
-        
     }
     
     private var locationLabel: some View {
@@ -200,13 +205,15 @@ struct ContentView: View {
     private func downloadAllData() -> Void {
         lastRefresh = Date()
         if (viewModel.location?.coordinate) != nil {
-            viewModel.getAllData() { result in
-                switch result {
-                case .success(let success):
-                    presentAlertFeedUnavailable = !success
-                case .failure:
+            Task {
+                let success = await viewModel.getAllData()
+                
+                if success {
+                    presentAlertFeedUnavailable = false
+                } else {
                     presentAlertFeedUnavailable.toggle()
                 }
+                showProgress = false
             }
         } else if showProgress {
             presentAlertLocationUnkown.toggle()
@@ -231,6 +238,13 @@ struct ContentView: View {
             }
         }
         return result
+    }
+    
+    private func getTripUpdate(for train: MTATrain) -> MTATripUpdate? {
+        if let tripId = train.trip?.tripId, let tripUpdates = viewModel.tripUpdatesByTripId[tripId] {
+            return tripUpdates.first
+        }
+        return nil
     }
     
     private func updateStopsAndTrainsNearby() -> Void {

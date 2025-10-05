@@ -16,23 +16,21 @@ struct StopsView: View {
         
         List {
             ForEach(stops) { stop in
-                if let key = stop.id {
-                    if let vehicles = viewModel.vehiclesByStopId[key] {
-                        NavigationLink {
-                            VehiclesAtStopView(stop: stop, vehicles: vehicles)
-                        } label: {
-                            HStack {
-                                Text("\(stop.id): \(stop.name)")
-                                Spacer()
-                                Text("\(stop.latitude), \(stop.longitude)")
-                            }
-                        }
-                    } else {
+                if let vehicles = viewModel.vehiclesByStopId[stop.id] {
+                    NavigationLink {
+                        VehiclesAtStopView(stop: stop, vehicles: vehicles)
+                    } label: {
                         HStack {
                             Text("\(stop.id): \(stop.name)")
                             Spacer()
                             Text("\(stop.latitude), \(stop.longitude)")
                         }
+                    }
+                } else {
+                    HStack {
+                        Text("\(stop.id): \(stop.name)")
+                        Spacer()
+                        Text("\(stop.latitude), \(stop.longitude)")
                     }
                 }
             }

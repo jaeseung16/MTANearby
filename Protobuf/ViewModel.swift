@@ -11,12 +11,13 @@ import CodableCSV
 import CoreLocation
 import MapKit
 
+@MainActor
 class ViewModel: NSObject, ObservableObject {
     private static let logger = Logger()
     
-    static var mtaStops: [MTAStop] = ViewModel.read(from: "stops", type: MTAStop.self)
+    static let mtaStops: [MTAStop] = ViewModel.read(from: "stops", type: MTAStop.self)
     
-    static var mtaRoutes: [MTARoute] = ViewModel.read(from: "routes", type: MTARoute.self)
+    static let mtaRoutes: [MTARoute] = ViewModel.read(from: "routes", type: MTARoute.self)
         
     private static func read<T>(from resource: String, type: T.Type) -> [T] where T: Decodable {
         guard let stopsURL = Bundle.main.url(forResource: resource, withExtension: "txt") else {
@@ -24,7 +25,7 @@ class ViewModel: NSObject, ObservableObject {
             return [T]()
         }
         
-        guard let contents = try? String(contentsOf: stopsURL) else {
+        guard let contents = try? String(contentsOf: stopsURL, encoding: .utf8) else {
             ViewModel.logger.error("The file doesn't contain anything")
             return [T]()
         }
@@ -56,7 +57,7 @@ class ViewModel: NSObject, ObservableObject {
         return result
     }
     
-    static var stopsById: [String: MTAStop] = Dictionary(uniqueKeysWithValues: mtaStops.map { ($0.id, $0) })
+    static let stopsById: [String: MTAStop] = Dictionary(uniqueKeysWithValues: mtaStops.map { ($0.id, $0) })
     
     @Published var feedAvailable = true
     @Published var numberOfUpdatedFeed = 0
@@ -70,14 +71,13 @@ class ViewModel: NSObject, ObservableObject {
         }
     }
     
-    var feedDownloader = MTAFeedDownloader()
-    var restDownloader = RestDownloader()
-    
+    var feedDownLoadersByURL: [MTASubwayFeedURL: MTAFeedDownloader] = Dictionary(uniqueKeysWithValues: MTASubwayFeedURL.allCases.map { ($0, MTAFeedDownloader(mtaSubwayFeedURL: $0)) })
+        
     var vehiclesByStopId = [String: [MTAVehicle]]()
     var tripUpdatesByTripId = [String: [MTATripUpdate]]()
     var tripUpdatesByStopId = [String: [MTATripUpdate]]()
     
-    func getAllData(completionHandler: @escaping (Result<Bool, Error>) -> Void) -> Void {
+    func getAllData() async -> Bool {
         ViewModel.logger.log("getAllData()")
         if !vehiclesByStopId.isEmpty {
             vehiclesByStopId.removeAll()
@@ -88,83 +88,55 @@ class ViewModel: NSObject, ObservableObject {
         if !tripUpdatesByStopId.isEmpty {
             tripUpdatesByStopId.removeAll()
         }
-        
-        DispatchQueue.main.async {
-            self.numberOfUpdatedFeed = 0
-        }
-        
-        downloadAll() { result in
-            completionHandler(result)
-        }
+        return await downloadAll2()
     }
     
-    private func downloadAll(completionHandler: @escaping (Result<Bool, Error>) -> Void) -> Void {
-        restDownloader.download(from: location) { wrapper, error in
-            guard let wrapper = wrapper else {
-                ViewModel.logger.log("Failed to download MTA feeds from REST, trying mta.info: error = \(String(describing: error?.localizedDescription), privacy: .public)")
-                self.downloadFromMTAInfo() { result in
-                    completionHandler(result)
-                }
-                return
-            }
-            
-            //ViewModel.logger.log("wrapper=\(String(describing: wrapper), privacy: .public)")
-            
-            DispatchQueue.main.async {
-                //ViewModel.logger.log("wrapper.tripUpdatesByTripId.count = \(wrapper.tripUpdatesByTripId.count, privacy: .public)")
-                if !wrapper.tripUpdatesByTripId.isEmpty {
-                    wrapper.tripUpdatesByTripId.forEach { key, updates in
-                        self.tripUpdatesByTripId[key] = updates
-                        //ViewModel.logger.log("tripUpdatesByTripId.key = \(key, privacy: .public)")
-                    }
-                }
-                //ViewModel.logger.log("wrapper.vehiclesByStopId.count = \(wrapper.vehiclesByStopId.count, privacy: .public)")
-                if !wrapper.vehiclesByStopId.isEmpty {
-                    wrapper.vehiclesByStopId.forEach { key, vehicles in
-                        self.vehiclesByStopId[key] = vehicles
-                        //ViewModel.logger.log("vehiclesByStopId.key = \(key, privacy: .public)")
-                    }
-                }
-                self.numberOfUpdatedFeed += MTASubwayFeedURL.allCases.count
-                //ViewModel.logger.log("numberOfUpdatedFeed=\(self.numberOfUpdatedFeed, privacy: .public)")
-                
-                completionHandler(.success(true))
-            }
-        }
-    }
     
-    private func downloadFromMTAInfo(completionHandler: @escaping (Result<Bool, Error>) -> Void) -> Void {
-        MTASubwayFeedURL.allCases.forEach { feedDownloader.download(from: $0) { wrapper, error in
-            guard let wrapper = wrapper else {
-                ViewModel.logger.log("Failed to download MTA feeds from mta.info: error = \(String(describing: error?.localizedDescription), privacy: .public)")
-                if let error = error {
-                    completionHandler(.failure(error))
-                } else {
-                    completionHandler(.success(false))
+    private func downloadAll2() async -> Bool {
+        numberOfUpdatedFeed = 0
+        
+        let wrappers = await withTaskGroup(of: MTAFeedWrapper.self) { group in
+            for (url, feedDownloader) in feedDownLoadersByURL {
+                group.addTask {
+                    let wrapper: MTAFeedWrapper
+                    do {
+                        wrapper = try await feedDownloader.download()
+                    } catch {
+                        wrapper = MTAFeedWrapper()
+                        Task { @MainActor in
+                            ViewModel.logger.log("Failed to download MTA feeds from \(url.rawValue): error = \(String(describing: error.localizedDescription), privacy: .public)")
+                        }
+                    }
+                    return wrapper
                 }
-                return
             }
             
-            DispatchQueue.main.async {
-                //ViewModel.logger.log("wrapper.tripUpdatesByTripId.count = \(wrapper.tripUpdatesByTripId.count, privacy: .public)")
-                if !wrapper.tripUpdatesByTripId.isEmpty {
-                    wrapper.tripUpdatesByTripId.forEach { key, updates in
-                        self.tripUpdatesByTripId[key] = updates
-                    }
-                }
-                //ViewModel.logger.log("wrapper.vehiclesByStopId.count = \(wrapper.vehiclesByStopId.count, privacy: .public)")
-                if !wrapper.vehiclesByStopId.isEmpty {
-                    wrapper.vehiclesByStopId.forEach { key, vehicles in
-                        self.vehiclesByStopId[key] = vehicles
-                    }
-                }
-                self.numberOfUpdatedFeed += 1
-                ViewModel.logger.log("numberOfUpdatedFeed=\(self.numberOfUpdatedFeed, privacy: .public)")
-                completionHandler(.success(true))
+            var results: [MTAFeedWrapper] = []
+            for await result in group {
+                results.append(result)
             }
+            return results
         }
+        
+        for wrapper in wrappers {
+            //ViewModel.logger.log("wrapper.tripUpdatesByTripId.count = \(wrapper.tripUpdatesByTripId.count, privacy: .public)")
+            if !wrapper.tripUpdatesByTripId.isEmpty {
+                wrapper.tripUpdatesByTripId.forEach { key, updates in
+                    self.tripUpdatesByTripId[key] = updates
+                }
+            }
+            //ViewModel.logger.log("wrapper.vehiclesByStopId.count = \(wrapper.vehiclesByStopId.count, privacy: .public)")
+            if !wrapper.vehiclesByStopId.isEmpty {
+                wrapper.vehiclesByStopId.forEach { key, vehicles in
+                    self.vehiclesByStopId[key] = vehicles
+                }
+            }
             
+            numberOfUpdatedFeed += 1
         }
+        
+        ViewModel.logger.log("numberOfUpdatedFeed=\(self.numberOfUpdatedFeed, privacy: .public)")
+        return numberOfUpdatedFeed > 0
     }
     
     func vehicles(within distance: Double, from center: CLLocationCoordinate2D) -> [MTAStop: [MTAVehicle]] {
@@ -273,11 +245,9 @@ class ViewModel: NSObject, ObservableObject {
         return CLLocationDistance(maxDistance * rangeFactor)
     }
     
-    func lookUpCurrentLocation() {
-        locationHelper.lookUpCurrentLocation() { userLocality in
-            self.userLocality = userLocality
-            self.userLocalityUpdated.toggle()
-        }
+    func lookUpCurrentLocation() async {
+        self.userLocality = await locationHelper.lookUpCurrentLocation()
+        self.userLocalityUpdated.toggle()
     }
     
     var maxAgo: TimeInterval = -1 * 60
@@ -296,13 +266,8 @@ class ViewModel: NSObject, ObservableObject {
             self.maxComing = UserDefaults.standard.double(forKey: "maxComing")
         }
         
-        getAllData() { result in
-            switch result {
-            case .success(let success):
-                self.feedAvailable = success
-            case .failure:
-                self.feedAvailable = false
-            }
+        Task {
+            self.feedAvailable = await getAllData()
         }
     }
     
@@ -314,7 +279,7 @@ class ViewModel: NSObject, ObservableObject {
     
 }
 
-extension ViewModel: CLLocationManagerDelegate {
+extension ViewModel: @MainActor CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
 
@@ -322,8 +287,10 @@ extension ViewModel: CLLocationManagerDelegate {
         self.locationUpdated.toggle()
         
         if let location = self.location {
-            lookUpCurrentLocation()
-            updateRegion(center: location.coordinate)
+            Task {
+                await lookUpCurrentLocation()
+                updateRegion(center: location.coordinate)
+            }
         }
     }
     
@@ -332,3 +299,4 @@ extension ViewModel: CLLocationManagerDelegate {
         location = nil
     }
 }
+

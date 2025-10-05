@@ -14,6 +14,7 @@ struct TrainsAtStopView: View {
     var stop: MTAStop
     var trains: [MTATrain]
     var tripUpdateByTripId: [String: MTATripUpdate]
+    @Binding var selectedTrain: MTATrain?
     
     private var region : Binding<MKCoordinateRegion> {
         Binding {
@@ -29,24 +30,47 @@ struct TrainsAtStopView: View {
     
     var body: some View {
         VStack {
-            Map(coordinateRegion: region, interactionModes: .zoom, showsUserLocation: true, annotationItems: [stop]) { place in
-                MapMarker(coordinate: place.getCLLocationCoordinate2D())
-            }
-            .aspectRatio(CGSize(width: 1.0, height: 1.0), contentMode: .fit)
+            Text(stop.name)
+                .font(.title3)
+                .bold()
             
-            List {
+            if #available(iOS 17.0, *) {
+                MapReader { proxy in
+                    Map(
+                        initialPosition: .region(
+                            viewModel.region ?? MKCoordinateRegion(
+                                center: CLLocationCoordinate2D(latitude: 40.712778, longitude: -74.006111),
+                                latitudinalMeters: viewModel.regionSpan,
+                                longitudinalMeters: viewModel.regionSpan
+                            )
+                        ),
+                        interactionModes: .all
+                    ) {
+                        UserAnnotation()
+                        Marker("", coordinate: stop.getCLLocationCoordinate2D())
+                    }
+                    .onMapCameraChange { context in
+                        let region = context.region
+                        DispatchQueue.main.async {
+                            viewModel.region = region
+                        }
+                    }
+                }
+                .aspectRatio(CGSize(width: 1.0, height: 1.0), contentMode: .fit)
+            } else {
+                Map(coordinateRegion: region, interactionModes: .zoom, showsUserLocation: true, annotationItems: [stop]) { place in
+                    MapMarker(coordinate: place.getCLLocationCoordinate2D())
+                }
+                .aspectRatio(CGSize(width: 1.0, height: 1.0), contentMode: .fit)
+            }
+            
+            List(selection: $selectedTrain) {
                 ForEach(trains, id: \.self) { train in
                     if let trip = train.trip, let eventTime = train.eventTime, isValid(eventTime) {
-                        NavigationLink {
-                            if let tripId = trip.tripId, let tripUpdate = tripUpdateByTripId[tripId] {
-                                TripUpdatesView(tripUpdate: tripUpdate)
-                                    .navigationTitle(trip.getRouteId()?.rawValue ?? "")
-                            } else {
-                                EmptyView()
-                            }
-                        } label: {
+                        NavigationLink(value: train) {
                             label(for: train, trip: trip, arrivalTime: eventTime)
                         }
+                        .id(train)
                     }
                 }
             }

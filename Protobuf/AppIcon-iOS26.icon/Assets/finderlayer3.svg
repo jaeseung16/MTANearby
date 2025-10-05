@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_4_Layer" data-name="4 – Layer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fccc0a;
+      }
+
+      .cls-2 {
+        fill: #2850ad;
+      }
+
+      .cls-3 {
+        fill: #00933c;
+      }
+    </style>
+  </defs>
+  <polygon class="cls-3" points="237.39 700.26 75.27 700.26 194.16 563.26 356.27 563.26 237.39 700.26"/>
+  <path class="cls-2" d="M241.77,309.26c-41.96,0-76.02,34.84-76.5,78h.31l76,216h.69l76-216c-.48-43.16-34.54-78-76.5-78Z"/>
+  <circle class="cls-1" cx="241.77" cy="386.76" r="35"/>
+</svg>

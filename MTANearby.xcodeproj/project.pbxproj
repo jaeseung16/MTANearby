@@ -15,13 +15,10 @@
 		905AD685293176A8006110E2 /* MTAFeedDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905AD684293176A8006110E2 /* MTAFeedDownloader.swift */; };
 		905AD68729317EE7006110E2 /* MTAFeedWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905AD68629317EE7006110E2 /* MTAFeedWrapper.swift */; };
 		90672E4328CFE0FF00B4BF74 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90672E4228CFE0FF00B4BF74 /* ViewModel.swift */; };
-		90672E4528CFE14E00B4BF74 /* gtfs-realtime.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90672E4428CFE14E00B4BF74 /* gtfs-realtime.pb.swift */; };
-		90672E4728CFE15600B4BF74 /* nyct-subway.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90672E4628CFE15600B4BF74 /* nyct-subway.pb.swift */; };
 		906B5EE92935287B00B820A6 /* DistanceUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906B5EE82935287B00B820A6 /* DistanceUnit.swift */; };
 		906B5EEB29353A9E00B820A6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906B5EEA29353A9E00B820A6 /* SettingsView.swift */; };
 		90720791292ED615002DA887 /* LocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90720790292ED615002DA887 /* LocationHelper.swift */; };
 		90783D8A296CC3960038A25B /* RouteLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90783D89296CC3960038A25B /* RouteLabel.swift */; };
-		9079EEC42958C91100F8F6FE /* RestDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9079EEC32958C91100F8F6FE /* RestDownloader.swift */; };
 		9079EECC2959057800F8F6FE /* MTANearbyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9079EECB2959057800F8F6FE /* MTANearbyTests.swift */; };
 		907F0DED296DD8B6005DA23E /* WatchMTANearbyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907F0DEC296DD8B6005DA23E /* WatchMTANearbyApp.swift */; };
 		907F0DEF296DD8B6005DA23E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907F0DEE296DD8B6005DA23E /* ContentView.swift */; };
@@ -33,7 +30,6 @@
 		907F0DFD296DDC16005DA23E /* LocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90720790292ED615002DA887 /* LocationHelper.swift */; };
 		907F0DFE296DDC19005DA23E /* MTAFeedDownloadError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908A06AD2960F8620040F3E2 /* MTAFeedDownloadError.swift */; };
 		907F0DFF296DDC1B005DA23E /* MTAFeedDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905AD684293176A8006110E2 /* MTAFeedDownloader.swift */; };
-		907F0E00296DDC1E005DA23E /* RestDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9079EEC32958C91100F8F6FE /* RestDownloader.swift */; };
 		907F0E01296DDC20005DA23E /* MTAFeedConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908A06B12960FA7B0040F3E2 /* MTAFeedConstant.swift */; };
 		907F0E02296DDC25005DA23E /* RestResponseWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9080542F295A2830001AB1A1 /* RestResponseWrapper.swift */; };
 		907F0E03296DDC28005DA23E /* RestVehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90805431295A2872001AB1A1 /* RestVehicle.swift */; };
@@ -57,8 +53,6 @@
 		907F0E15296DDC59005DA23E /* MTAVehicleStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A46B6828F229CA00DED050 /* MTAVehicleStatus.swift */; };
 		907F0E16296DDC5B005DA23E /* MTATrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908CB9EA28FE0964007D163F /* MTATrain.swift */; };
 		907F0E17296DDC5D005DA23E /* MTAFeedWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905AD68629317EE7006110E2 /* MTAFeedWrapper.swift */; };
-		907F0E18296DDC6E005DA23E /* nyct-subway.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90672E4628CFE15600B4BF74 /* nyct-subway.pb.swift */; };
-		907F0E19296DDC70005DA23E /* gtfs-realtime.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90672E4428CFE14E00B4BF74 /* gtfs-realtime.pb.swift */; };
 		907F0E1B296DDC82005DA23E /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = 907F0E1A296DDC82005DA23E /* SwiftProtobuf */; };
 		907F0E1C296DDC87005DA23E /* routes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9085487528EB9CC500DE7863 /* routes.txt */; };
 		907F0E1D296DDC89005DA23E /* stops.txt in Resources */ = {isa = PBXBuildFile; fileRef = 908EC75828E252070020CC92 /* stops.txt */; };
@@ -107,6 +101,12 @@
 		90A983B728CFD71C0046A19B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90A983B628CFD71C0046A19B /* Assets.xcassets */; };
 		90A983BA28CFD71C0046A19B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90A983B928CFD71C0046A19B /* Preview Assets.xcassets */; };
 		90A983C228CFD79E0046A19B /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = 90A983C128CFD79E0046A19B /* SwiftProtobuf */; };
+		90CFFFD92E89A13A0071993F /* gtfs-realtime.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CFFFD82E89A13A0071993F /* gtfs-realtime.pb.swift */; };
+		90CFFFDA2E89A13A0071993F /* gtfs-realtime.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CFFFD82E89A13A0071993F /* gtfs-realtime.pb.swift */; };
+		90CFFFDC2E89A1580071993F /* nyct-subway.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CFFFDB2E89A1580071993F /* nyct-subway.pb.swift */; };
+		90CFFFDD2E89A1580071993F /* nyct-subway.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CFFFDB2E89A1580071993F /* nyct-subway.pb.swift */; };
+		90CFFFE22E89AE9F0071993F /* AppIcon-iOS26.icon in Resources */ = {isa = PBXBuildFile; fileRef = 90CFFFE12E89AE9F0071993F /* AppIcon-iOS26.icon */; };
+		90CFFFE32E89AE9F0071993F /* AppIcon-iOS26.icon in Resources */ = {isa = PBXBuildFile; fileRef = 90CFFFE12E89AE9F0071993F /* AppIcon-iOS26.icon */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,13 +149,10 @@
 		905AD684293176A8006110E2 /* MTAFeedDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTAFeedDownloader.swift; sourceTree = "<group>"; };
 		905AD68629317EE7006110E2 /* MTAFeedWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTAFeedWrapper.swift; sourceTree = "<group>"; };
 		90672E4228CFE0FF00B4BF74 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
-		90672E4428CFE14E00B4BF74 /* gtfs-realtime.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "gtfs-realtime.pb.swift"; sourceTree = "<group>"; };
-		90672E4628CFE15600B4BF74 /* nyct-subway.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "nyct-subway.pb.swift"; sourceTree = "<group>"; };
 		906B5EE82935287B00B820A6 /* DistanceUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceUnit.swift; sourceTree = "<group>"; };
 		906B5EEA29353A9E00B820A6 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		90720790292ED615002DA887 /* LocationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHelper.swift; sourceTree = "<group>"; };
 		90783D89296CC3960038A25B /* RouteLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteLabel.swift; sourceTree = "<group>"; };
-		9079EEC32958C91100F8F6FE /* RestDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestDownloader.swift; sourceTree = "<group>"; };
 		9079EEC92959057800F8F6FE /* MTANearbyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MTANearbyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9079EECB2959057800F8F6FE /* MTANearbyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTANearbyTests.swift; sourceTree = "<group>"; };
 		907F0DEA296DD8B6005DA23E /* WatchMTANearby Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchMTANearby Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -199,6 +196,9 @@
 		90A983B428CFD71B0046A19B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		90A983B628CFD71C0046A19B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		90A983B928CFD71C0046A19B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		90CFFFD82E89A13A0071993F /* gtfs-realtime.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "gtfs-realtime.pb.swift"; sourceTree = "<group>"; };
+		90CFFFDB2E89A1580071993F /* nyct-subway.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "nyct-subway.pb.swift"; sourceTree = "<group>"; };
+		90CFFFE12E89AE9F0071993F /* AppIcon-iOS26.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = "AppIcon-iOS26.icon"; sourceTree = "<group>"; };
 		90F65AF2291EFA22001E8204 /* MTANearby-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "MTANearby-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -325,7 +325,6 @@
 				90720790292ED615002DA887 /* LocationHelper.swift */,
 				908A06AD2960F8620040F3E2 /* MTAFeedDownloadError.swift */,
 				905AD684293176A8006110E2 /* MTAFeedDownloader.swift */,
-				9079EEC32958C91100F8F6FE /* RestDownloader.swift */,
 				908A06B12960FA7B0040F3E2 /* MTAFeedConstant.swift */,
 			);
 			path = Helper;
@@ -382,12 +381,13 @@
 				908EC75728E251EF0020CC92 /* Resources */,
 				9085487228EB967E00DE7863 /* Model */,
 				908B1AA028FB6A8E008ACF21 /* Views */,
-				90672E4628CFE15600B4BF74 /* nyct-subway.pb.swift */,
-				90672E4428CFE14E00B4BF74 /* gtfs-realtime.pb.swift */,
+				90CFFFD82E89A13A0071993F /* gtfs-realtime.pb.swift */,
+				90CFFFDB2E89A1580071993F /* nyct-subway.pb.swift */,
 				90A983B228CFD71B0046A19B /* MTANearByApp.swift */,
 				90A983B428CFD71B0046A19B /* ContentView.swift */,
 				90672E4228CFE0FF00B4BF74 /* ViewModel.swift */,
 				90A983B628CFD71C0046A19B /* Assets.xcassets */,
+				90CFFFE12E89AE9F0071993F /* AppIcon-iOS26.icon */,
 				90A983B828CFD71C0046A19B /* Preview Content */,
 			);
 			path = Protobuf;
@@ -475,7 +475,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 2600;
 				TargetAttributes = {
 					9079EEC82959057800F8F6FE = {
 						CreatedOnToolsVersion = 14.2;
@@ -527,6 +527,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				907F0E1D296DDC89005DA23E /* stops.txt in Resources */,
+				90CFFFE32E89AE9F0071993F /* AppIcon-iOS26.icon in Resources */,
 				907F0DF4296DD8B7005DA23E /* Preview Assets.xcassets in Resources */,
 				907F0DF1296DD8B7005DA23E /* Assets.xcassets in Resources */,
 				907F0E1C296DDC87005DA23E /* routes.txt in Resources */,
@@ -538,6 +539,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				90A983BA28CFD71C0046A19B /* Preview Assets.xcassets in Resources */,
+				90CFFFE22E89AE9F0071993F /* AppIcon-iOS26.icon in Resources */,
 				908EC75928E252070020CC92 /* stops.txt in Resources */,
 				9085487628EB9CC500DE7863 /* routes.txt in Resources */,
 				90A983B728CFD71C0046A19B /* Assets.xcassets in Resources */,
@@ -567,6 +569,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				907F0E0E296DDC46005DA23E /* MTAStop.swift in Sources */,
+				90CFFFDD2E89A1580071993F /* nyct-subway.pb.swift in Sources */,
 				907F0E06296DDC2F005DA23E /* RestTrip.swift in Sources */,
 				907F0E27296E066A005DA23E /* ArrivalTimeSettingView.swift in Sources */,
 				907F0E07296DDC32005DA23E /* RestTripUpdate.swift in Sources */,
@@ -581,7 +584,7 @@
 				907F0E0C296DDC3D005DA23E /* MTARoute.swift in Sources */,
 				907F0DF8296DDB73005DA23E /* ViewModel.swift in Sources */,
 				907F0DFE296DDC19005DA23E /* MTAFeedDownloadError.swift in Sources */,
-				907F0E00296DDC1E005DA23E /* RestDownloader.swift in Sources */,
+				90CFFFD92E89A13A0071993F /* gtfs-realtime.pb.swift in Sources */,
 				907F0E17296DDC5D005DA23E /* MTAFeedWrapper.swift in Sources */,
 				907F0E08296DDC34005DA23E /* RestStopTimeUpdate.swift in Sources */,
 				907F0DED296DD8B6005DA23E /* WatchMTANearbyApp.swift in Sources */,
@@ -590,7 +593,6 @@
 				907F0E14296DDC57005DA23E /* MTAVehicle.swift in Sources */,
 				907F0E25296E014E005DA23E /* DistanceSettingView.swift in Sources */,
 				907F0E16296DDC5B005DA23E /* MTATrain.swift in Sources */,
-				907F0E18296DDC6E005DA23E /* nyct-subway.pb.swift in Sources */,
 				907F0E04296DDC2B005DA23E /* RestVehicleStatus.swift in Sources */,
 				907F0DFF296DDC1B005DA23E /* MTAFeedDownloader.swift in Sources */,
 				907F0E2B296E123D005DA23E /* WatchRouteLabel.swift in Sources */,
@@ -602,7 +604,6 @@
 				907F0E12296DDC51005DA23E /* MTATripReplacementPeriod.swift in Sources */,
 				907F0E03296DDC28005DA23E /* RestVehicle.swift in Sources */,
 				907F0E09296DDC36005DA23E /* MTAAlert.swift in Sources */,
-				907F0E19296DDC70005DA23E /* gtfs-realtime.pb.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -610,9 +611,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90CFFFDC2E89A1580071993F /* nyct-subway.pb.swift in Sources */,
 				9085487428EB96A500DE7863 /* MTAFeedMessageType.swift in Sources */,
 				9059965728F37F5A006FD733 /* MTAStopTimeUpdate.swift in Sources */,
 				90805430295A2830001AB1A1 /* RestResponseWrapper.swift in Sources */,
+				90CFFFDA2E89A13A0071993F /* gtfs-realtime.pb.swift in Sources */,
 				906B5EE92935287B00B820A6 /* DistanceUnit.swift in Sources */,
 				908CB9ED28FE1084007D163F /* TrainsAtStopView.swift in Sources */,
 				9059965928F37F6A006FD733 /* MTATripUpdate.swift in Sources */,
@@ -627,9 +630,7 @@
 				90805432295A2872001AB1A1 /* RestVehicle.swift in Sources */,
 				90A46B6928F229CA00DED050 /* MTAVehicleStatus.swift in Sources */,
 				909B162028FA1C7A002D8A33 /* VehiclesAtStopView.swift in Sources */,
-				90672E4528CFE14E00B4BF74 /* gtfs-realtime.pb.swift in Sources */,
 				906B5EEB29353A9E00B820A6 /* SettingsView.swift in Sources */,
-				90672E4728CFE15600B4BF74 /* nyct-subway.pb.swift in Sources */,
 				909F55F728F4D89600BEC9B9 /* StopsView.swift in Sources */,
 				90783D8A296CC3960038A25B /* RouteLabel.swift in Sources */,
 				909F55F328F4B2F900BEC9B9 /* MTATripReplacementPeriod.swift in Sources */,
@@ -647,7 +648,6 @@
 				90720791292ED615002DA887 /* LocationHelper.swift in Sources */,
 				908CB9EB28FE0964007D163F /* MTATrain.swift in Sources */,
 				90A983B328CFD71B0046A19B /* MTANearByApp.swift in Sources */,
-				9079EEC42958C91100F8F6FE /* RestDownloader.swift in Sources */,
 				905385FD293C0EED000750EA /* BannerAdViewController.swift in Sources */,
 				9080543A295A2904001AB1A1 /* RestTripUpdate.swift in Sources */,
 				908EC76128E255E10020CC92 /* MTAStop.swift in Sources */,
@@ -687,7 +687,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MTANearby.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MTANearby";
 			};
@@ -710,7 +710,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MTANearby.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MTANearby";
 			};
@@ -719,11 +719,11 @@
 		907F0DF5296DD8B7005DA23E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-iOS26";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchMTANearby Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = U8VSJXRJTQ;
 				ENABLE_PREVIEWS = YES;
@@ -738,26 +738,26 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.resonance.MTANearby.watchkitextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 9.1;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
 			};
 			name = Debug;
 		};
 		907F0DF6296DD8B7005DA23E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-iOS26";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchMTANearby Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = U8VSJXRJTQ;
 				ENABLE_PREVIEWS = YES;
@@ -772,15 +772,15 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.resonance.MTANearby.watchkitextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 9.1;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
 			};
 			name = Release;
 		};
@@ -820,6 +820,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -839,8 +840,10 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
@@ -880,6 +883,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -892,8 +896,10 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -901,10 +907,10 @@
 		90A983BE28CFD71C0046A19B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-iOS26";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Protobuf/Preview Content\"";
 				DEVELOPMENT_TEAM = U8VSJXRJTQ;
 				ENABLE_PREVIEWS = YES;
@@ -919,17 +925,17 @@
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "location-services";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.4;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.resonance.MTANearby;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -937,10 +943,10 @@
 		90A983BF28CFD71C0046A19B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-iOS26";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Protobuf/Preview Content\"";
 				DEVELOPMENT_TEAM = U8VSJXRJTQ;
 				ENABLE_PREVIEWS = YES;
@@ -955,17 +961,17 @@
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "location-services";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.4;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.resonance.MTANearby;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -1016,8 +1022,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
+				kind = exactVersion;
+				version = 12.11.0;
 			};
 		};
 		908EC75D28E255B10020CC92 /* XCRemoteSwiftPackageReference "CodableCSV" */ = {
@@ -1033,7 +1039,7 @@
 			repositoryURL = "https://github.com/apple/swift-protobuf.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.6.0;
+				minimumVersion = 1.31.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

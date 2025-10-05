@@ -43,23 +43,23 @@ struct ContentView: View {
     var body: some View {
         VStack {
             if !trainsNearby.isEmpty {
-                    List {
-                        ForEach(stopsNearby, id:\.self) { stop in
-                            if let trains = getTrains(at: stop) {
-                                NavigationLink {
-                                    WatchTrainsAtStopView(stop: stop, trains: getSortedTrains(from: trains))
-                                        .environmentObject(viewModel)
-                                        .navigationTitle(stop.name)
-                                } label: {
-                                    if kmSelected {
-                                        label(for: stop, distanceUnit: .km)
-                                    } else {
-                                        label(for: stop, distanceUnit: .mile)
-                                    }
+                List {
+                    ForEach(stopsNearby, id:\.self) { stop in
+                        if let trains = getTrains(at: stop) {
+                            NavigationLink {
+                                WatchTrainsAtStopView(stop: stop, trains: getSortedTrains(from: trains))
+                                    .environmentObject(viewModel)
+                                    .navigationTitle(stop.name)
+                            } label: {
+                                if kmSelected {
+                                    label(for: stop, distanceUnit: .km)
+                                } else {
+                                    label(for: stop, distanceUnit: .mile)
                                 }
                             }
                         }
                     }
+                }
             } else {
                 ProgressView("Please wait...")
                     .progressViewStyle(.circular)
@@ -115,12 +115,12 @@ struct ContentView: View {
         .onReceive(timer) { _ in
             refreshable = lastRefresh.distance(to: Date()) > 60
         }
-        .onChange(of: maxComing) { _ in
+        .onChange(of: maxComing) { _, _ in
             if viewModel.maxComing != maxComing {
                 viewModel.maxComing = maxComing
             }
         }
-        .onChange(of: maxDistance) { _ in
+        .onChange(of: maxDistance) { _, _ in
             if viewModel.maxDistance != maxDistance {
                 viewModel.maxDistance = maxDistance
                 updateStopsAndTrainsNearby()
@@ -228,14 +228,15 @@ struct ContentView: View {
     private func downloadAllData() -> Void {
         lastRefresh = Date()
         if (viewModel.location?.coordinate) != nil {
-            viewModel.getAllData() { result in
-                switch result {
-                case .success(let success):
-                    presentAlertFeedUnavailable = !success
-                case .failure:
+            Task {
+                let success = await viewModel.getAllData()
+                
+                if success {
+                    presentAlertFeedUnavailable = false
+                } else {
                     presentAlertFeedUnavailable.toggle()
-                    showProgress = false
                 }
+                showProgress = false
             }
         } else if showProgress {
             presentAlertLocationUnkown.toggle()
