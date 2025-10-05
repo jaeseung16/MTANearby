@@ -29,6 +29,10 @@ The app provides the information on train schedules at the subway stations in Ne
   - Accessible by selecting a train
   - A list of subway stations with estimated arrival times
 
+### Support
+
+Email: [:email:](mailto:jaeseung@gmail.com)
+
 ## Version History
 ### ver 1.4 (Oct 2025)
 ### ver 1.3 (Jul 2023)
