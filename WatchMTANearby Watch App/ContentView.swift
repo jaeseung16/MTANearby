@@ -43,23 +43,23 @@ struct ContentView: View {
     var body: some View {
         VStack {
             if !trainsNearby.isEmpty {
-                    List {
-                        ForEach(stopsNearby, id:\.self) { stop in
-                            if let trains = getTrains(at: stop) {
-                                NavigationLink {
-                                    WatchTrainsAtStopView(stop: stop, trains: getSortedTrains(from: trains))
-                                        .environmentObject(viewModel)
-                                        .navigationTitle(stop.name)
-                                } label: {
-                                    if kmSelected {
-                                        label(for: stop, distanceUnit: .km)
-                                    } else {
-                                        label(for: stop, distanceUnit: .mile)
-                                    }
+                List {
+                    ForEach(stopsNearby, id:\.self) { stop in
+                        if let trains = getTrains(at: stop) {
+                            NavigationLink {
+                                WatchTrainsAtStopView(stop: stop, trains: getSortedTrains(from: trains))
+                                    .environmentObject(viewModel)
+                                    .navigationTitle(stop.name)
+                            } label: {
+                                if kmSelected {
+                                    label(for: stop, distanceUnit: .km)
+                                } else {
+                                    label(for: stop, distanceUnit: .mile)
                                 }
                             }
                         }
                     }
+                }
             } else {
                 ProgressView("Please wait...")
                     .progressViewStyle(.circular)
