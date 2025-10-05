@@ -11,8 +11,11 @@ import os
 actor MTAFeedDownloader {
     private static let logger = Logger()
     
-    private let httpHeaderForApiKey = MTAFeedConstant.httpHeaderForApiKey
-    private let apiKey = MTAFeedConstant.apiKey
+    let mtaSubwayFeedURL: MTASubwayFeedURL
+    
+    init(mtaSubwayFeedURL: MTASubwayFeedURL) {
+        self.mtaSubwayFeedURL = mtaSubwayFeedURL
+    }
     
     private var feedDateFormatter: DateFormatter {
         let dateFormatter = DateFormatter()
@@ -22,14 +25,16 @@ actor MTAFeedDownloader {
         return dateFormatter
     }
     
+    func download() async throws -> MTAFeedWrapper {
+        try await download(from: mtaSubwayFeedURL)
+    }
+    
     func download(from mtaSubwayFeedURL: MTASubwayFeedURL) async throws -> MTAFeedWrapper {
         guard let url = mtaSubwayFeedURL.url() else {
             MTAFeedDownloader.logger.log("url is nil for mtaSubwayFeedURL = \(mtaSubwayFeedURL.rawValue, privacy: .public)")
             throw MTAFeedDownloadError.noURL
         }
         
-        //var urlRequest = URLRequest(url: url)
-        //urlRequest.setValue(apiKey, forHTTPHeaderField: httpHeaderForApiKey)
         let start = Date()
         MTAFeedDownloader.logger.log("Downloading feeds from mtaSubwayFeedURL = \(mtaSubwayFeedURL.rawValue, privacy: .public)")
         

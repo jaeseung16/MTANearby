@@ -71,8 +71,8 @@ class ViewModel: NSObject, ObservableObject {
         }
     }
     
-    var feedDownloader = MTAFeedDownloader()
-    
+    var feedDownLoadersByURL: [MTASubwayFeedURL: MTAFeedDownloader] = Dictionary(uniqueKeysWithValues: MTASubwayFeedURL.allCases.map { ($0, MTAFeedDownloader(mtaSubwayFeedURL: $0)) })
+        
     var vehiclesByStopId = [String: [MTAVehicle]]()
     var tripUpdatesByTripId = [String: [MTATripUpdate]]()
     var tripUpdatesByStopId = [String: [MTATripUpdate]]()
@@ -88,34 +88,54 @@ class ViewModel: NSObject, ObservableObject {
         if !tripUpdatesByStopId.isEmpty {
             tripUpdatesByStopId.removeAll()
         }
-        return await downloadAll()
+        return await downloadAll2()
     }
     
-    private func downloadAll() async -> Bool {
+    
+    private func downloadAll2() async -> Bool {
         numberOfUpdatedFeed = 0
-        for mtaSubwayFeedURL in MTASubwayFeedURL.allCases {
-            do {
-                let wrapper = try await feedDownloader.download(from: mtaSubwayFeedURL)
-                
-                //ViewModel.logger.log("wrapper.tripUpdatesByTripId.count = \(wrapper.tripUpdatesByTripId.count, privacy: .public)")
-                if !wrapper.tripUpdatesByTripId.isEmpty {
-                    wrapper.tripUpdatesByTripId.forEach { key, updates in
-                        self.tripUpdatesByTripId[key] = updates
+        
+        let wrappers = await withTaskGroup(of: MTAFeedWrapper.self) { group in
+            for (url, feedDownloader) in feedDownLoadersByURL {
+                group.addTask {
+                    let wrapper: MTAFeedWrapper
+                    do {
+                        wrapper = try await feedDownloader.download()
+                    } catch {
+                        wrapper = MTAFeedWrapper()
+                        Task { @MainActor in
+                            ViewModel.logger.log("Failed to download MTA feeds from \(url.rawValue): error = \(String(describing: error.localizedDescription), privacy: .public)")
+                        }
                     }
+                    return wrapper
                 }
-                //ViewModel.logger.log("wrapper.vehiclesByStopId.count = \(wrapper.vehiclesByStopId.count, privacy: .public)")
-                if !wrapper.vehiclesByStopId.isEmpty {
-                    wrapper.vehiclesByStopId.forEach { key, vehicles in
-                        self.vehiclesByStopId[key] = vehicles
-                    }
-                }
-                self.numberOfUpdatedFeed += 1
-                ViewModel.logger.log("numberOfUpdatedFeed=\(self.numberOfUpdatedFeed, privacy: .public)")
-                
-            } catch {
-                ViewModel.logger.log("Failed to download MTA feeds from \(mtaSubwayFeedURL.rawValue): error = \(String(describing: error.localizedDescription), privacy: .public)")
             }
+            
+            var results: [MTAFeedWrapper] = []
+            for await result in group {
+                results.append(result)
+            }
+            return results
         }
+        
+        for wrapper in wrappers {
+            //ViewModel.logger.log("wrapper.tripUpdatesByTripId.count = \(wrapper.tripUpdatesByTripId.count, privacy: .public)")
+            if !wrapper.tripUpdatesByTripId.isEmpty {
+                wrapper.tripUpdatesByTripId.forEach { key, updates in
+                    self.tripUpdatesByTripId[key] = updates
+                }
+            }
+            //ViewModel.logger.log("wrapper.vehiclesByStopId.count = \(wrapper.vehiclesByStopId.count, privacy: .public)")
+            if !wrapper.vehiclesByStopId.isEmpty {
+                wrapper.vehiclesByStopId.forEach { key, vehicles in
+                    self.vehiclesByStopId[key] = vehicles
+                }
+            }
+            
+            numberOfUpdatedFeed += 1
+        }
+        
+        ViewModel.logger.log("numberOfUpdatedFeed=\(self.numberOfUpdatedFeed, privacy: .public)")
         return numberOfUpdatedFeed > 0
     }
     
