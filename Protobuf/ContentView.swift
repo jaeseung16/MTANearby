@@ -71,7 +71,6 @@ struct ContentView: View {
                                      trains: getSortedTrains(from: trains),
                                      tripUpdateByTripId: getTripUpdateByTripId(from: trains),
                                      selectedTrain: $selectedTrain)
-                    .navigationTitle(selectedStop.name)
                 }
             } detail: {
                 if let selectedTrain = selectedTrain {
